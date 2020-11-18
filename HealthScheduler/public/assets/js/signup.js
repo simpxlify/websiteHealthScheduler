@@ -6,28 +6,43 @@ const contentContainer = document.querySelector("#content-container");
 
 auth.onAuthStateChanged(user => {
 	if (user) {
-		window.location.assign("/index.html");
-		console.log("idk");
+		window.location.assign("/public/index.html");
 	} else {
 		loader.classList.add("hide");
 		loader.classList.remove("d-flex");
 		contentContainer.classList.remove("hide");
-		console.log("loaded");
 	}
 });
 
-function login() {
+auth.useDeviceLanguage();
+
+function signUp() {
 	event.preventDefault();
 	const email = emailInput.value;
 	const password = passwordInput.value;
-	auth.signInWithEmailAndPassword(email, password)
-		.then(() => {
-			console.log("signed in");
-			window.location.assign("index.html");
+	auth.createUserWithEmailAndPassword(email, password)
+		.then(user => {
+			const userUid = user.user.uid;
+			const account = {
+				events: []
+			};
+			usersRef
+				.doc(userUid)
+				.set(account)
+				.then(() => {
+					verifyUserEmail();
+					window.location.assign("index.html");
+				});
 		})
 		.catch(error => {
 			alertBox.classList.remove("hide");
 			alertBox.innerHTML = error.message;
 			console.log("Error: " + error.message);
 		});
+}
+
+function verifyUserEmail() {
+	auth.currentUser.sendEmailVerification().then(() => {
+		console.log("email sent");
+	});
 }

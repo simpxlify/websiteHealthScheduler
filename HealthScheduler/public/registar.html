@@ -3,16 +3,16 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>HealthSchedular</title>
+		<title>HealthScheduler</title>
 
 	
 		<link rel="stylesheet" href="assets/css/style.css" />
 	</head>
 	<body>
-		<script src="assets/js/login.js"></script>
+		<script src="assets/js/signup.js"></script>
 	  <div class="app">
 		  <div class="bg"></div>
-		  <form> 
+		  <form method="POST" onsubmit="signUp()">
 			  <header>
 				  <img src="assets/img/logo.png" class="imgLogin">
 			  </header>
@@ -20,15 +20,14 @@
 			  <div class="inputs">
 				  <input type="text" name="" placeholder="username or email" id="emailInput">
 				  <input type="password" name="" placeholder="password" id="passwordInput">
-  
-				  <p class="light"><a href="#">Esqueceu-se da password?</a></p>
+                  <input type="password" name="" placeholder="confirm password" id="confirmPasswordInput">
 			  </div>
   
 		  </form>
   
 		  <footer>
-			  <button onclick="login()"><a href="registar.html">Continuar</a></button>
-			  <p>Não tem conta? <a href="registar.html">Registe-se</a></p>
+			  <button type="submit" >Continuar</button>
+			  <p>Já tem conta? <a href="index.html">Entre na conta</a></p>
 		  </footer>
 	  </div>
   </body>
@@ -66,6 +65,6 @@
 	<script src="/__/firebase/7.9.2/firebase-firestore.js"></script>
 	<script src="/__/firebase/init.js"></script>
 
-	<script src="/assets/js/firebase.js"></script>
-	<script src="/assets/js/login.js"></script>
+	<script src="assets/js/firebase.js"></script>
+	<script src="assets/js/signup.js"></script>
 </html>
