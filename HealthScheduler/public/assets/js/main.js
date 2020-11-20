@@ -28,7 +28,8 @@ function signup() {
 			userID : "",
 			username : nomeRegister.value
 		});
-		window.location.assign("index.html");
+		window.location.assign("mainpage.html");
+
 	})
 	.catch((error) => {
 		var errorCode = error.code;

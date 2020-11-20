@@ -1,6 +1,10 @@
 {
   "hosting": {
     "public": "public",
+    "splash": "/mainpage.html",
+    "cleanUrls": true,
+    "trailingSlash": false,
+
     "ignore": [
       "firebase.json",
       "**/.*",

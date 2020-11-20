@@ -6,12 +6,6 @@
     box-sizing: border-box;
   }
 
-  #logo-animation {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-  } 
-
   body {
     margin: 0;
     border: 0;
