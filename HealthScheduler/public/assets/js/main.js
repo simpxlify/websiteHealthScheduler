@@ -16,9 +16,18 @@ function login(){
 function signup() {
 	var emailRegister = document.getElementById("email_input_register");
 	var passwordRegister = document.getElementById("password_input_register");
+	var nomeRegister = document.getElementById("nome_input");
+	var moradaRegister = document.getElementById("morada_input");
 
     firebase.auth().createUserWithEmailAndPassword(emailRegister.value, passwordRegister.value)
 	.then((user) => {
+		firebase.firestore().collection("users/").document("asd").set({
+			address: moradaRegister.value,
+			imagePath: "",
+			phoneNumberEmail : emailRegister.value,
+			userID : "",
+			username : nomeRegister.value
+		});
 		window.location.assign("index.html");
 	})
 	.catch((error) => {
@@ -27,6 +36,4 @@ function signup() {
 		
 		alert(errorMessage);
 	});
-    
-    
 }

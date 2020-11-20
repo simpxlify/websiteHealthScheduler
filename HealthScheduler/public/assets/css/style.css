@@ -43,7 +43,7 @@
   .app {
     background-color: #fff;
     width: 400px;
-    height: 700px;
+    height: 90%;
     margin-left: auto;
     margin-top: auto;
     margin-right: auto;
@@ -74,12 +74,12 @@
       }
 
   .bg {
-    width: 550px;
-    height: 600px;
+    width: 150%;
+    height: 90%;
     background: #36bfb8;
     position: absolute;
     top: -5em;
-    left: 0;
+    left: -5em;
     right: 0;
     margin: auto;
     background-image: url("background.jpg");
@@ -143,6 +143,7 @@
     background: #36bfb8;
     outline: none;
     color: #fff;
+    cursor: pointer; 
     transition: 0.3s;
     -webkit-transition: 0.3s;
     -moz-transition: 0.3s;

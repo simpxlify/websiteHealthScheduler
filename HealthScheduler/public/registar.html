@@ -16,18 +16,20 @@
 		<script src="/__/firebase/8.0.2/firebase-app.js"></script>
 
 		<!-- Add Firebase products that you want to use -->
-		<script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
 
 		<!-- TODO: Add SDKs for Firebase products that you want to use
 			https://firebase.google.com/docs/web/setup#available-libraries -->
 		<script src="/__/firebase/8.0.2/firebase-analytics.js"></script>
 
+		
+		<!-- The core Firebase JS SDK is always required and must be listed first -->
+		<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
+
 		<!-- Initialize Firebase -->
 		<script src="/__/firebase/init.js?useEmulator=true"></script>
 
 
-		<!--<script src="assets/js/webappconfig.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>-->
 		<script src="assets/js/main.js"></script>
 
 		<div class="app">
@@ -41,12 +43,14 @@
 					<input type="email" placeholder="username or email" id="email_input_register">
 					<input type="password" placeholder="password" id="password_input_register">
 					<input type="password" placeholder="confirm password" id="password_confirm_input_register">
+					<input type="text" placeholder="nome" id="nome_input">
+					<input type="text" placeholder="morada" id="morada_input">
 					<p class="light"><a href="#">Esqueceu-se da password?</a></p>
 				</div>
 			</div>
 			<div class="footer">
 				<button onclick="signup()">Continuar</button>
-				<p>Não tem conta? <a href="registar.html">Registe-se</a></p>
+				<p>Já tem conta? <a href="index.html">Login</a></p>
 			</div>
 		</div>
   </body>
