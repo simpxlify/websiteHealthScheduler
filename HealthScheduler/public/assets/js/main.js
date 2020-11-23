@@ -14,20 +14,14 @@ function login(){
 }
 
 function signup() {
-	var emailRegister = document.getElementById("email_input_register");
-	var passwordRegister = document.getElementById("password_input_register");
-	var nomeRegister = document.getElementById("nome_input");
-	var moradaRegister = document.getElementById("morada_input");
+	var emailRegister = document.getElementById("email_input_register").value;
+	var passwordRegister = document.getElementById("password_input_register").value;
+	var nomeRegister = document.getElementById("nome_input").value;
+	var moradaRegister = document.getElementById("morada_input").value;
 
-    firebase.auth().createUserWithEmailAndPassword(emailRegister.value, passwordRegister.value)
+    firebase.auth().createUserWithEmailAndPassword(emailRegister, passwordRegister)
 	.then((user) => {
-		firebase.firestore().collection("users/").document("asd").set({
-			address: moradaRegister.value,
-			imagePath: "",
-			phoneNumberEmail : emailRegister.value,
-			userID : "",
-			username : nomeRegister.value
-		});
+		writeUserDataWithCompletion("asd", nomeRegister, emailRegister, "", moradaRegister);
 		window.location.assign("mainpage.html");
 
 	})
@@ -38,3 +32,19 @@ function signup() {
 		alert(errorMessage);
 	});
 }
+
+function writeUserDataWithCompletion(userId, name, email, imageUrl, address) {
+	firebase.firestore().collection("users").doc(userId + "").set({
+		address: address,
+		imagePath: imageUrl,
+		phoneNumberEmail : email,
+		userID : "",
+		username : name
+	}, function(error) {
+	  if (error) {
+		  alert(error);
+	  } else {
+		// Data saved successfully!
+	  }
+	});
+  }
