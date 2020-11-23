@@ -83,6 +83,22 @@
     clip-path: ellipse(69% 46% at 48% 46%);
   }
 
+  .bglogin{
+    width: 150%;
+    height: 70%;
+    background: #36bfb8;
+    position: absolute;
+    top: -5em;
+    left: -5em;
+    right: 0;
+    margin: auto;
+    background-image: url("background.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    clip-path: ellipse(69% 46% at 48% 46%);
+  }
+
   .form {
     position: absolute;
     visibility: visible;

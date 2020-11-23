@@ -14,23 +14,30 @@ function login(){
 }
 
 function signup() {
-	var emailRegister = document.getElementById("email_input_register").value;
-	var passwordRegister = document.getElementById("password_input_register").value;
-	var nomeRegister = document.getElementById("nome_input").value;
-	var moradaRegister = document.getElementById("morada_input").value;
+	const db = firebase.firestore();
 
-    firebase.auth().createUserWithEmailAndPassword(emailRegister, passwordRegister)
+	const phoneNumberEmail = document.getElementById("email_input_register").value;
+	const passwordRegister = document.getElementById("password_input_register").value;
+	const username = document.getElementById("nome_input").value;
+	const address = document.getElementById("morada_input").value;
+	firebase.auth().createUserWithEmailAndPassword(phoneNumberEmail, passwordRegister)
 	.then((user) => {
-		writeUserDataWithCompletion("asd", nomeRegister, emailRegister, "", moradaRegister);
-		window.location.assign("mainpage.html");
+		const userID = "" + user.uid;
+		const response = db.collection('users').doc().set({
+			address,
+			imagePath: "",
+			phoneNumberEmail,
+			userID,
+			username
+		});
 
-	})
-	.catch((error) => {
+		window.location.assign("mainpage.html");
+	}).catch((error) => {
 		var errorCode = error.code;
 		var errorMessage = error.message;
 		
 		alert(errorMessage);
-	});
+	})
 }
 
 function writeUserDataWithCompletion(userId, name, email, imageUrl, address) {
