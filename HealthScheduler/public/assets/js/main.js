@@ -24,7 +24,7 @@ function signup() {
 	firebase.auth().createUserWithEmailAndPassword(phoneNumberEmail, passwordRegister)
 	.then((user) => {
 		const userID = "" + user.uid;
-		const response = db.collection('users').doc().set({
+		const response = db.collection('users_medic').doc().set({
 			address,
 			imagePath: "",
 			phoneNumberEmail,
@@ -32,13 +32,25 @@ function signup() {
 			username
 		});
 
-		window.location.assign("mainpage.html");
+		loginOnSignup(phoneNumberEmail, passwordRegister);
 	}).catch((error) => {
 		var errorCode = error.code;
 		var errorMessage = error.message;
 		
 		alert(errorMessage);
 	})
+}
+
+function loginOnSignup(email, password){
+	firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
+		window.location.assign("mainpage.html");
+
+	}).catch((error) => {
+		var errorCode = error.code;
+		var errorMessage = error.message;
+
+		alert(errorMessage);
+	  });
 }
 
 function writeUserDataWithCompletion(userId, name, email, imageUrl, address) {
