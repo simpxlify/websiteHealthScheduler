@@ -69,7 +69,7 @@
 
   .bg {
     width: 150%;
-    height: 90%;
+    height: 670px;
     background: #36bfb8;
     position: absolute;
     top: -5em;
@@ -85,7 +85,7 @@
 
   .bglogin{
     width: 150%;
-    height: 70%;
+    height: 400px;
     background: #36bfb8;
     position: absolute;
     top: -5em;
@@ -112,9 +112,9 @@
 
   .header {
       width: 220px;
-      height: 180px;
+      height: 130px;
       margin: auto;
-      margin-bottom: 75px;
+      margin-bottom: 85px;
     }
 
   .form input {
