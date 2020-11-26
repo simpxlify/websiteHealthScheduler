@@ -1,12 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,900|Poppins:400,500');
-  * {
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    box-sizing: border-box;
-  }
-
-  body {
+body {
     margin: 0;
     border: 0;
     padding: 0;
@@ -17,7 +9,7 @@
     margin: auto;
     display: flex;
   }
-  
+    
   body::after{
     content: "";
     background-image: url('../img/bg.jpg');
@@ -29,15 +21,16 @@
     position: absolute;
     z-index: -1;  
   }
-
+  
   img {
-    max-width: 100%;
+    max-width: 200px;
   }
-
+  
   .app {
+    position: fixed;
     background-color: #fff;
     width: 400px;
-    height: 90%;
+    height: 800px;
     margin-left: auto;
     margin-top: auto;
     margin-right: auto;
@@ -48,28 +41,35 @@
     overflow: hidden;
     box-shadow: 0 6px 31px -2px rgba(0, 0, 0, .3);
   }
-
-  a {
+  
+  a{
     text-decoration: none;
-    color: #257aa6;
+    color: #1b736f;
   }
-
-  p {
+  
+  .recoveryPassword{
+    width: 100%;
+    font-size: 13px;
+    color: #fff;
+    text-align: right;
+    padding-top: 30px;
+  }
+  
+  .forgotPassword{
+    padding: 0;
+    margin: 0;
+    margin-right: 40px;
+  }
+  
+  .login{
     font-size: 13px;
     color: #333;
     line-height: 2;
   }
-    .light {
-      text-align: right;
-      color: #fff;
-    }
-      .light a {
-        color: #fff;
-      }
-
-  .bg {
-    width: 150%;
-    height: 670px;
+  
+  .bg{
+    width: 600px;
+    height: 720px;
     background: #36bfb8;
     position: absolute;
     top: -5em;
@@ -82,23 +82,7 @@
     background-repeat: no-repeat;
     clip-path: ellipse(69% 46% at 48% 46%);
   }
-
-  .bglogin{
-    width: 150%;
-    height: 400px;
-    background: #36bfb8;
-    position: absolute;
-    top: -5em;
-    left: -5em;
-    right: 0;
-    margin: auto;
-    background-image: url("background.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    clip-path: ellipse(69% 46% at 48% 46%);
-  }
-
+  
   .form {
     position: absolute;
     visibility: visible;
@@ -107,35 +91,38 @@
     right: 0;
     width: 100%;
     text-align: center;
-    padding: 2em;
   }
-
+  
   .header {
-      width: 220px;
-      height: 130px;
-      margin: auto;
-      margin-bottom: 85px;
-    }
-
-  .form input {
-      width: 100%;
-      padding: 13px 15px;
-      margin: 0.7em auto;
-      border-radius: 100px;
-      border: none;
-      background: rgb(255,255,255,0.3);
-      outline: none;
-      color: #fff;
+    width: 220px;
+    height: 130px;
+    margin: auto;
+    margin-top: 75px;
+    margin-bottom: 85px;
   }
+  
+  input {
+    width: 300px;
+    padding: 13px 15px;
+    margin: 0.7em auto;
+    border-radius: 100px;
+    border: none;
+    background: rgb(255,255,255,0.3);
+    outline: none;
+    color: #fff;
+  }
+  
   input::placeholder {
-      color: #fff;
-      font-size: 13px;
+    color: #fff;
+    font-size: 13px;
   }
-
+  
   .inputs {
+    position: relative;
     margin-top: -4em;
+    width: 100%;
   }
-
+  
   .footer {
     position: absolute;
     bottom: 0;
@@ -144,7 +131,7 @@
     padding: 2em;
     text-align: center;
   }
-
+  
   button {
     width: 100%;
     padding: 13px 15px;
@@ -158,54 +145,29 @@
     -webkit-transition: 0.3s;
     -moz-transition: 0.3s;
   }
-  
+    
   button:hover{
     background-color: #1b736f;
     color: #fff;
   }
-
+  
   .imgLogin{
     width: 120px;
     height: 120px;
   }
-
-  .splash{
-    position: fixed;
-    top:0;
-    left:0;
-    width: 100%;
-    height: 100vh;
-    background:#2c7d79 ;
-    z-index:200;
+  
+  #input-container {
+    position: relative;
+  }
+  
+  #input-container > img {
+    position: absolute;
+    right: 0;
+    padding-right: 70px;
+    padding-top: 19px;
+    opacity: 0.6;
+  }
+  
+  #input-container > input {
   
   }
-
-  .splash.display-none{
-    position: fixed;
-    top:0;
-    left:0;
-    width: 100%;
-    height: 100vh;
-    background:#2c7d79 ;
-    z-index:-10;
-    transition: all 0.5s;
-  
-  }
-
-  .imgSplash {
-    animation-name: imgSplash;
-    animation-duration: 2s;
-    animation-timing-function: linear;
-  }
-  @keyframes imgSplash {
-  0% {
-    transform: rotate(0);
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(360deg);
-
-    opacity: 0;
-
-  }
-}
