@@ -6,18 +6,18 @@ var month = dateObj.getUTCMonth() + 1;
 var day = dateObj.getUTCDate();
 var year = dateObj.getUTCFullYear();
 var monthText = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December"
+  "Janeiro",
+  "Fevereiro",
+  "Março",
+  "Abril",
+  "Maio",
+  "Junho",
+  "Julho",
+  "Agosto",
+  "Setembro",
+  "Outubro",
+  "Novembro",
+  "Dezembro"
 ];
 var indexMonth = month;
 var todayBtn = $(".c-today__btn");
@@ -38,10 +38,8 @@ function defaultEvents(dataDay,dataName,dataNotes,classTag){
   date.addClass("event--" + classTag);
 }
 
-defaultEvents(today, 'YEAH!','Today is your day','important');
-defaultEvents('2017-12-25', 'MERRY CHRISTMAS','A lot of gift!!!!','festivity');
-defaultEvents('2017-05-04', "LUCA'S BIRTHDAY",'Another gifts...?','birthday');
-defaultEvents('2017-03-03', "MY LADY'S BIRTHDAY",'A lot of money to spent!!!!','birthday');
+defaultEvents(today, 'HOJE','','important');
+defaultEvents('2020-12-25', 'FELIZ NATAL','','festivity');
 
 
 // ------ functions control -------

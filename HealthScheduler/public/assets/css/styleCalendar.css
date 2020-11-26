@@ -250,6 +250,22 @@ header > .wrapper a {
   line-height: 80px;
   padding: 0 20px;
 }
+
+.o-btn2 {
+  margin-left: 345px;
+  margin-bottom: 7px;
+  display: inline-block;
+  padding: 0 15px;
+  line-height: 30px;
+  height: 30px;
+  background-color:rgb(27,115,111);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
 .o-btn {
   display: inline-block;
   padding: 0 10px;
@@ -396,7 +412,7 @@ header > .wrapper a {
   display: block;
   padding-top: 100%;
 }
-.c-cal__cel:nth-child(1) p {
+.c-cal__cel:nth-child(6) p {
   background: rgba(226, 192, 192, 0.2);
 }
 .c-cal__cel:nth-child(7) p {
