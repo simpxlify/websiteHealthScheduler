@@ -68,3 +68,7 @@ function writeUserDataWithCompletion(userId, name, email, imageUrl, address) {
 	  }
 	});
   }
+
+function fadeIn(){
+	
+}

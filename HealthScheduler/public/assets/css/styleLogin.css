@@ -1,3 +1,51 @@
+/*
+Palete de cores:
+    #fff
+    #49b3ad - verde mais claro
+    #36bfb8 - verde da aplicação
+    #1b736f - verde mais escuro
+
+Degrade row:
+    #2a5c5a - verde mais escuro 50%
+    #227e74 - verde mais claro 82%
+
+p: #333;
+a: #333;
+h: #333;
+
+font-family: 'Roboto', sans-serif;
+*/
+
+/*fade in up*/
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+/*fade in*/
+
+@keyframes fadeIn {
+  from { 
+  opacity: 0;
+  }
+
+  to {
+  opacity: 1;
+  -webkit-transform: none;
+  transform: none;
+  }
+}
+
 body {
   margin: 0;
   border: 0;
@@ -8,6 +56,10 @@ body {
   height: 100vh;
   margin: auto;
   display: flex;
+}
+
+a, p, h1{
+  color: #333;
 }
   
 body::after{
@@ -40,10 +92,17 @@ img {
   position: relative;
   overflow: hidden;
   box-shadow: 0 6px 31px -2px rgba(0, 0, 0, .3);
+
+  /*fadein*/
+  opacity: 0; 
+  animation: fadeIn 1s ease-in-out 0s forwards;
 }
 
 a{
   text-decoration: none;
+}
+
+a:hover{
   color: #1b736f;
 }
 
@@ -65,13 +124,6 @@ a{
   font-size: 13px;
   color: #333;
   line-height: 2;
-}
-.light {
-  text-align: right;
-  color: #fff;
-}
-.light a {
-  color: #fff;
 }
 
 .bg{
