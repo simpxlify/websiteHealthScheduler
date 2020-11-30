@@ -53,8 +53,6 @@ function signup() {
 					uid,
 					username
 				});
-
-				window.location.assign("mainpage.html");
 				} else {
 				// User is signed out.
 				// ...
@@ -67,7 +65,6 @@ function signup() {
 
 			alert(errorMessage);
 		});
-		
 	})
 	.catch((error) => {
 		var errorCode = error.code;
@@ -77,33 +74,10 @@ function signup() {
 	})
 }
 
-function loginOnSignup(email, password){
-	firebase.auth().signInWithEmailAndPassword(email, password)
-	.then((user) => {
-		var uid = onLoginAuth();
-		alert(uid + "");
-		return uid;
-	})
-	.catch(error => {
-		var errorCode = error.code;
-		var errorMessage = error.message;
-
-		alert(errorMessage);
-	});
-}
-
-function onLoginAuth(){
-	var uid;
-	firebase.auth().onAuthStateChanged(function(user) {
-		if (user) {
-		  // User is signed in.
-		  alert("" + user.uid);
-		  uid = user.uid;
-		  // ...
-		  return uid + "";
-		} else {
-		  // User is signed out.
-		  // ...
-		}
+function logOut(){
+	firebase.auth().signOut().then(function() {
+		// Sign-out successful.
+	  }).catch(function(error) {
+		// An error happened.
 	  });
 }
