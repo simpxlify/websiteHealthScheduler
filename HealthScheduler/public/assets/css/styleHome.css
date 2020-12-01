@@ -54,6 +54,7 @@ a{
     position: absolute;
     bottom: 0; 
     left: 0;
+    margin: auto;
     width: 65px;
     float: inline;
 }

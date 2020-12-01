@@ -14,12 +14,13 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
+
 function login(){
 	var email = document.getElementById("email_input");
 	var password = document.getElementById("password_input");
 
 	firebase.auth().signInWithEmailAndPassword(email.value, password.value).then((user) => {
-		window.location.assign("mainpage.html");
+		window.location.replace("mainpage.html");
 
 	})
 	.catch((error) => {
@@ -31,31 +32,29 @@ function login(){
 }
 
 function signup() {
-	const db = firebase.firestore();
-
+	const db = firebase.firestore();	
 	const phoneNumberEmail = document.getElementById("email_input_register").value;
 	const passwordRegister = document.getElementById("password_input_register").value;
 	const username = document.getElementById("nome_input").value;
 	const address = document.getElementById("morada_input").value;
+
 	firebase.auth().createUserWithEmailAndPassword(phoneNumberEmail, passwordRegister)
 	.then((user) => {
 		firebase.auth().signInWithEmailAndPassword(phoneNumberEmail, passwordRegister)
 		.then((user) => {
 			firebase.auth().onAuthStateChanged(function(user) {
 				if (user) {
-				// User is signed in.
-				const uid = "" + user.uid;
-				// ...
-				db.collection('users_medic').doc("" + uid).set({
-					address,
-					imagePath: "",
-					phoneNumberEmail,
-					uid,
-					username
-				});
+					const uid = "" + user.uid;
+
+					db.collection('users_medic').doc("" + uid).set({
+						address,
+						imagePath: "",
+						phoneNumberEmail,
+						uid,
+						username
+					});
 				} else {
-				// User is signed out.
-				// ...
+					
 				}
 			});
 		})
@@ -70,7 +69,7 @@ function signup() {
 		var errorCode = error.code;
 		var errorMessage = error.message;
 		
-		alert(errorMessage);
+		alert("Email já registado!");
 	})
 }
 
