@@ -1,3 +1,4 @@
+
 //global variables
 var monthEl = $(".c-main");
 var dataCel = $(".c-cal__cel");
@@ -65,6 +66,7 @@ dataCel.each(function() {
 
 //window event creator
 addBtn.on("click", function() {
+
   winCreator.addClass("isVisible");
   $("body").addClass("overlay");
   dataCel.each(function() {
@@ -76,17 +78,23 @@ addBtn.on("click", function() {
     }
   });
 });
+
+
 closeBtn.on("click", function() {
   winCreator.removeClass("isVisible");
   $("body").removeClass("overlay");
 });
+
+
 saveBtn.on("click", function() {
-  var inputName = $("input[name=name]").val();
-  var inputDate = $("input[name=date]").val();
-  var inputNotes = $("textarea[name=notes]").val();
-  var inputTag = $("select[name=tags]")
-    .find(":selected")
-    .text();
+
+  const db = firebase.firestore();
+
+  const inputName = $("input[name=name]").val();
+  const inputDate = $("input[name=date]").val();
+  const inputNotes = $("textarea[name=notes]").val();
+  const inputTag = $("select[name=tags]").find(":selected").text();
+
 
   dataCel.each(function() {
     if ($(this).data("day") === inputDate) {
@@ -102,11 +110,44 @@ saveBtn.on("click", function() {
       }
       fillEventSidebar($(this));
     }
+
+    
   });
+
+  
 
   winCreator.removeClass("isVisible");
   $("body").removeClass("overlay");
   $("#addEvent")[0].reset();
+
+  if (!inputName || !inputDate || !inputNotes || !inputTag ) {
+
+    alert("error");
+
+  } 
+
+  else {  
+    db.collection('consultas').set({
+      inputName,
+      inputDate,
+      inputNotes,
+      inputTag
+    
+    
+  }),
+  function(error){
+    if(!error)
+    {
+      $("input[name=name]").val("");
+      $("input[name=date]").val("");
+      $("textarea[name=notes]").val("");
+      $("select[name=tags]").find(":selected").text();
+    }
+    else{
+      alert("error")
+    }
+  }
+}
 });
 
 //fill sidebar event info
