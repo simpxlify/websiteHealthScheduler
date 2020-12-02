@@ -18,15 +18,16 @@ li a {
 }
 
 ul {
+    top: 0;
     list-style-type: none;
     padding: 0;
     width: 65px;
     overflow: hidden;
     background: rgb(27,115,111);
     background: linear-gradient(180deg, rgba(27,115,111,1) 0%, rgba(54,191,176,1) 100%);
-    height: 100%;
-    position: relative;
-    overflow: auto;
+    height: 100%; /* Full height */
+    position: fixed; /* Make it stick, even on scroll */
+    overflow: auto; /* Enable scrolling if the sidenav has too much content */
 }
 
 a{
@@ -52,4 +53,50 @@ a{
     margin: 0;
     height: 50px;
     width: 50px;
+}
+
+.twoRows{
+    margin: auto;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 100px;
+    height: 300px;
+    width: 1200px;
+    text-align:center;
+}
+
+.rowPersonalInfo{
+    float: left;
+    width: 400px;
+    height: 300px;
+    padding-left: 200px;
+}
+
+.profilePicture img{
+    float: right;
+    width: auto;
+    height: 300px;
+    margin-right: 200px;
+    border-radius: 200px;
+}
+
+.alignLeft h4{
+    margin: 0;
+    padding: 0;
+}
+
+.alignLeft{
+    margin: auto;
+    padding: auto;
+    position: relative;
+    float: left;
+    height: 40px;
+}
+
+.alignRight{
+    margin: auto;
+    padding: auto;
+    float: left;
+    padding-left: 20px;
+    height: 40px;
 }
