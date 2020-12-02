@@ -75,7 +75,7 @@ function signup() {
 
 function logOut(){
 	firebase.auth().signOut().then(function() {
-		// Sign-out successful.
+		alert("Saiu com sucesso!");
 	  }).catch(function(error) {
 		// An error happened.
 	  });
