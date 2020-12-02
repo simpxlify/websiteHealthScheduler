@@ -1,4 +1,5 @@
 
+
 //global variables
 var monthEl = $(".c-main");
 var dataCel = $(".c-cal__cel");
@@ -95,7 +96,39 @@ saveBtn.on("click", function() {
   const inputNotes = $("textarea[name=notes]").val();
   const inputTag = $("select[name=tags]").find(":selected").text();
 
+  if (!inputName || !inputDate || !inputNotes || !inputTag ) {
 
+    alert("error");
+
+  } 
+
+  else {  
+    db.collection('consultas').add({
+      cabinet : inputNotes,
+      date : inputDate,
+      doctorName : inputName,
+      floor : inputTag, 
+      hour : "",
+      local : "",
+      pavilion : "",
+      typeOfConsult : "",
+      userID : ""
+    
+    
+  }),
+  function(error){
+    if(!error)
+    {
+      $("input[name=name]").val("");
+      $("input[name=date]").val("");
+      $("textarea[name=notes]").val("");
+      $("select[name=tags]").find(":selected").text();
+    }
+    else{
+      alert("error")
+    }
+  }
+}
   dataCel.each(function() {
     if ($(this).data("day") === inputDate) {
       if (inputName != null) {
@@ -114,40 +147,11 @@ saveBtn.on("click", function() {
     
   });
 
-  
 
   winCreator.removeClass("isVisible");
   $("body").removeClass("overlay");
   $("#addEvent")[0].reset();
 
-  if (!inputName || !inputDate || !inputNotes || !inputTag ) {
-
-    alert("error");
-
-  } 
-
-  else {  
-    db.collection('consultas').set({
-      inputName,
-      inputDate,
-      inputNotes,
-      inputTag
-    
-    
-  }),
-  function(error){
-    if(!error)
-    {
-      $("input[name=name]").val("");
-      $("input[name=date]").val("");
-      $("textarea[name=notes]").val("");
-      $("select[name=tags]").find(":selected").text();
-    }
-    else{
-      alert("error")
-    }
-  }
-}
 });
 
 //fill sidebar event info

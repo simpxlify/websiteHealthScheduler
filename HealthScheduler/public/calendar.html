@@ -146,7 +146,7 @@ function fill_table(month, month_length, indexMonth) {
 <div class="wrapper">
   <div class="c-calendar">
     <div class="c-calendar__style c-aside">
-      <a class="c-add o-btn js-event__add" href="javascript:;">Adicionar evento <span class="fa fa-plus"></span></a>
+      <a class="c-add o-btn js-event__add" href="javascript:;">Adicionar consulta <span class="fa fa-plus"></span></a>
       <div class="c-aside__day">
         <span class="c-aside__num"></span> <span class="c-aside__month"></span>
       </div>
@@ -183,14 +183,18 @@ function fill_table(month, month_length, indexMonth) {
   <div class="c-event__creator c-calendar__style js-event__creator">
     <a href="javascript:;" class="o-btn2 js-event__close">FECHAR <span class="fa fa-close"></span></a>
     <form id="addEvent">
-      <input placeholder="Nome do evento" type="text" name="name">
+      <input placeholder="Nome do médico" type="text" name="name">
+      <input placeholder="Gabinete" type="text" name="name">
       <input type="date" name="date">
-      <textarea placeholder="Notas" name="notes" cols="30" rows="10"></textarea>
+      <input placeholder="Horas" type="text" name="name">
+      <input placeholder="Notas" name="notes">
       <select name="tags">
-          <option value="event">Evento</option>
-          <option value="important">Importante</option>
-          <option value="birthday">Data de Aniversário</option>
-          <option value="festivity">Festividade</option>
+          <option value="event">Fisioterapia</option>
+          <option value="event">Medicina física</option>
+          <option value="event">Reabilitação</option>
+          <option value="important">Cuidados Paliativos</option>
+          <option value="birthday">Neurologia</option>
+          <option value="festivity">Pneumologia</option>
         </select>
     </form>
     <br>
@@ -199,7 +203,8 @@ function fill_table(month, month_length, indexMonth) {
 </div>
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.cycle2/2.1.6/jquery.cycle2.core.min.js'></script><script  src="assets/js/calendar.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.cycle2/2.1.6/jquery.cycle2.core.min.js'></script>
+<script  src="assets/js/calendar.js"></script>
 
 </body>
 </html>
