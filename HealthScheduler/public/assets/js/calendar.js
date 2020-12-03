@@ -1,6 +1,15 @@
 
 
 //global variables
+var uid = "";
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user != null) {
+        document.getElementsByTagName("BODY")[0].style.display = "contents";
+        uid = "" + user.uid;
+  }
+});
+
 var monthEl = $(".c-main");
 var dataCel = $(".c-cal__cel");
 var dateObj = new Date();
@@ -91,38 +100,58 @@ saveBtn.on("click", function() {
 
   const db = firebase.firestore();
 
-  const inputName = $("input[name=name]").val();
-  const inputDate = $("input[name=date]").val();
-  const inputNotes = $("textarea[name=notes]").val();
-  const inputTag = $("select[name=tags]").find(":selected").text();
+  // firebase.auth().onAuthStateChanged(function(user) {
+  //   if (user != null) {
+  //         document.getElementsByTagName("BODY")[0].style.display = "contents";
+  //         uid = "" + user.uid;
+  //   }
+  // });
 
-  if (!inputName || !inputDate || !inputNotes || !inputTag ) {
+  const inputCabinet = $("input[name=cabinet]").val();
+  const inputDate = $("input[name=date]").val();
+  const inputDocname = $("input[name=doctorname]").val();
+  const inputHour = $("input[name=hour]").val();
+  // const inputFloor = $("input[name=floor]").val();
+  // const inputLocal = $("input[name=local]").val();
+  // const inputPavilion = $("input[name=pavilion]").val();
+  const inputNotes = $("input[name=notes]").val();
+  const inputTypeofconsult = $("select[name=typeofconsult]").find(":selected").text();
+
+  if (!inputDocname  ) {
 
     alert("error");
 
   } 
 
-  else {  
+  else {
+
+
     db.collection('consultas').add({
-      cabinet : inputNotes,
+      cabinet : inputCabinet,
       date : inputDate,
-      doctorName : inputName,
-      floor : inputTag, 
-      hour : "",
-      local : "",
-      pavilion : "",
-      typeOfConsult : "",
-      userID : ""
+      doctorName : inputDocname,
+      // floor : inputFloor, 
+      hour : inputHour,
+      //local : inputLocal,
+      //pavilion : inputPavilion,
+      typeOfConsult : inputTypeofconsult,
+      // Notes : inputNotes,
+      userID : uid
     
     
   }),
   function(error){
     if(!error)
     {
-      $("input[name=name]").val("");
-      $("input[name=date]").val("");
-      $("textarea[name=notes]").val("");
-      $("select[name=tags]").find(":selected").text();
+      const inputCabinet = $("input[name=cabinet]").val();
+      const inputDate = $("input[name=date]").val();
+      const inputDocname = $("input[name=doctorname]").val();
+      const inputHour = $("input[name=hour]").val();
+      const inputFloor = $("input[name=floor]").val();
+      const inputLocal = $("input[name=local]").val();
+      const inputPavilion = $("input[name=pavilion]").val();
+      const inputNotes = $("textarea[name=notes]").val();
+      const inputTypeofconsult = $("select[name=typeofconsult]").find(":selected").text();
     }
     else{
       alert("error")
@@ -131,15 +160,15 @@ saveBtn.on("click", function() {
 }
   dataCel.each(function() {
     if ($(this).data("day") === inputDate) {
-      if (inputName != null) {
-        $(this).attr("data-name", inputName);
+      if (inputDocname != null) {
+        $(this).attr("data-name", inputDocname);
       }
       if (inputNotes != null) {
         $(this).attr("data-notes", inputNotes);
       }
       $(this).addClass("event");
-      if (inputTag != null) {
-        $(this).addClass("event--" + inputTag);
+      if (inputTypeofconsult != null) {
+        $(this).addClass("event--" + inputTypeofconsult);
       }
       fillEventSidebar($(this));
     }

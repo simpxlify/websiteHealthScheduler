@@ -112,9 +112,9 @@ function fill_table(month, month_length, indexMonth) {
 <header>
   <ul>
     <li><a href="mainpage.html"><img class="imgNavLogo" src="assets/img/logo.png" alt="Home"></a></li>
-    <li><a href="#"><img class="imgNav" src="assets/img/round_chat_white_48dp.png" alt="Chat"></a></li>
-    <li><a href="calendar.html"><img class="imgNav" src="assets/img/round_event_white_48dp.png" alt="Calendario"></a></li>
-    <li><a href="profile.html"><img class="profileImage" src="assets/img/picuser.png"></a></li>
+            <li><a href="#"><img class="imgNav" src="assets/img/round_chat_white_48dp.png" alt="Chat"></a></li>
+            <li><a href="calendar.html"><img class="imgNav" src="assets/img/round_event_white_48dp.png" alt="Calendario"></a></li>
+            <li><a onclick="logOut()"><img class="imgNav imgNavBottom" src="assets/img/round_exit_to_app_white_48dp.png"></a></li>
 </ul>
   <div class="wrapper">
     <div class="c-monthyear">
@@ -183,12 +183,12 @@ function fill_table(month, month_length, indexMonth) {
   <div class="c-event__creator c-calendar__style js-event__creator">
     <a href="javascript:;" class="o-btn2 js-event__close">FECHAR <span class="fa fa-close"></span></a>
     <form id="addEvent">
-      <input placeholder="Nome do médico" type="text" name="name">
-      <input placeholder="Gabinete" type="text" name="name">
+      <input placeholder="Nome do médico" type="text" name="doctorname">
+      <input placeholder="Gabinete" type="text" name="cabinet">
       <input type="date" name="date">
-      <input placeholder="Horas" type="text" name="name">
+      <input placeholder="Horas" type="time" name="hour">
       <input placeholder="Notas" name="notes">
-      <select name="tags">
+      <select  name="typeofconsult">
           <option value="event">Fisioterapia</option>
           <option value="event">Medicina física</option>
           <option value="event">Reabilitação</option>
