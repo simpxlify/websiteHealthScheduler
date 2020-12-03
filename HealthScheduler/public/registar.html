@@ -16,6 +16,7 @@
 		<script src="/__/firebase/8.1.1/firebase-app.js"></script>
 		<script src="/__/firebase/8.1.1/firebase-auth.js"></script>
 		<script src="/__/firebase/8.1.1/firebase-firestore.js"></script>
+		<script src="/__/firebase/8.1.1/firebase-storage.js"></script>
 		<script src="/__/firebase/8.1.1/firebase-analytics.js"></script>
 		<!-- Initialize Firebase -->
 		<!--<script src="/__/firebase/init.js"></script> ?useEmulator=true-->
@@ -28,8 +29,8 @@
 			<div class="form"> 
 				<header class="header">
 					<div class="uploadImageDiv">
-						<img src="assets/img/logo.png" class="imgRegister">
-						<div class="uploadImage">Carregar imagem</div>
+						<img src="assets/img/logo.png" class="imgRegister" accept="image/*" id="imgRegister">
+						<div class="uploadImage"><input type="file" class="inputImage" id="photo" onclick="swapImage(event)"></div>
 					</div>
 				</header>
 	

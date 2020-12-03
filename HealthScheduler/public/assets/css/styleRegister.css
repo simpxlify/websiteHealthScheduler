@@ -162,6 +162,14 @@ a:hover{
   cursor: pointer;
 }
 
+.imgRegister{
+  width: 190px;
+  height: 190px;
+  border-radius: 220px;
+  position: relative;
+  backface-visibility: hidden;
+}
+
 .uploadImageDiv:hover .imgRegister {
   transition: .5s ease;
   filter: blur(2px);
@@ -174,15 +182,6 @@ a:hover{
   opacity: 1;
 }
 
-  
-.imgRegister{
-  width: 190px;
-  height: 190px;
-  border-radius: 220px;
-  position: relative;
-  backface-visibility: hidden;
-}
-
 .uploadImage {
   color: #333;
   transition: .5s ease;
@@ -193,6 +192,12 @@ a:hover{
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   text-align: center;
+}
+
+.uploadImageText{
+  margin: 0;
+  padding: 0;
+  color: #333;
 }
   
 input {
@@ -216,7 +221,35 @@ input::placeholder {
   margin-top: -4em;
   width: 100%;
 }
+
+.inputImage{
+  background: none;
+}
   
+.inputImage::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.inputImage::before {
+  color: #333;
+  content: 'Carregar Imagem';
+  border: none;
+  background: none;
+  padding-left: 95px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  float: center;
+  font-weight: 700;
+  font-size: 10pt;
+}
+.inputImage:hover::before {
+  border-color: black;
+}
+.inputImage:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
 .footer {
   position: absolute;
   bottom: 0;

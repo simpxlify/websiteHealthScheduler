@@ -14,7 +14,6 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
-
 function login(){
 	var email = document.getElementById("email_input");
 	var password = document.getElementById("password_input");
@@ -37,6 +36,8 @@ function signup() {
 	const passwordRegister = document.getElementById("password_input_register").value;
 	const username = document.getElementById("nome_input").value;
 	const address = document.getElementById("morada_input").value;
+	var imageName = document.getElementById("photo").src;
+	imageName = imagePath.replace('blob:http://localhost:5000/', '');
 
 	firebase.auth().createUserWithEmailAndPassword(phoneNumberEmail, passwordRegister)
 	.then((user) => {
@@ -48,7 +49,7 @@ function signup() {
 
 					db.collection('users_medic').doc("" + uid).set({
 						address,
-						imagePath: "",
+						imagePath,
 						phoneNumberEmail,
 						uid,
 						username
@@ -78,5 +79,27 @@ function logOut(){
 		alert("Saiu com sucesso!");
 	  }).catch(function(error) {
 		// An error happened.
+	  });
+}
+
+function swapImage(){
+	var fileButton = document.getElementById('photo');
+	var photoRegister = document.getElementById('imgRegister');
+
+	
+	var imageName = document.getElementById("imgRegister").src;
+	imageName = imageName.replace('blob:http://localhost:5000/', '');
+
+	console.log(imageName);
+
+	fileButton.addEventListener('change', function(e){
+		var file = e.target.files[0];
+
+		photoRegister.src = file.name;
+
+		photoRegister.src = URL.createObjectURL(event.target.files[0]);
+		photoRegister.onload = function() {
+			URL.revokeObjectURL(photoRegister.src) // free memory
+		}
 	  });
 }
