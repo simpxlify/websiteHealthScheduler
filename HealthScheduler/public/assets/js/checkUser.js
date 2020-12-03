@@ -10,20 +10,22 @@ firebase.auth().onAuthStateChanged(function(user) {
                 //console.log("Document data:", doc.data());
                 document.getElementById("img_user").removeAttribute('src');
 
-
                 var username = document.getElementById("user_name");
                 var imageUser = document.getElementById("img_user");
                 var addressUser = document.getElementById("address_user");
+                var emailUser = document.getElementById("email_user");
 
 
                 var usernames = doc.data().username;
                 var imagePath = doc.data().imagePath;
                 var addressUsers = doc.data().address;
+                var emailUsers = doc.data().phoneNumberEmail;
 
 
                 imagePath = imagePath.replace(/^"(.*)"$/, '$1');
                 username.innerHTML = "" + usernames.replace(/^"(.*)"$/, '$1');
                 addressUser.innerHTML = "" + addressUsers.replace(/^"(.*)"$/, '$1');
+                emailUser.innerHTML = "" + emailUsers.replace(/^"(.*)"$/, '$1');
 
                 imageUser.src = imagePath;
             } else {
@@ -33,7 +35,6 @@ firebase.auth().onAuthStateChanged(function(user) {
             console.log("Error getting document:", error);
         });
 	} else {
-        alert("Utilzador não logado!");
         window.location.replace("login.html");
 	} 
 });
