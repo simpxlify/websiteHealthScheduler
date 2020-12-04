@@ -1,8 +1,5 @@
-
-
 //global variables
 var uid = "";
-
 firebase.auth().onAuthStateChanged(function(user) {
   if (user != null) {
         document.getElementsByTagName("BODY")[0].style.display = "contents";
@@ -100,20 +97,13 @@ saveBtn.on("click", function() {
 
   const db = firebase.firestore();
 
-  // firebase.auth().onAuthStateChanged(function(user) {
-  //   if (user != null) {
-  //         document.getElementsByTagName("BODY")[0].style.display = "contents";
-  //         uid = "" + user.uid;
-  //   }
-  // });
-
   const inputCabinet = $("input[name=cabinet]").val();
   const inputDate = $("input[name=date]").val();
   const inputDocname = $("input[name=doctorname]").val();
   const inputHour = $("input[name=hour]").val();
-  // const inputFloor = $("input[name=floor]").val();
-  // const inputLocal = $("input[name=local]").val();
-  // const inputPavilion = $("input[name=pavilion]").val();
+  const inputFloor = $("input[name=floor]").val();
+  const inputLocal = $("input[name=local]").val();
+  const inputPavilion = $("input[name=pavilion]").val();
   const inputNotes = $("input[name=notes]").val();
   const inputTypeofconsult = $("select[name=typeofconsult]").find(":selected").text();
 
@@ -130,12 +120,12 @@ saveBtn.on("click", function() {
       cabinet : inputCabinet,
       date : inputDate,
       doctorName : inputDocname,
-      // floor : inputFloor, 
+      floor : inputFloor, 
       hour : inputHour,
-      //local : inputLocal,
-      //pavilion : inputPavilion,
+      local : inputLocal,
+      pavilion : inputPavilion,
       typeOfConsult : inputTypeofconsult,
-      // Notes : inputNotes,
+      notes : inputNotes,
       userID : uid
     
     
