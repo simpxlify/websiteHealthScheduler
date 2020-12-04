@@ -19,8 +19,7 @@
 		<script src="/__/firebase/8.1.1/firebase-storage.js"></script>
 		<script src="/__/firebase/8.1.1/firebase-analytics.js"></script>
 		<!-- Initialize Firebase -->
-		<!--<script src="/__/firebase/init.js"></script> ?useEmulator=true-->
-		<script src="assets/js/main.js"></script>
+		<script src="assets/js/register.js"></script>
 
 
 
@@ -33,7 +32,6 @@
 						<div class="uploadImage"><input type="file" class="inputImage" id="photo" onclick="swapImage(event)"></div>
 					</div>
 				</header>
-	
 				<div class="inputs">
 					<div id="input-container">
 						<img draggable="false" src="assets/img/round_person_white_18dp.png" alt="">
@@ -58,9 +56,7 @@
 				</div>
 			</div>
 			<div class="footer">
-				<form href="login.html">
-					<button onclick="signup()" href="login.html">Continuar</button>
-				</form>
+				<button onclick="signup()" id="register">Continuar</button>
 				<p class="login">Já tem conta? <a href="login.html"><b>Login</b></a></p>
 			</div>
 		</div>
