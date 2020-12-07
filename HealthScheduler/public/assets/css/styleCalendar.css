@@ -455,14 +455,23 @@ header > .wrapper a {
   transform: translate(-50%, calc(50% + 20px/2));
   -webkit-transform: translate(-50%, calc(50% + 20px/2));
 }
-.event--birthday:before {
+.event--Fisioterapia:before {
   background-color: #FACC2E;
 }
-.event--festivity:before {
+.event--Medicina:before {
   background-color: #10DDC2;
 }
-.event--important:before {
+.event--Reabilitação:before {
   background-color: #F57170;
+}
+.event--Cuidados:before {
+  background-color: #FACC2E;
+}
+.event--Neurologia:before {
+  background-color: #10DDC2;
+}
+.event--Pneumologia:before {
+  background-color: #000000;
 }
 .c-aside {
   width: 300px;
@@ -488,18 +497,27 @@ header > .wrapper a {
   width: 16px;
   height: 16px;
   left: 0;
-  background-color: #F5F5F5;
+  background-color: #fcb2b2;
   border-radius: 50%;
   -webkit-border-radius: 50%;
 }
-.c-aside__event--birthday:before {
+.c-aside__event--Fisioterapia:before {
   background-color: #FACC2E;
 }
-.c-aside__event--festivity:before {
+.c-aside__event--Medicina:before {
   background-color: #10DDC2;
 }
-.c-aside__event--important:before {
+.c-aside__event--Reabilitação:before {
   background-color: #F57170;
+}
+.c-aside__event--Cuidados:before {
+  background-color: #FACC2E;
+}
+.c-aside__event--Neurologia:before {
+  background-color: #10DDC2;
+}
+.c-aside__event--Pneumologia:before {
+  background-color: #000000;
 }
 .c-event__creator {
   position: fixed;

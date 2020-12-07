@@ -161,7 +161,9 @@ function fill_table(month, month_length, indexMonth) {
 
       // first day of the week of the new year
       today = new Date("Janeiro 1, " + year);
-      start_day = today.getDay() + 1;
+      start_day = today.getDay() + 1; // 2020
+      // start_day = today.getDay(); // 2021
+
       fill_table("Janeiro", 31, "01");
       fill_table("Fevereiro", 28, "02");
       fill_table("Março", 31, "03");
@@ -192,12 +194,12 @@ function fill_table(month, month_length, indexMonth) {
       <input placeholder="Horas" type="time" name="hour">
       <input placeholder="Notas" name="notes">
       <select  name="typeofconsult">
-          <option value="event">Fisioterapia</option>
-          <option value="event">Medicina física</option>
-          <option value="event">Reabilitação</option>
-          <option value="important">Cuidados Paliativos</option>
-          <option value="birthday">Neurologia</option>
-          <option value="festivity">Pneumologia</option>
+          <option value="Fisioterapia">Fisioterapia</option>
+          <option value="Medicina">Medicina física</option>
+          <option value="Reabilitação">Reabilitação</option>
+          <option value="Cuidados">Cuidados Paliativos</option>
+          <option value="Neurologia">Neurologia</option>
+          <option value="Pneumologia">Pneumologia</option>
         </select>
     </form>
     <br>
