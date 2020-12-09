@@ -14,22 +14,6 @@ var firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 
-function login(){
-	var email = document.getElementById("email_input");
-	var password = document.getElementById("password_input");
-
-	firebase.auth().signInWithEmailAndPassword(email.value, password.value).then((user) => {
-		window.location.replace("mainpage.html");
-
-	})
-	.catch((error) => {
-		var errorCode = error.code;
-		var errorMessage = error.message;
-
-		alert(errorMessage);
-	});
-}
-
 function logOut(){
 	firebase.auth().signOut().then(function() {
 		alert("Saiu com sucesso!");
