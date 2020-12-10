@@ -32,7 +32,7 @@ function login(){
                 
                     alert("Verifique o email ou a password!");
                 });
-            }else alert("Verifique o email ou a password!");
+            }
         });
     });
 }

@@ -1,11 +1,11 @@
 //global variables
 const db = firebase.firestore();
 
-var uid = "";
+var medicID = "";
 firebase.auth().onAuthStateChanged(function(user) {
   if (user != null) {
         document.getElementsByTagName("BODY")[0].style.display = "contents";
-        uid = "" + user.uid;
+        medicID = "" + user.medicID;
   }
 });
 
@@ -56,7 +56,7 @@ defaultEvents('2020-12-25', 'FELIZ NATAL','','festivity');
 
 db.collection("consultas").get().then(function(querySnapshot) {
   querySnapshot.forEach(function(doc) {
-    if(doc.data().userID == uid){
+    if(doc.data().medicID == medicID){
 
       var thisYear = (doc.data().date).slice(0,4);
       if(year == thisYear)
@@ -181,7 +181,7 @@ saveBtn.on("click", function() {
       pavilion : inputPavilion,
       typeOfConsult : inputTypeofconsult,
       notes : inputNotes,
-      userID : uid
+      medicID
     
     
   }),

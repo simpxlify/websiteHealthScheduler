@@ -33,13 +33,13 @@ function signIn(imagePath){
 			.then((user) => {
 				auth.onAuthStateChanged(function(user) {
 					if (user) {
-						const uid = "" + user.uid;
+						const medicID = "" + user.uid;
 
 						db.collection('users_medic').doc("" + uid).set({
 							address,
 							imagePath,
 							phoneNumberEmail,
-							uid,
+							medicID,
 							username
 						});
 						setTimeout(function(){ window.location = "login.html"; }, 3000);
