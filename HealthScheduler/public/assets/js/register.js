@@ -10,8 +10,8 @@ var firebaseConfig = {
     projectId: "healthscheduler-834e9",
     storageBucket: "healthscheduler-834e9.appspot.com",
     messagingSenderId: "1081449165079",
-    appId: "1:1081449165079:web:ad0897787ad0bd310c0752",
-    measurementId: "G-8WKMXG4700"
+    appId: "1:1081449165079:web:a5c312917c0103ac0c0752",
+    measurementId: "G-FLSBZJ2B42"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);

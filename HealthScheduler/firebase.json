@@ -1,6 +1,7 @@
 {
   "hosting": {
     "public": "public",
+    "site": "healthscheduler-am",
     "splash": "/mainpage.html",
     "cleanUrls": true,
     "trailingSlash": false,

@@ -422,7 +422,7 @@ header > .wrapper a {
   background-color: rgb(27,115,111) !important;
 }
 .c-cal__cel:hover p {
-  background: #003b71 !important;
+  background: #024a4d !important;
 }
 .c-cal__cel.isSelected {
   background-color: rgb(27,115,111);
