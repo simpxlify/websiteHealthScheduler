@@ -1,5 +1,4 @@
-/*
-Palete de cores:
+/*Palete de cores:
     #fff
     #49b3ad - verde mais claro
     #36bfb8 - verde da aplicação
@@ -15,7 +14,7 @@ h: #333;
 
 font-family: 'Roboto', sans-serif;
 */
-/* 
+
 @keyframes fadeInUp {
   from { 
     opacity: 0;
@@ -42,257 +41,6 @@ font-family: 'Roboto', sans-serif;
   }
 }
 
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: auto;
-}
-
-a, p, h1, h4, span{
-    color: #fff;
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-li a {
-    display: block;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-}
-
-ul {
-    top: 0;
-    list-style-type: none;
-    padding: 0;
-    width: 65px;
-    overflow: hidden;
-    background: rgb(27,115,111);
-    background: linear-gradient(180deg, rgba(27,115,111,1) 0%, rgba(54,191,176,1) 100%);
-    height: 100%;
-    position: fixed;
-    overflow: auto;
-}
-
-a{
-    display: block;
-    padding: 8px;
-}
-
-.imgNav{
-    height: 20px;
-    width: 20px;
-}
-
-
-.imgNavBottom{
-    bottom: 0;
-    left: 24px;
-    position: absolute;
-    padding-bottom: 20px;
-    cursor: pointer;
-}
-
-.imgNavLogo{  
-    padding: 0;
-    margin: 0;
-    height: 50px;
-    width: 50px;
-}
-
-.informationAboutUser{
-    margin: auto;
-    margin-left: 100px;
-    height: 300px;
-    width: 500px;
-    margin-top: 100px;
-    padding-top: 100px;
-    padding-bottom: 100px;
-    text-align:center;
-    background: #36bfb8;
-    box-shadow: 0 6px 31px -2px rgba(0, 0, 0, .8);
-}
-
-.rowPersonalInfo{
-    float: left;
-    width: 400px;
-    height: 300px;
-    padding-left: 200px;
-    text-align: left;
-}
-
-.rowPersonalInfo h1{
-    text-align: center;
-    
-    opacity: 0; 
-    animation: fadeIn 750ms ease-in-out 1s forwards;
-}
-
-.profilePicture img{
-    float: right;
-    width: auto;
-    height: 300px;
-    margin-right: 200px;
-    border-radius: 200px;
-    
-    opacity: 0; 
-    animation: fadeInUp 1s ease-in-out 1s forwards;
-}
-
-.info{
-    margin: auto;
-    padding: auto;
-    position: relative;
-    height: 40px;
-    width: 100%;
-
-    
-    opacity: 0; 
-    animation: fadeIn 1s ease-in-out 2s forwards;
-}
-
-.info h4{
-    margin: 0;
-    padding: 0;
-} */
-
-:root {
-  /*   color variables */
-  --clr-primary: #36bfb8;
-  --clr-primary-hover: #49b3ad;
-  --clr-primary-dark: #1b736f;
-  --clr-gray100: #f9fbff;
-  --clr-gray150: #f4f6fb;
-  --clr-gray200: #eef1f6;
-  --clr-gray300: #e1e5ee;
-  --clr-gray400: #767b91;
-  --clr-gray500: #4f546c;
-  /*   border radius */
-  --radius: 0.2rem;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'Roboto', sans-serif;
-  background-color: var(--clr-gray100);
-}
-
-.nav {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  background-color: white;
-  box-shadow: 0px 0px 10px var(--clr-gray300);
-  height: 100vh;
-}
-
-.navExpand {
-  width: 2rem;
-  height: 2rem;
-  fill: var(--clr-gray400);
-  background-color: white;
-  box-shadow: 0px 0px 10px var(--clr-gray300);
-  border-radius: 50%;
-  position: absolute;
-  right: -1rem;
-  top: 1rem;
-  z-index: 99;
-  cursor: pointer;
-  transform: rotatez(-180deg);
-  transition: transform 200ms ease-in-out;
-}
-
-.navExpand:hover {
-  fill: var(--clr-gray500);
-}
-
-.nav__list {
-  display: flex;
-  flex-direction: column;
-}
-
-.navListitem {
-  list-style: none;
-  transition: all 200ms ease-in;
-  padding: 1rem 1.5rem;
-  border-left: 6px solid transparent;
-  cursor: pointer;
-}
-
-.navListitem:first-child {
-  margin-bottom: 2rem;
-}
-
-.navListitem:hover {
-  background-color: var(--clr-gray150);
-}
-
-.navListitem a {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  color: var(--clr-gray400);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.navListitem .logoHealthSchedular {
-  margin: 0;
-  padding: 0;
-}
-
-.navListitem svg {
-  fill: var(--clr-gray400);
-  width: 2rem;
-  height: 2rem;
-}
-
-.navListitem-active {
-  background-color: var(--clr-gray200);
-  border-left: 6px solid var(--clr-primary);
-}
-
-.navListitem-active svg,
-.navListitem-active p {
-  color: var(--clr-primary);
-  fill: var(--clr-primary);
-}
-
-.nav-closed .navExpand {
-  transform: rotatez(0deg);
-}
-
-.nav-closed .navListitem p {
-  display: none;
-}
-
-.navListitem p {
-  font-size: 18px;
-}
-
-.logoHealthSchedular {
-  height: 50px;
-  width: 50px;
-}
-
-.logOut{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-
 .form{
   width: 75%;
   margin: 0;
@@ -311,15 +59,15 @@ body {
   height: auto;
   padding-top: 100px;
   box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1), 0 1px 10px 0 rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  border-radius: var(--radius);
 }
 
 
 .info{
   padding: 0;
   margin: 0;
-  height: auto;
   width: 100%;
+  height: 100%;
   background: #fff;
 }
 
@@ -361,5 +109,57 @@ body {
 
 .appointementsContainer{
   width: 100%;
+  height: auto;
   margin: 50px;
+  background: #1b736f;
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1), 0 1px 10px 0 rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius);
+}
+
+.allConsultas{
+  width: 100%;
+  height: auto;
+  margin-top: 100px;
+  background: #fff;
+}
+
+.descriptionOfConsulta{
+  padding: 20px;
+}
+
+.titleOfConsulta{
+  padding: 20px;
+}
+
+
+@media only screen and (max-width: 1250px) {
+
+  .nav{
+    display: none;
+  }
+
+  .nav-closed{
+    display: none;
+  }
+
+  .form{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: block;
+  }
+
+  .profileContainer{
+    width: auto;
+    margin: 20px;
+  }
+
+  .imgAndName img{
+    top: 75;
+  }
+
+  .appointementsContainer{
+    width: auto;
+    margin: 20px;
+  }
 }
