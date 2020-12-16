@@ -1,5 +1,15 @@
 /*
 Palete de cores:
+    SHADOW-BOXESQUERDA: -webkit-box-shadow: 10px 13px 20px -12px rgba(0,0,0,0.53);
+-moz-box-shadow: 10px 13px 20px -12px rgba(0,0,0,0.53);
+box-shadow: 10px 13px 20px -12px rgba(0,0,0,0.53);
+
+    SHADOW-BOXDIREITA:-webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.64);
+    -moz-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.64);
+     box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.64);
+
+
+
     #fff
     #49b3ad - verde mais claro
     #36bfb8 - verde da aplicação
