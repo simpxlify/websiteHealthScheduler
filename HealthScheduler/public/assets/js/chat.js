@@ -19,35 +19,45 @@
 
       db.collection("users").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
-           var user = {userID : doc.data().userID , nome : doc.data().username, avatar : doc.data().imagePath }
+
+          
+          // var listContainer = document.createElement('div');
+
+          var listContainer = document.getElementById('allUsersContainer');
+          listContainer.className = 'allUsersContainer';
+          
+          var containerUsers = document.createElement('div');
+          containerUsers.className = 'usersBox';
 
 
-          var listContainer = document.createElement('div');
-          listContainer.className = 'userBox'
+          listContainer.appendChild(containerUsers);
+          
           // Make the list
           var listElement = document.createElement('ul');
-          listElement.className = 'listOfUsers'
+          listElement.className = 'listOfUsers';
           // Set up a loop that goes through the items in listItems one at a time
 
               // let div = document.createElement('div')
               document.getElementsByTagName('body')[0].appendChild(listContainer);
-              listContainer.appendChild(listElement);
+              containerUsers.appendChild(listElement);
 
 
 
-              listItem = document.createElement('li');
+              listItem2 = document.createElement('li');
+              listItem2.className = 'listItems';
 
-              listItem2 = document.createElement('img');
-              listItem2.className = 'imgRedonda'
+              listItem = document.createElement('img');
+              listItem.className = 'imgRedonda'
         // Add the item text
-              listItem.innerHTML = doc.data().username;
-              listItem2.src = doc.data().imagePath;
+              listItem.src = doc.data().imagePath;
+              listItem2.innerHTML = doc.data().username;
 
 
         // Add listItem to the listElement
               listElement.appendChild(listItem);
               listElement.appendChild(listItem2);
-              console.log(user);
+
+              
 
           // myList.push(user);
           // myList.push(doc.data().imagePath);

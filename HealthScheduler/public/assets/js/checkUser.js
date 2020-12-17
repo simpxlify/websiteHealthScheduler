@@ -28,6 +28,8 @@ firebase.auth().onAuthStateChanged(function(user) {
                 emailUser.innerHTML = "" + emailUsers.replace(/^"(.*)"$/, '$1');
 
                 imageUser.src = imagePath;
+
+                listConsultas(uid);
             } else {
                 console.log("No such document!");
             }
@@ -38,3 +40,36 @@ firebase.auth().onAuthStateChanged(function(user) {
         window.location.replace("login.html");
 	} 
 });
+
+
+function listConsultas(uid){
+    db.collection("consultas").get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            if(doc.data().medicID == uid){
+                var h1Title = document.createElement("h1");
+                var spanText = document.createElement("span");
+
+                h1Title = "" + doc.data().typeOfConsult;
+                spanText = "" + doc.data().notes;
+
+                console.log("title: " + h1Title + " text: " + spanText);
+
+                var divTitle = document.getElementById("titleOfConsutla");
+                var divSpan = document.getElementById("descriptionOfConsulta");
+                divTitle.appendChild(
+                    "<h1>" +
+                    h1Title +
+                    "</h1> <br>"
+                );
+
+                divSpan.appendChild(
+                    "<span>" +
+                    spanText +
+                    "</span> <br>"
+                );
+                
+            }
+        });
+    });
+}
