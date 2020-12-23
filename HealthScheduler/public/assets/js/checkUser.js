@@ -40,48 +40,74 @@ firebase.auth().onAuthStateChanged(function (user) {
     }
 });
 
-
 function listConsultas(uid) {
     db.collection("consultas").get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
             if (doc.data().medicID == uid) {
-                var userID = doc.data().userID;
-
+                getUserID(doc.data().userID, doc.data().notes, doc.data().hour);
+            } else{
                 var consultaContainer = document.getElementById('allConsultas');
                 var titleOfConsulta = document.createElement('div');
-                titleOfConsulta.className = 'titleOfConsulta';
                 var descriptionOfConsulta = document.createElement('div');
+                titleOfConsulta.className = 'titleOfConsulta';
+                
+                consultaContainer.appendChild(titleOfConsulta);
+
+                var titles = document.createElement("h1");
+                
+                var titleText = document.createTextNode("Você não tem nenhuma consulta");
+
+                titles.appendChild(titleText);
+
+                titleOfConsulta.append(titles);
+            }
+        });
+    });
+}
+
+function getUserID(userID, notes, hour){
+    db.collection("users")
+        .doc(userID)
+        .get()
+        .then(function(doc) {
+            if (doc.exists){
+                var consultaContainer = document.getElementById('allConsultas');
+                var titleOfConsulta = document.createElement('div');
+                var descriptionOfConsulta = document.createElement('div');
+                titleOfConsulta.className = 'titleOfConsulta';
                 descriptionOfConsulta.className = 'descriptionOfConsulta';
 
                 document.getElementsByClassName('appointementsContainer')[0].appendChild(consultaContainer);
-                
                 
                 consultaContainer.appendChild(titleOfConsulta);
                 consultaContainer.appendChild(descriptionOfConsulta);
 
 
-                var title = document.createElement("h1");
-                var span = document.createElement("span");
-                var hour = document.createElement("p");
-
+                var titles = document.createElement("h1");
+                var spans = document.createElement("span");
+                var hours = document.createElement("p");
+                var divider = document.createElement("hr");
+                divider.className = "inConsultaDivider";
                 
+                var spanText = document.createTextNode(notes);
 
-                var spanText = document.createTextNode(doc.data().notes);
+                spans.appendChild(spanText);
 
-                span.appendChild(spanText);
+                var hourText = document.createTextNode(hour);
 
-                var hourText = document.createTextNode(doc.data().hour);
+                hours.appendChild(hourText);
+                
+                var titleText = document.createTextNode(doc.data().username);
 
-                hour.appendChild(hourText);
+                titles.appendChild(titleText);
 
-                var titleText = document.createTextNode(doc.data().typeOfConsult);
-
-                title.appendChild(titleText);
-
-                titleOfConsulta.append(title);
-                descriptionOfConsulta.append(span);
-                descriptionOfConsulta.append(hour);
-            }
-        });
-    });
+                titleOfConsulta.append(titles);
+                descriptionOfConsulta.append(spans);
+                descriptionOfConsulta.append(hours);
+                descriptionOfConsulta.append(divider);
+            } else {
+                
+            }}).catch(function(error) {
+                
+            });
 }

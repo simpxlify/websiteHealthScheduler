@@ -119,9 +119,10 @@ font-family: 'Roboto', sans-serif;
 .allConsultas{
   width: 100%;
   height: auto;
-  padding-bottom: 20px;
-  margin-top: 100px;
   background: #fff;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 20px;
 }
 
 .descriptionOfConsulta{
@@ -130,6 +131,27 @@ font-family: 'Roboto', sans-serif;
 
 .titleOfConsulta{
   padding: 20px;
+}
+
+.appointmentsTitle{
+  text-align: center;
+}
+
+.appointementsContainer{
+  width: 100%;
+  height: auto;
+}
+
+.appointments{
+  padding: 31px 0 31px 0;
+  color: white;
+}
+
+.inConsultaDivider{
+  width: 50%;
+  opacity: 0.3;
+  margin: auto;
+  margin-top: 20px;
 }
 
 
