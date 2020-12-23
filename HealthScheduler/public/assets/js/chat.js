@@ -17,13 +17,18 @@
     //   var li = document.createElement("li")
     //   li.appendChild(t)
 
-      db.collection("users").get().then(function(querySnapshot) {
+
+
+    var listContainer = document.getElementById('allUsersContainer');
+
+
+      db.collection("users").onSnapshot(function(querySnapshot) {
+        listContainer.innerHTML = '';
         querySnapshot.forEach(function(doc) {
 
-          
+            
           // var listContainer = document.createElement('div');
 
-          var listContainer = document.getElementById('allUsersContainer');
           listContainer.className = 'allUsersContainer';
           
           var containerUsers = document.createElement('div');
@@ -63,12 +68,12 @@
           // myList.push(doc.data().imagePath);
           // console.log(doc.data().userID);
         });
-    })
-    .catch(function(error) {
-
-        console.log("Error getting documents: ", error);
-
     });
+    // .catch(function(error) {
+
+    //     console.log("Error getting documents: ", error);
+
+    // });
 
 
 //     div.innerHTML = `
