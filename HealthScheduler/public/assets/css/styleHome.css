@@ -155,34 +155,26 @@ font-family: 'Roboto', sans-serif;
 }
 
 
-@media only screen and (max-width: 1250px) {
-
-  .nav{
-    display: none;
-  }
-
-  .nav-closed{
-    display: none;
-  }
-
+@media only screen and (max-width: 1000px) {
   .form{
-    margin: 0;
-    padding: 0;
-    width: 100%;
+    width: auto;
     display: block;
   }
 
   .profileContainer{
-    width: auto;
-    margin: 20px;
+    width: 80%;
   }
 
-  .imgAndName img{
-    top: 75;
+  .profileContainer{
+    width: auto;
+    height: auto;
+  }
+
+  .profileContainer img{
+    top: 110;
   }
 
   .appointementsContainer{
     width: auto;
-    margin: 20px;
   }
 }

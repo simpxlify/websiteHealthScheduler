@@ -41,14 +41,15 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 function listConsultas(uid) {
-    db.collection("consultas").get().then(function (querySnapshot) {
+    var consultaContainer = document.getElementById('allConsultas');
+    db.collection("consultas").onSnapshot(function (querySnapshot) {
+        consultaContainer.innerHTML = "";
         querySnapshot.forEach(function (doc) {
             if (doc.data().medicID == uid) {
                 getUserID(doc.data().userID, doc.data().notes, doc.data().hour);
             } else{
                 var consultaContainer = document.getElementById('allConsultas');
                 var titleOfConsulta = document.createElement('div');
-                var descriptionOfConsulta = document.createElement('div');
                 titleOfConsulta.className = 'titleOfConsulta';
                 
                 consultaContainer.appendChild(titleOfConsulta);
