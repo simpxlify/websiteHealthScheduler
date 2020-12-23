@@ -75,7 +75,7 @@ db.collection("consultas").get().then(function(querySnapshot) {
         if( doc.data().typeOfConsult == 'Reabilitação'  )
         {
           defaultEvents(doc.data().date,doc.data().doctorName,doc.data().notes,'Reabilitação');
-          console.log('rheab');
+          console.log('reahb');
         }
         if( doc.data().typeOfConsult == 'Cuidados Paliativos'  )
         {
@@ -130,7 +130,6 @@ dataCel.each(function() {
 
 //window event creator
 addBtn.on("click", function() {
-
   winCreator.addClass("isVisible");
   $("body").addClass("overlay");
   dataCel.each(function() {
@@ -151,7 +150,6 @@ closeBtn.on("click", function() {
 
 
 saveBtn.on("click", function() {
-
 
   const inputCabinet = $("input[name=cabinet]").val();
   const inputDate = $("input[name=date]").val();
@@ -244,69 +242,35 @@ function fillEventSidebar(self) {
   
 
   switch (true) {
-    case thisFisioterapia:
-      $(".c-aside__eventList").append(
-              "<p class='c-aside__event c-aside__event--Fisioterapia'>" +
-              thisName +
-              " <span> • " +
-              thisNotes +
-              "</span></p>"
-      );
+
+      case thisFisioterapia:
+      $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Fisioterapia'>" +thisName +" <span> • " +thisNotes +"</span></p>");
       break;
-    case thisMedicina:
-      $(".c-aside__eventList").append(
-        "<p class='c-aside__event c-aside__event--Medicina'>" +
-        thisName +
-        " <span> • " +
-        thisNotes +
-        "</span></p>"
-      );
+
+      case thisMedicina:
+      $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Medicina'>" +thisName +" <span> • " +thisNotes +"</span></p>");
       break;
-    case thisReabilitação:
-      $(".c-aside__eventList").append(
-        "<p class='c-aside__event c-aside__event--Reabilitação'>" +
-        thisName +
-        " <span> • " +
-        thisNotes +
-        "</span></p>"
-      );
+
+      case thisReabilitação:
+      $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Reabilitação'>" +thisName +" <span> • " +thisNotes +"</span></p>");
       break;
+
       case thisCuidados:
-      $(".c-aside__eventList").append(
-        "<p class='c-aside__event c-aside__event--Cuidados'>" +
-        thisName +
-        " <span> • " +
-        thisNotes +
-        "</span></p>"
-      );
+      $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Cuidados'>" +thisName +" <span> • " +thisNotes +"</span></p>");
       break;
+
       case thisNeurologia:
-      $(".c-aside__eventList").append(
-        "<p class='c-aside__event c-aside__event--Neurologia'>" +
-        thisName +
-        " <span> • " +
-        thisNotes +
-        "</span></p>"
-      );
+      $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Neurologia'>" +thisName +" <span> • " +thisNotes +"</span></p>");
       break;
+
       case thisPneumologia:
-      $(".c-aside__eventList").append(
-        "<p class='c-aside__event c-aside__event--Pneumologia'>" +
-        thisName +
-        " <span> • " +
-        thisNotes +
-        "</span></p>"
-      );
+      $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Pneumologia'>" +thisName +" <span> • " +thisNotes +"</span></p>");
       break;
-    case thisEvent:
-      $(".c-aside__eventList").append(
-        "<p class='c-aside__event'>" +
-        thisName +
-        " <span> • " +
-        thisNotes +
-        "</span></p>"
-      );
+
+      case thisEvent:
+      $(".c-aside__eventList").append("<p class='c-aside__event'>" +thisName +" <span> • " +thisNotes +"</span></p>");
       break;
+
    }
 };
 dataCel.on("click", function() {

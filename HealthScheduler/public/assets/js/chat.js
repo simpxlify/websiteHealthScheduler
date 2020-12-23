@@ -1,79 +1,185 @@
 //global variables
- const db = firebase.firestore();
- var myList = new Array();
+const db = firebase.firestore();
+//  var myList = new Array();
 
 
-  var medicID = "";
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user != null) {
-          document.getElementsByTagName("BODY")[0].style.display = "contents";
-          medicID = "" + user.medicID;
-    }
+var username = "";
+var uid = "";
+firebase.auth().onAuthStateChanged(function (user) {
+  if (user != null) {
+    // document.getElementsByTagName("BODY")[0].style.display = "contents";
+    uid = "" + user.uid;
+    
+
+    db.collection('users_medic').doc(uid).get().then(function(doc){
+      if (doc.exists) {
+          
+        username = doc.data().username;
+
+        listAllMessages(uid)
+        console.log(username)
+      }
+    })
+  }
+
+});
+
+// fazer fromid e o toid, ir buscar a colecao de chat_messages, por a foto, fazer o css do 
+// chat e fazer o css do enter message tambem
+
+
+
+//   var li = document.createElement("li")
+//   li.appendChild(t)
+
+
+
+var listContainer = document.getElementById('allUsersContainer');
+
+
+db.collection("users").onSnapshot(function (querySnapshot) {
+
+  listContainer.innerHTML = '';
+
+  querySnapshot.forEach(function (doc) {
+
+
+    // var listContainer = document.createElement('div');
+
+    listContainer.className = 'allUsersContainer';
+
+    var containerUsers = document.createElement('div');
+    containerUsers.className = 'usersBox';
+
+
+    listContainer.appendChild(containerUsers);
+
+    // Make the list
+    var listElement = document.createElement('ul');
+    listElement.className = 'listOfUsers';
+    // Set up a loop that goes through the items in listItems one at a time
+
+    // let div = document.createElement('div')
+    document.getElementsByTagName('body')[0].appendChild(listContainer);
+    containerUsers.appendChild(listElement);
+
+
+
+    listItem2 = document.createElement('li');
+    listItem2.className = 'listItems';
+
+    listItem = document.createElement('img');
+    listItem.className = 'imgRedonda'
+    // Add the item text
+    listItem.src = doc.data().imagePath;
+    listItem2.innerHTML = doc.data().username;
+
+
+    // Add listItem to the listElement
+    listElement.appendChild(listItem);
+    listElement.appendChild(listItem2);
+
+
+
+    // myList.push(user);
+    // myList.push(doc.data().imagePath);
+    // console.log(doc.data().userID);
   });
-  
- 
+});
+
+function sendMessage() {
+  // get message
+  var message = document.getElementById("message").value;
+
+  // save in database
+  db.collection('messages').add({
+    "sender": uid,
+    "nome" : username,
+    "message": message
+  });
+
+  // prevent form from submitting
+  return false;
+}
 
 
-    //   var li = document.createElement("li")
-    //   li.appendChild(t)
+// listen for incoming messages
+function listAllMessages(uid){
+var listMessages = document.getElementById('allMessagesContainer');
+
+db.collection("messages").onSnapshot(function (querySnapshot) {
+
+  listMessages.innerHTML = '';
+
+  querySnapshot.forEach(function (doc) {
+
+    if (doc.data().sender == uid) {
+
+      listMessages.className = 'allMessagesContainer';
+
+      var containerMessages = document.createElement('div');
+      containerMessages.className = 'messageBox';
+
+      listMessages.appendChild(containerMessages);
+
+      // Make the list
+      var listElement = document.createElement('ul');
+      listElement.className = 'listOfMessages';
+      // Set up a loop that goes through the items in listItems one at a time
+
+      // let div = document.createElement('div')
+      document.getElementsByTagName('body')[0].appendChild(listMessages);
+      containerMessages.appendChild(listElement);
+
+
+      // listItem3 = document.createElement('li');
+      // listItem3.className = 'listItemsMessages';
+
+      listItem4 = document.createElement('li');
+      listItem4.className = 'listItemsMessages';
+
+      listItem5 = document.createElement('li');
+      listItem5.className = 'listItemsMessages';
+      // Add the item text
+      // listItem3.innerHTML = doc.data().sender;
+      listItem5.innerHTML = username;
+      listItem4.innerHTML = doc.data().message;
+
+
+      // Add listItem to the listElement
+      listElement.appendChild(listItem4);
+      listElement.appendChild(listItem5);
+      // listElement.appendChild(listItem3);
+
+    }
+
+  });
+
+});
+}
+
+// function deleteMessage(self) {
+//   // get message ID
+//   var messageId = self.getAttribute("data-id");
+
+//   // delete message
+//   db.collection("messages").child(messageId).remove();
+// }
+
+// // attach listener for delete message
+// db.collection("messages").on("child_removed", function (snapshot) {
+//   // remove message node
+//   document.getElementById("message-" + snapshot.key).innerHTML = "This message has been removed";
+// });
 
 
 
-    var listContainer = document.getElementById('allUsersContainer');
 
+// .catch(function(error) {
 
-      db.collection("users").onSnapshot(function(querySnapshot) {
-        listContainer.innerHTML = '';
-        querySnapshot.forEach(function(doc) {
+//     console.log("Error getting documents: ", error);
 
-            
-          // var listContainer = document.createElement('div');
-
-          listContainer.className = 'allUsersContainer';
-          
-          var containerUsers = document.createElement('div');
-          containerUsers.className = 'usersBox';
-
-
-          listContainer.appendChild(containerUsers);
-          
-          // Make the list
-          var listElement = document.createElement('ul');
-          listElement.className = 'listOfUsers';
-          // Set up a loop that goes through the items in listItems one at a time
-
-              // let div = document.createElement('div')
-              document.getElementsByTagName('body')[0].appendChild(listContainer);
-              containerUsers.appendChild(listElement);
-
-
-
-              listItem2 = document.createElement('li');
-              listItem2.className = 'listItems';
-
-              listItem = document.createElement('img');
-              listItem.className = 'imgRedonda'
-        // Add the item text
-              listItem.src = doc.data().imagePath;
-              listItem2.innerHTML = doc.data().username;
-
-
-        // Add listItem to the listElement
-              listElement.appendChild(listItem);
-              listElement.appendChild(listItem2);
-
-              
-
-          // myList.push(user);
-          // myList.push(doc.data().imagePath);
-          // console.log(doc.data().userID);
-        });
-    });
-    // .catch(function(error) {
-
-    //     console.log("Error getting documents: ", error);
-
-    // });
+// });
 
 
 //     div.innerHTML = `
@@ -120,8 +226,8 @@
 
 //               `;
 
-        
-  
+
+
 // var novoElem  = document.createElement('li');
 // var nome     = document.createTextNode('');
 // novoElem.appendChild(texto);
@@ -141,65 +247,65 @@
 // //
 // lista.insertBefore(novoElem, itens[0]);
 
-          // id: i,
-          // username: myList[i].nome,
-          // avatar: myList[i].avatar,
-          // messages: ["ola"]
-      
-    
-     
+// id: i,
+// username: myList[i].nome,
+// avatar: myList[i].avatar,
+// messages: ["ola"]
+
+
+
 
 // Animation Styles
-$(function() {
+// $(function() {
 
-  var index = 0;
-  
-  function initScroll() {
-    $(".message-wrap").animate({ 
-      scrollTop: $("main").height() 
-    }, 1000);
-  }
-  
-  function scroll() {
-    $(".message-wrap").animate({
-      scrollTop: 9000
-    }, 1000);
-  }
-  
-  $("input[type='submit']").click(function() {
-    scroll();
-  });
+//   var index = 0;
 
-  $("aside").find("li").click(function() {
-    initScroll();
-    $(".init").animate({
-      'opacity': '0'
-    }, 500);
-  });
+//   function initScroll() {
+//     $(".message-wrap").animate({ 
+//       scrollTop: $("main").height() 
+//     }, 1000);
+//   }
 
-  $("aside").find("li").click(function() {
-    if (index == 1) {
-      index = 0;
-      $(".message-wrap").find(".message").css({
-        'opacity': '1'
-      });
-    } else {
-      index = 0;
-      $(".message-wrap").find(".message").css({
-        'opacity': '0'
-      });
-      $(".loader").delay(500).animate({
-        'opacity': '1'
-      });
-      setTimeout(function() {
-        index = 0;
-        $(".message-wrap").find(".message").css({
-          'opacity': '1'
-        });
-        $(".loader").animate({
-          'opacity': '0'
-        });
-      }, 3000)
-    }
-  });
-});
+//   function scroll() {
+//     $(".message-wrap").animate({
+//       scrollTop: 9000
+//     }, 1000);
+//   }
+
+//   $("input[type='submit']").click(function() {
+//     scroll();
+//   });
+
+//   $("aside").find("li").click(function() {
+//     initScroll();
+//     $(".init").animate({
+//       'opacity': '0'
+//     }, 500);
+//   });
+
+//   $("aside").find("li").click(function() {
+//     if (index == 1) {
+//       index = 0;
+//       $(".message-wrap").find(".message").css({
+//         'opacity': '1'
+//       });
+//     } else {
+//       index = 0;
+//       $(".message-wrap").find(".message").css({
+//         'opacity': '0'
+//       });
+//       $(".loader").delay(500).animate({
+//         'opacity': '1'
+//       });
+//       setTimeout(function() {
+//         index = 0;
+//         $(".message-wrap").find(".message").css({
+//           'opacity': '1'
+//         });
+//         $(".loader").animate({
+//           'opacity': '0'
+//         });
+//       }, 3000)
+//     }
+//   });
+// });
