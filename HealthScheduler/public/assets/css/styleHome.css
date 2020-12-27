@@ -119,9 +119,10 @@ font-family: 'Roboto', sans-serif;
 .allConsultas{
   width: 100%;
   height: auto;
-  padding-bottom: 20px;
-  margin-top: 100px;
   background: #fff;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 20px;
 }
 
 .descriptionOfConsulta{
@@ -132,35 +133,48 @@ font-family: 'Roboto', sans-serif;
   padding: 20px;
 }
 
+.appointmentsTitle{
+  text-align: center;
+}
 
-@media only screen and (max-width: 1250px) {
+.appointementsContainer{
+  width: 100%;
+  height: auto;
+}
 
-  .nav{
-    display: none;
-  }
+.appointments{
+  padding: 31px 0 31px 0;
+  color: white;
+}
 
-  .nav-closed{
-    display: none;
-  }
+.inConsultaDivider{
+  width: 50%;
+  opacity: 0.3;
+  margin: auto;
+  margin-top: 20px;
+}
 
+
+@media only screen and (max-width: 1000px) {
   .form{
-    margin: 0;
-    padding: 0;
-    width: 100%;
+    width: auto;
     display: block;
   }
 
   .profileContainer{
-    width: auto;
-    margin: 20px;
+    width: 80%;
   }
 
-  .imgAndName img{
-    top: 75;
+  .profileContainer{
+    width: auto;
+    height: auto;
+  }
+
+  .profileContainer img{
+    top: 110;
   }
 
   .appointementsContainer{
     width: auto;
-    margin: 20px;
   }
 }
