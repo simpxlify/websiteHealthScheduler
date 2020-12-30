@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>HealthScheduler</title>
@@ -10,21 +11,22 @@
 
 
 </head>
+
 <body>
 
 
- <!--main javascript-->
-		<!--firebase-->
-		<!-- The core Firebase JS SDK is always required and must be listed first -->
-		<script src="/__/firebase/8.1.1/firebase-app.js"></script>
-		<script src="/__/firebase/8.1.1/firebase-auth.js"></script>
-		<script src="/__/firebase/8.1.1/firebase-firestore.js"></script>
-		<script src="/__/firebase/8.1.1/firebase-analytics.js"></script>
-		<!-- Initialize Firebase -->
-		<!--<script src="/__/firebase/init.js"></script> ?useEmulator=true-->
-		<script src="assets/js/main.js"></script>
+  <!--main javascript-->
+  <!--firebase-->
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="/__/firebase/8.1.1/firebase-app.js"></script>
+  <script src="/__/firebase/8.1.1/firebase-auth.js"></script>
+  <script src="/__/firebase/8.1.1/firebase-firestore.js"></script>
+  <script src="/__/firebase/8.1.1/firebase-analytics.js"></script>
+  <!-- Initialize Firebase -->
+  <!--<script src="/__/firebase/init.js"></script> ?useEmulator=true-->
+  <script src="assets/js/main.js"></script>
 
-<!-- partial:index.partial.html -->
+  <!-- partial:index.partial.html -->
 
 
 
@@ -87,22 +89,48 @@
       </li>
     </ul>
   </nav> -->
+  <div class="container">
+    <div class="chatContainer">
+      <div class="userContainer" id="userContainer">
+        <div class="allUsersContainer" id="allUsersContainer">
 
-  <div class="allUsersContainer" id="allUsersContainer">
-    
+        </div>
+      </div>
+      <div class="chatContainer">
+        <div class="allMessagesContainer" id="allMessagesContainer">
+          <div class="allMessagesList" id="allMessagesList">
+            
+          </div>
+          <!-- <form onclick="return sendMessage();"> -->
+          <div class="sendMessage">
+            <div class="bottomMessages">
+              <div class="input">
+                <input id="message" placeholder="Enter message" autocomplete="off">
+              </div>
+              <div class="buttonMessage">
+                <button id="sendmsg"> 
+                  <svg class="sendIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                      d="M21.426,11.095l-17-8c-0.35-0.163-0.763-0.112-1.061,0.133C3.066,3.473,2.937,3.868,3.03,4.242L4.969,12L3.03,19.758 c-0.094,0.374,0.036,0.77,0.335,1.015C3.548,20.923,3.772,21,4,21c0.145,0,0.29-0.031,0.426-0.095l17-8 C21.776,12.74,22,12.388,22,12S21.776,11.26,21.426,11.095z M5.481,18.197L6.32,14.84L12,12L6.32,9.16L5.481,5.803L18.651,12 L5.481,18.197z">
+                    </path>
+                  </svg></button>
+              </div>
+              <!-- <input type="submit">
+              </form> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="allMessagesContainer" id="allMessagesContainer">
-    
-  </div>
 
-  <!-- <form onclick="return sendMessage();"> -->
-    <input id="message" placeholder="Enter message" autocomplete="off">
-    <button id="sendmsg"> Enviar msg</button>
-    <!-- <input type="submit">
-</form> -->
-     
-<ul id="messages"></ul>
+
+
+
+
+
+
 
 
 
@@ -110,9 +138,10 @@
 <!-- partial -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script  src="assets/js/chat.js"></script>
-<script  src="assets/js/navbar.js"></script>
+<script src="assets/js/chat.js"></script>
+<script src="assets/js/navbar.js"></script>
 
 
 </body>
+
 </html>

@@ -1,18 +1,3 @@
-.allUsersContainer{
-  margin: 0;
-  margin-left: 200px;
-  width: 250px;
-  height: 100%;
-}
-
-.allMessagesContainer{
-  margin: 0;
-  margin-left: 500px;
-  width: 250px;
-  height: 100%;
-}
-
-
 .userBox{
   width: 100%;
   margin: 0;
@@ -46,16 +31,9 @@
   padding: 20px;
 }
 
-
-.listOfMessages{
-  display: flex;
-  align-items: left;
-  list-style-type: none;
-  justify-content: left;
-  text-align: left;
-  padding: 120px;
+.listOfUsers:hover{
+  background-color: grey;
 }
-
 
 .imgRedonda{
   height: 70px;
@@ -78,4 +56,128 @@
   list-style-type: none;
   justify-content: center;
   text-align: left;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.chatContainer{
+  width: 100%;
+  height: auto;
+}
+
+.userContainer{
+  width: 30%;
+  height: 600px;
+  background-color: lightgrey;
+  display: inline-block;
+}
+
+.chatContainer{
+  width: 70%;
+  height: 600px;
+  display: flex;
+}
+
+.allUsersContainer{
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.allMessagesContainer{
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #36bfb8; 
+}
+
+.sendMessage{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.bottomMessages{
+  content: "";
+  display: flex;
+  clear: both;
+  width: 100%;
+  text-align: center;
+}
+
+.input{
+  margin: 10px 10px 10px 10px;
+  width: 90%;
+}
+
+.input input{
+  float: left;
+  width: 100%;
+  height: 100%;
+  padding: 10px 12px;
+  border-radius: 100px;
+  border: none;
+  background: rgb(255,255,255,0.3);
+  outline: none;
+  color: #fff;
+}
+  
+.input input::placeholder {
+  color: #fff;
+  font-size: 13px;
+}
+
+.buttonMessage{
+  width: 10%;
+}
+
+.buttonMessage button{
+  padding: 5px 5px;
+  border-radius: 50%;
+  margin: 10px 5px 10px 5px;
+  border: none;
+  background: rgb(255,255,255,0.3);
+  outline: none;
+  color: #fff;
+}
+
+#sendmsg{
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  height: auto;
+}
+
+.sendIcon{
+  padding-left: 1px;
+  padding-top: 2px;
+  fill: rgb(255,255,255,0.3);
+}
+
+.sendIcon:hover{
+  fill: #fff;
+}
+
+.allMessages{
+  width: 90%;
+  margin: 5px 20px 5px 20px;
+}
+
+.listOfMessages{
+  display: flex;
+  align-items: left;
+  list-style-type: none;
+  justify-content: left;
+  text-align: left;
+}
+
+.allMessagesList{
+  width: 100%;
+  height: 90%;
 }

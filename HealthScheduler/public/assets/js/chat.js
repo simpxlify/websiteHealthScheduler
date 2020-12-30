@@ -22,7 +22,10 @@ firebase.auth().onAuthStateChanged(function (user) {
 // por o nome em cima, por a foto do contacto a falar, fazer o css do 
 // chat e fazer o css do enter message tambem
 
+var userContainer = document.getElementById('userContainer');
+
 var listContainer = document.getElementById('allUsersContainer');
+
 
 db.collection("users").onSnapshot(function (querySnapshot) {
 
@@ -31,8 +34,6 @@ db.collection("users").onSnapshot(function (querySnapshot) {
   querySnapshot.forEach(function (doc) {
 
     // var listContainer = document.createElement('div');
-
-    listContainer.className = 'allUsersContainer';
 
     var containerUsers = document.createElement('div');
     containerUsers.className = 'usersBox';
@@ -69,6 +70,9 @@ db.collection("users").onSnapshot(function (querySnapshot) {
 
 
   });
+
+  
+  userContainer.appendChild(listContainer);
 });
 
 function sendMessage(uid, toId) {
@@ -103,15 +107,17 @@ return false;
 
 // listen for incoming messages
 function listAllMessages(uid, toId){
-  var listMessages = document.getElementById('allMessagesContainer');
+  var allMessagesContainer = document.getElementById('allMessagesContainer');
+
+  var listMessages = document.getElementById('allMessagesList');
 
   db.collection("chat_messages").doc(uid).collection(toId).orderBy("timeStamp").onSnapshot(function (querySnapshot) {
   
     listMessages.innerHTML = '';
   
     querySnapshot.forEach(function (doc) {
+      var messages = document.getElementById('messages');
   
-        listMessages.className = 'allMessagesContainer';
         var timeStamp = doc.data().timeStamp;
         var a = new Date(timeStamp * 1000);
         var months = [
@@ -136,19 +142,23 @@ function listAllMessages(uid, toId){
         var sec = a.getSeconds();
         var formattedTime = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
         
-        var containerMessages = document.createElement('div');
-        containerMessages.className = 'messageBox';
+        // var containerMessages = document.createElement('div');
+        // containerMessages.className = 'messageBox';
   
-        listMessages.appendChild(containerMessages);
-  
+        // listMessages.appendChild(containerMessages);
+
         // Make the list
         var listElement = document.createElement('ul');
-        listElement.className = 'listOfMessages';
+        listElement.className = 'allMessages';
+  
+        // Make the list
+        // var listElement = document.createElement('ul');
+        // listElement.className = 'listOfMessages';
         // Set up a loop that goes through the items in listItems one at a time
   
         // let div = document.createElement('div')
         document.getElementsByTagName('body')[0].appendChild(listMessages);
-        containerMessages.appendChild(listElement);
+        listMessages.appendChild(listElement);
   
   
         listItem3 = document.createElement('li');
@@ -180,6 +190,7 @@ function listAllMessages(uid, toId){
   
   
     });
+    allMessagesContainer.appendChild(listMessages);
   
   });
   }
