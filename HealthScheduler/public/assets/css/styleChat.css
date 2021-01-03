@@ -51,18 +51,22 @@
 }
 
 .listItemsMessages{
-  display: flex;
-  align-items: center;
   list-style-type: none;
-  justify-content: center;
   text-align: left;
+  padding: 10px 20px 10px 20px;
+  background-color: rgb(255,255,255,0.3);
+  border-radius: 100px;
+  display: inline-block;
+
+  margin-right: auto;
 }
 
 .container{
   display: flex;
   justify-content: center;
   align-items: center;
-
+  margin-top: 100px;
+  overflow: hidden;
 }
 
 .chatContainer{
@@ -72,14 +76,14 @@
 
 .userContainer{
   width: 30%;
-  height: 600px;
+  height: 800px;
   background-color: lightgrey;
   display: inline-block;
 }
 
 .chatContainer{
   width: 70%;
-  height: 600px;
+  height: 800px;
   display: flex;
 }
 
@@ -165,8 +169,8 @@
 }
 
 .allMessages{
-  width: 90%;
-  margin: 5px 20px 5px 20px;
+  width: 50%;
+  padding: 10px;
 }
 
 .listOfMessages{
@@ -180,4 +184,26 @@
 .allMessagesList{
   width: 100%;
   height: 90%;
+  padding: 50px;
+}
+
+.date{
+  display: block;
+  padding: 0;
+  margin: 10px 0 0 0;
+
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.myMessage{
+  width: 100%;
+  text-align: right;
+}
+
+.dateRight{
+  display: block;
+  text-align: right;
+  padding: 0;
+  margin: 10px 0 0 0;
+  background-color: rgba(255, 255, 255, 0);
 }
