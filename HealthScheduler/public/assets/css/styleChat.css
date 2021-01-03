@@ -185,6 +185,31 @@
   width: 100%;
   height: 90%;
   padding: 50px;
+  
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+}
+
+.allMessagesList-overflow{
+  min-height: 600px;
+}
+
+.allMessagesList::-webkit-scrollbar-track{
+  padding: 2px 0;
+  background-color: #36bfb8;
+}
+
+.allMessagesList::-webkit-scrollbar{
+  width: 10px;
+}
+
+.allMessagesList::-webkit-scrollbar-thumb{
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #737272;
+  border: 1px solid #000;
 }
 
 .date{
