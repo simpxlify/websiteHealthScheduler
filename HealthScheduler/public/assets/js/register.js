@@ -7,6 +7,9 @@ function signIn(imagePath){
 	const username = document.getElementById("nome_input").value;
 	const address = document.getElementById("morada_input").value;
 
+	const typeOfMedic = document.getElementById("medic_input").value;
+
+
 	if(passwordRegister == passwordVerifyRegister){
 		auth.createUserWithEmailAndPassword(phoneNumberEmail, passwordRegister)
 		.then((user) => {
@@ -15,12 +18,14 @@ function signIn(imagePath){
 				auth.onAuthStateChanged(function(user) {
 					if (user) {
 						const medicID = "" + user.uid;
+						console.log(medicInput);
 
 						db.collection('users_medic').doc("" + medicID).set({
 							address,
 							imagePath,
 							phoneNumberEmail,
 							medicID,
+							typeOfMedic,
 							username
 						});
 						setTimeout(function(){ window.location = "login.html"; }, 3000);

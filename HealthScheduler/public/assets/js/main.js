@@ -26,7 +26,9 @@ firebase.auth().onAuthStateChanged(function (user) {
 
         imageUser.src = imagePath;
 
-        listConsultas(uid);
+        if(listConsultas(uid) != true){
+          
+        }
       } else {
         console.log("No such document!");
       }
@@ -80,21 +82,9 @@ function listConsultas(uid) {
         descriptionOfConsulta.append(spans);
         descriptionOfConsulta.append(hours);
         descriptionOfConsulta.append(divider);
+
+        return true;
       }
     });
   });
-}
-
-function getUserID(userID, notes, hour) {
-
-  db.collection("consultas").where("medicID", "==", userID)
-    .get()
-    .then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        
-      });
-    })
-    .catch(function (error) {
-      console.log("Error getting documents: ", error);
-    });
 }
