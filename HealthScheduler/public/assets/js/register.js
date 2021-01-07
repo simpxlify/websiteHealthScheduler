@@ -18,7 +18,6 @@ function signIn(imagePath){
 				auth.onAuthStateChanged(function(user) {
 					if (user) {
 						const medicID = "" + user.uid;
-						console.log(medicInput);
 
 						db.collection('users_medic').doc("" + medicID).set({
 							address,
