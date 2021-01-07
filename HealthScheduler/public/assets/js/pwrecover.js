@@ -21,7 +21,7 @@ firebase.analytics();
 var uid = "";
 firebase.auth().onAuthStateChanged(function(user) {
   if (user != null) {
-        document.getElementsByTagName("BODY")[0].style.display = "contents";
+        // document.getElementsByTagName("BODY")[0].style.display = "contents";
         uid = "" + user.uid;
   }
 });

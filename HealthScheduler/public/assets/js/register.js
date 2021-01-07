@@ -35,7 +35,7 @@ function signIn(imagePath){
 					if (user) {
 						const medicID = "" + user.uid;
 
-						db.collection('users_medic').doc("" + uid).set({
+						db.collection('users_medic').doc("" + medicID).set({
 							address,
 							imagePath,
 							phoneNumberEmail,
@@ -59,7 +59,7 @@ function signIn(imagePath){
 			var errorCode = error.code;
 			var errorMessage = error.message;
 		
-			alert("Verifique a palavra-passe ou Email!");
+			alert("Verifique que todos os campos estejam preenchidos conforme o pedido.");
 		});
 	} else {
 		alert("Verifique que todos os campos estejam preenchidos conforme o pedido.");

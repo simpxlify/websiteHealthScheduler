@@ -7,7 +7,7 @@
 		<link rel="shortcut icon" href="assets/img/logo.png">
 
 	
-		<link rel="stylesheet" href="assets/css/styleRegister.css" />
+		<link rel="stylesheet" href="assets/css/stylePwRecover.css" />
 	</head>
 	<body>
 		<!--main javascript-->
@@ -21,24 +21,24 @@
 		<!-- Initialize Firebase -->
 		<script src="assets/js/pwrecover.js"></script>
 
-
-
 		<div class="app">
 			<div class="bg"></div>
 			<div class="form"> 
 				<header class="header">
-					<img src="assets/img/logo.png" class="imgLogin">
+					<div class="uploadImageDiv">
+						<img src="assets/img/logo.png" class="imgRegister" accept="image/*" id="imgRegister">
+					</div>
 				</header>
-				<div class="inputs">
-					<p> Insira o seu email para redifinir palavra passe</p>
+				<div class="inputRecovery">
 					<div id="input-container">
 						<img draggable="false" src="assets/img/round_person_white_18dp.png" alt="">
-						<input type="email" placeholder="Email" id="email_input_pwrecover">
+						<input type="email" placeholder="Insira o seu email para redifinir palavra-passe" id="email_input_pwrecover">
 					</div>
 				</div>
 			</div>
 			<div class="footer">
 				<button id="recover" href="login.html" onclick="recoverpw()">Recuperar palavra-passe</button>
+				<p class="login">Já tem palavra-passe? <a href="login.html"><b>Login</b></a></p>
 			</div>
 		</div>
   </body>
