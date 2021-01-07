@@ -1,5 +1,3 @@
-//global variables
-const db = firebase.firestore();
 //  var myList = new Array();
 
 var text = "text";

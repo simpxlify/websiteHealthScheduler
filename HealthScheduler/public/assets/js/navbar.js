@@ -12,3 +12,11 @@ function listActive() {
   navListItem.forEach((link) => link.classList.remove("navListitem-active"));
   this.classList.add("navListitem-active");
 }
+
+function logOut(){
+	firebase.auth().signOut().then(function() {
+		alert("Saiu com sucesso!");
+	  }).catch(function(error) {
+		// An error happened.
+	  });
+}

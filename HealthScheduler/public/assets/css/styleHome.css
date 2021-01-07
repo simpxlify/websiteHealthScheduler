@@ -120,9 +120,10 @@ font-family: 'Roboto', sans-serif;
   width: 100%;
   height: auto;
   background: #fff;
-  text-align: center;
+  text-align: left;
   padding-top: 10px;
   padding-bottom: 20px;
+  padding-left: 50px;
 }
 
 .descriptionOfConsulta{
@@ -150,7 +151,7 @@ font-family: 'Roboto', sans-serif;
 .inConsultaDivider{
   width: 50%;
   opacity: 0.3;
-  margin: auto;
+  text-align: left;
   margin-top: 20px;
 }
 
