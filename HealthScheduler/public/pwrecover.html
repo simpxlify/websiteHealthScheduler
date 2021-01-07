@@ -3,10 +3,11 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>HealthSchedular</title>
+		<title>HealthScheduler</title>
 		<link rel="shortcut icon" href="assets/img/logo.png">
+
 	
-		<link rel="stylesheet" href="assets/css/styleLogin.css" />
+		<link rel="stylesheet" href="assets/css/styleRegister.css" />
 	</head>
 	<body>
 		<!--main javascript-->
@@ -15,10 +16,12 @@
 		<script src="/__/firebase/8.1.1/firebase-app.js"></script>
 		<script src="/__/firebase/8.1.1/firebase-auth.js"></script>
 		<script src="/__/firebase/8.1.1/firebase-firestore.js"></script>
+		<script src="/__/firebase/8.1.1/firebase-storage.js"></script>
 		<script src="/__/firebase/8.1.1/firebase-analytics.js"></script>
 		<!-- Initialize Firebase -->
-		<!--<script src="/__/firebase/init.js"></script> ?useEmulator=true-->
-		<script src="assets/js/login.js"></script>
+		<script src="assets/js/pwrecover.js"></script>
+
+
 
 		<div class="app">
 			<div class="bg"></div>
@@ -26,25 +29,16 @@
 				<header class="header">
 					<img src="assets/img/logo.png" class="imgLogin">
 				</header>
-	
 				<div class="inputs">
+					<p> Insira o seu email para redifinir palavra passe</p>
 					<div id="input-container">
 						<img draggable="false" src="assets/img/round_person_white_18dp.png" alt="">
-						<input id="email_input" type="text" placeholder="Email acesso...">
-					</div>
-					<div id="input-container">
-						<img draggable="false" src="assets/img/round_vpn_key_white_18dp.png" alt="">
-						<input id="password_input" type="password" placeholder="Palavra-passe...">
-					</div>
-					<div class="recoveryPassword">
-						<p class="forgotPassword">Esqueceu-se da palavra-passe?</p>
-						<a class="forgotPassword" href="pwrecover.html"><b>Recuperar agora</b></a>
+						<input type="email" placeholder="Email" id="email_input_pwrecover">
 					</div>
 				</div>
 			</div>
 			<div class="footer">
-				<button id="button_login" onclick="login()">Continuar</button>
-				<p class="noAccount">Não tem conta? <a class="links" href="register.html"><b>Registe-se</b></a></p>
+				<button id="recover" href="login.html" onclick="recoverpw()">Recuperar palavra-passe</button>
 			</div>
 		</div>
   </body>

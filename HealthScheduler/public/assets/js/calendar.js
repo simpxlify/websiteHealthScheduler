@@ -6,7 +6,7 @@ var medicID = "";
 firebase.auth().onAuthStateChanged(function(user) {
   if (user != null) {
         document.getElementsByTagName("BODY")[0].style.display = "contents";
-        medicID = "" + user.medicID;
+        medicID = "" + user.uid;
   }
 });
 
@@ -15,8 +15,8 @@ var dataCel = $(".c-cal__cel");
 var dateObj = new Date();
 var month = dateObj.getUTCMonth() + 1;
 var day = dateObj.getUTCDate();
-var year = dateObj.getUTCFullYear(); // 2020
-// var year = dateObj.getUTCFullYear() + 1; // 2021
+//var year = dateObj.getUTCFullYear(); // 2020
+ var year = dateObj.getUTCFullYear() + 1; // 2021
 var monthText = [
   "Janeiro",
   "Fevereiro",
@@ -180,7 +180,7 @@ saveBtn.on("click", function() {
       pavilion : inputPavilion,
       typeOfConsult : inputTypeofconsult,
       notes : inputNotes,
-      medicID
+      medicID : medicID
     
     
   }),
@@ -240,39 +240,66 @@ function fillEventSidebar(self) {
   var thisPneumologia = self.hasClass("event--Pneumologia");
   var thisEvent = self.hasClass("event");
   
-
+  
   switch (true) {
 
       case thisFisioterapia:
+
+      db.collection("consultas").doc(uid).onSnapshot(function (querySnapshot) { 
+      querySnapshot.forEach(function (doc) {
       $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Fisioterapia'>" +thisName +" <span> • " +thisNotes +"</span></p>");
+      })
+      })
+
       break;
 
       case thisMedicina:
+
+     
       $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Medicina'>" +thisName +" <span> • " +thisNotes +"</span></p>");
+      
       break;
 
       case thisReabilitação:
+
+        
       $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Reabilitação'>" +thisName +" <span> • " +thisNotes +"</span></p>");
+        
       break;
 
       case thisCuidados:
+
+       
       $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Cuidados'>" +thisName +" <span> • " +thisNotes +"</span></p>");
+        
       break;
 
       case thisNeurologia:
+
+       
       $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Neurologia'>" +thisName +" <span> • " +thisNotes +"</span></p>");
+        
       break;
 
       case thisPneumologia:
+
+      db.collection("consultas").get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
       $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Pneumologia'>" +thisName +" <span> • " +thisNotes +"</span></p>");
+      })
+      }) 
       break;
 
       case thisEvent:
+    
       $(".c-aside__eventList").append("<p class='c-aside__event'>" +thisName +" <span> • " +thisNotes +"</span></p>");
       break;
 
    }
+
 };
+
+
 dataCel.on("click", function() {
   var thisEl = $(this);
   var thisDay = $(this)
