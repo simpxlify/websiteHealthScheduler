@@ -54,7 +54,7 @@ function defaultEvents(dataDay, dataName, dataNotes, classTag) {
 
 }
 
-console.log(today);
+
 
 // defaultEvents(today, 'HOJE', '', 'important');
 // defaultEvents('2021-12-25', 'FELIZ NATAL', '', 'festivity');
@@ -66,8 +66,7 @@ db.collection("consultas").get().then(function (querySnapshot) {
 
       var thisYear = (doc.data().date).slice(0, 4);
 
-      console.log(medicID);
-      console.log(thisYear);
+      
       if (year == thisYear) {
 
 
@@ -76,18 +75,18 @@ db.collection("consultas").get().then(function (querySnapshot) {
         }
         if (doc.data().typeOfConsult == 'Medicina física') {
           defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Medicina');
-          console.log('mf');
+          
         }
         if (doc.data().typeOfConsult == 'Reabilitação') {
           defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Reabilitação');
-          console.log('reahb');
+          
         }
         if (doc.data().typeOfConsult == 'Cuidados Paliativos') {
           defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Cuidados');
         }
         if (doc.data().typeOfConsult == 'Neurologia') {
           defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Neurologia');
-          console.log('neuro');
+          
         }
         if (doc.data().typeOfConsult == 'Pneumologia') {
           defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Pneumologia');
@@ -116,18 +115,18 @@ todayBtn.on("click", function () {
     
     var step = indexMonth - month;
     movePrev(step, true);
-    console.log("1log" + step);00
+    
 
   } else if (month > indexMonth) {
 
     var step = month - indexMonth;
     moveNext(step, true);
-    console.log("2log" + step);
+    
 
 
   } else if (month == indexMonth) {
     var step = month ;
-    console.log("3log" + step);
+    
   }
 });
 
@@ -246,8 +245,7 @@ saveBtn.on("click", function () {
 
 //fill sidebar event info
 function fillEventSidebar(self, thisDate) {
-  console.log(thisDate)
-
+  
   $(".c-aside__event").remove();
   var thisName = self.attr("data-name");
   var thisNotes = self.attr("data-notes");
@@ -381,7 +379,7 @@ dataCel.on("click", function () {
   var thisDate = thisYear + "-" + thisMonth + "-" + thisDay;
 
   fillEventSidebar($(this), thisDate);
-  console.log(thisDate)
+  
 
   $(".c-aside__num").text(thisDay);
   $(".c-aside__month").text(monthText[thisMonth - 1]);

@@ -31,24 +31,35 @@ function openForm() {
 
 function closeForm() {
     document.getElementById("myForm").style.display = "none";
+    
 }
 
 function updateEmail() {
-
-    const auth = firebase.auth();
+    
+    const auth = firebase.auth().currentUser;
     var confirmEmail = document.getElementById("confirmEmail");
-    db.collection("users_medic").doc(uid).get().then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-            confirmEmail.addEventListener("click", function () {
 
-                var emailAddress = document.getElementById("email_input_change").value;
-                
-                auth.updateEmail(emailAddress).then(function () {
-                    alert("deu");
-                }).catch(function (error) {
-                    alert("n deu");
-                });
+    confirmEmail.addEventListener("click", function () {
+
+        var emailAddress = document.getElementById("email_input_change").value;
+        
+
+        auth.updateEmail(emailAddress).then(function () {
+
+
+            return db.collection("users_medic").doc(uid).update({
+                phoneNumberEmail: emailAddress
             })
-        })
+            .then(function() {
+                
+            })
+            .catch(function(error) {
+                
+            });
+
+        }).catch(function (error) {
+
+            alert("Error");
+        });
     })
 };

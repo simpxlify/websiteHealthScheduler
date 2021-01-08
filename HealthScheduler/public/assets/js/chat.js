@@ -83,9 +83,9 @@ db.collection("users").onSnapshot(function (querySnapshot) {
 
     sendmsg.addEventListener("click", function () {
 
-      console.log(uid + ' + ' + toId);
+      
       var timeStamp2 = parseInt(Date.now() / 1000);
-      console.log(timeStamp2);
+      
       var message = document.getElementById("message").value;
 
       db.collection('chat_messages').doc(uid).collection(toId).add({
