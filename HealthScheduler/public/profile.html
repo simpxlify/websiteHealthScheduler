@@ -1,31 +1,33 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>HealthScheduler</title>
-	<link rel="shortcut icon" href="assets/img/logo.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HealthScheduler</title>
+    <link rel="shortcut icon" href="assets/img/logo.png">
 
-	<link rel="stylesheet" href="assets/css/navBar.css">
-	<link rel="stylesheet" href="assets/css/styleHome.css" />
+
+    <link rel="stylesheet" href="assets/css/navBar.css">
+    <link rel="stylesheet" href="assets/css/styleHome.css">
+    <link rel="stylesheet" href="assets/css/styleProfile.css">
+
 </head>
-
 <body>
-
 	<!--main javascript-->
 	<!--firebase-->
-	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<!--The core Firebase JS SDK is always required and must be listed first-->
 	<script src="/__/firebase/8.1.1/firebase-app.js"></script>
 	<script src="/__/firebase/8.1.1/firebase-auth.js"></script>
 	<script src="/__/firebase/8.1.1/firebase-firestore.js"></script>
 	<script src="/__/firebase/8.1.1/firebase-analytics.js"></script>
 	<!-- Initialize Firebase -->
 	<!--<script src="/__/firebase/init.js"></script> ?useEmulator=true-->
-	<script src="assets/js/firebase.js"></script>
-	<script src="assets/js/main.js"></script>
-	<script src="assets/js/checkUser.js"></script>
+    <script src="assets/js/firebase.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/profile.js"></script>
+    
 
-	<nav class="nav nav-closed">
+    <nav class="nav nav-closed">
 		<svg class="navExpand" viewBox="0 0 256 512" width="100" title="angle-right">
 			<path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z" />
 		</svg>
@@ -85,31 +87,30 @@
 		</ul>
 	</nav>
 
-	<div class="form">
-		<div class="profileContainer">
-			<div class="info">
-				<div class="imgAndName">
-					<img src="assets/img/picuser.png" alt="Imagem do médico" id="img_user">
-					<h1 id="user_name"></h1>
-				</div>
-				<div class="customInfoUser">
-					<p><span id="address_user"></span></p>
-					<p><span id="email_user"></span></p>
-				</div>
-			</div>
-		</div>
-		<div class="appointementsContainer" id="appointementsContainer">
-			<div class="appointments">
-				<h1 class="appointmentsTitle">Consultas</h1>
-			</div>
-			<div class="allConsultas" id="allConsultas">
-				
-			</div>
-		</div>
-	</div>
 
-	<script src="assets/js/navbar.js"></script>
+
+    <div class="profileContainer">
+        <div class="info">
+            <div class="imgAndName">
+                <img src="assets/img/picuser.png" alt="Imagem do médico" id="img_user">
+                <h1 id="user_name"></h1>
+            </div>
+            <div class="customInfoUser">
+                <p><span id="address_user"></span></p>
+            
+                <p><span id="email_user"></span></p>
+                <button class="open-button" onclick="openForm()">Mudar Email</button>
+                <div class="chat-popup" id="myForm">
+                    <form  class="form-container">
+                      <input type="email" placeholder="Insira o seu email para que quer mudar" id="email_input_change">
+                      <button id="confirmEmail" type="submit" class="btn" onclick="updateEmail()">Confirmar mudança de email</button>
+                      <button type="button" class="btn cancel" onclick="closeForm()">Fechar</button>
+                    </form>
+                  </div>
+            </div>
+        </div>
+    </div>
+
 
 </body>
-
 </html>

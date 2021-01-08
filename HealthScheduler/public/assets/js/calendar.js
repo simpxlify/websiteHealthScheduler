@@ -116,7 +116,7 @@ todayBtn.on("click", function () {
     
     var step = indexMonth - month;
     movePrev(step, true);
-    console.log("1log" + step);
+    console.log("1log" + step);00
 
   } else if (month > indexMonth) {
 
