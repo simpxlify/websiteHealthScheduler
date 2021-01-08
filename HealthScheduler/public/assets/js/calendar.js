@@ -1,22 +1,22 @@
 // "site": "healthscheduler-am",
 //global variables
-const db = firebase.firestore();
+// const db = firebase.firestore();
 
 var medicID = "";
-firebase.auth().onAuthStateChanged(function(user) {
+firebase.auth().onAuthStateChanged(function (user) {
   if (user != null) {
-        document.getElementsByTagName("BODY")[0].style.display = "contents";
-        medicID = "" + user.uid;
+    document.getElementsByTagName("BODY")[0].style.display = "contents";
+    medicID = "" + user.uid;
   }
 });
 
 var monthEl = $(".c-main");
 var dataCel = $(".c-cal__cel");
 var dateObj = new Date();
-var month = dateObj.getUTCMonth() + 1;
-var day = dateObj.getUTCDate();
-//var year = dateObj.getUTCFullYear(); // 2020
- var year = dateObj.getUTCFullYear() + 1; // 2021
+var month = dateObj.getMonth() +1;
+var day = dateObj.getDate();
+// var year = dateObj.getUTCFullYear(); // 2020
+var year = dateObj.getFullYear(); // 2021
 var monthText = [
   "Janeiro",
   "Fevereiro",
@@ -38,57 +38,59 @@ var saveBtn = $(".js-event__save");
 var closeBtn = $(".js-event__close");
 var winCreator = $(".js-event__creator");
 var inputDate = $(this).data();
+day = (day<10) ? '0' + day : day;
+month = (month<10) ? '0' + month : month;
 today = year + "-" + month + "-" + day;
-
+fillEventSidebar($(this) , today);
 
 
 // ------ set default events -------
-function defaultEvents(dataDay,dataName,dataNotes,classTag){
-  var date = $('*[data-day='+dataDay+']');
+function defaultEvents(dataDay, dataName, dataNotes, classTag) {
+  var date = $('*[data-day=' + dataDay + ']');
   date.attr("data-name", dataName);
   date.attr("data-notes", dataNotes);
   date.addClass("event");
   date.addClass("event--" + classTag);
-  
+
 }
 
-defaultEvents(today, 'HOJE','','important');
-defaultEvents('2020-12-25', 'FELIZ NATAL','','festivity');
+console.log(today);
 
-db.collection("consultas").get().then(function(querySnapshot) {
-  querySnapshot.forEach(function(doc) {
-    if(doc.data().medicID == medicID){
+// defaultEvents(today, 'HOJE', '', 'important');
+// defaultEvents('2021-12-25', 'FELIZ NATAL', '', 'festivity');
 
-      var thisYear = (doc.data().date).slice(0,4);
-      if(year == thisYear)
-      {
+db.collection("consultas").get().then(function (querySnapshot) {
+  querySnapshot.forEach(function (doc) {
+    if (doc.data().medicID == medicID) {
 
-        if( doc.data().typeOfConsult == 'Fisioterapia'  )
-        {
-          defaultEvents(doc.data().date,doc.data().doctorName,doc.data().notes,'Fisioterapia');
+
+      var thisYear = (doc.data().date).slice(0, 4);
+
+      console.log(medicID);
+      console.log(thisYear);
+      if (year == thisYear) {
+
+
+        if (doc.data().typeOfConsult == 'Fisioterapia') {
+          defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Fisioterapia');
         }
-        if( doc.data().typeOfConsult == 'Medicina física'  )
-        {
-          defaultEvents(doc.data().date,doc.data().doctorName,doc.data().notes,'Medicina');
+        if (doc.data().typeOfConsult == 'Medicina física') {
+          defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Medicina');
           console.log('mf');
         }
-        if( doc.data().typeOfConsult == 'Reabilitação'  )
-        {
-          defaultEvents(doc.data().date,doc.data().doctorName,doc.data().notes,'Reabilitação');
+        if (doc.data().typeOfConsult == 'Reabilitação') {
+          defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Reabilitação');
           console.log('reahb');
         }
-        if( doc.data().typeOfConsult == 'Cuidados Paliativos'  )
-        {
-          defaultEvents(doc.data().date,doc.data().doctorName,doc.data().notes,'Cuidados');
+        if (doc.data().typeOfConsult == 'Cuidados Paliativos') {
+          defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Cuidados');
         }
-        if( doc.data().typeOfConsult == 'Neurologia'  )
-        {
-          defaultEvents(doc.data().date,doc.data().doctorName,doc.data().notes,'Neurologia');
+        if (doc.data().typeOfConsult == 'Neurologia') {
+          defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Neurologia');
           console.log('neuro');
         }
-        if( doc.data().typeOfConsult == 'Pneumologia'  )
-        {
-          defaultEvents(doc.data().date,doc.data().doctorName,doc.data().notes,'Pneumologia');
+        if (doc.data().typeOfConsult == 'Pneumologia') {
+          defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Pneumologia');
         }
         // defaultEvents(doc.data().date,doc.data().doctorName,doc.data().notes,'Medicina');
         // defaultEvents(doc.data().date,doc.data().doctorName,doc.data().notes,'Reabilitação');
@@ -96,12 +98,11 @@ db.collection("consultas").get().then(function(querySnapshot) {
         // defaultEvents(doc.data().date,doc.data().doctorName,doc.data().notes,'Neurologia');
         // defaultEvents(doc.data().date,doc.data().doctorName,doc.data().notes,'Pneumologia');
 
-      console.log(doc.data())
-    
-  }
-    // else {
-    //   alert('error');
-    // }
+
+      }
+      // else {
+      //   alert('error');
+      // }
     }
   });
 });
@@ -110,29 +111,44 @@ db.collection("consultas").get().then(function(querySnapshot) {
 // ------ functions control -------
 
 //button of the current day
-todayBtn.on("click", function() {
+todayBtn.on("click", function () {
   if (month < indexMonth) {
-    var step = indexMonth % month;
+    
+    var step = indexMonth - month;
     movePrev(step, true);
+    console.log("1log" + step);
+
   } else if (month > indexMonth) {
+
     var step = month - indexMonth;
     moveNext(step, true);
+    console.log("2log" + step);
+
+
+  } else if (month == indexMonth) {
+    var step = month ;
+    console.log("3log" + step);
   }
 });
 
+
 //higlight the cel of current day
-dataCel.each(function() {
+dataCel.each(function () {
   if ($(this).data("day") === today) {
     $(this).addClass("isToday");
-    fillEventSidebar($(this));
+    var thisDay = $(this).attr("data-day").slice(8);
+      var thisMonth = $(this).attr("data-day").slice(5, 7);
+      var thisYear = $(this).attr("data-day").slice(0,4);
+      var thisDate = thisYear + "-" + thisMonth + "-" + thisDay;
+    fillEventSidebar($(this), thisDate);
   }
 });
 
 //window event creator
-addBtn.on("click", function() {
+addBtn.on("click", function () {
   winCreator.addClass("isVisible");
   $("body").addClass("overlay");
-  dataCel.each(function() {
+  dataCel.each(function () {
     if ($(this).hasClass("isSelected")) {
       today = $(this).data("day");
       document.querySelector('input[type="date"]').value = today;
@@ -143,13 +159,13 @@ addBtn.on("click", function() {
 });
 
 
-closeBtn.on("click", function() {
+closeBtn.on("click", function () {
   winCreator.removeClass("isVisible");
   $("body").removeClass("overlay");
 });
 
 
-saveBtn.on("click", function() {
+saveBtn.on("click", function () {
 
   const inputCabinet = $("input[name=cabinet]").val();
   const inputDate = $("input[name=date]").val();
@@ -161,48 +177,44 @@ saveBtn.on("click", function() {
   const inputNotes = $("input[name=notes]").val();
   const inputTypeofconsult = $("select[name=typeofconsult]").find(":selected").text();
 
-  if (!inputDocname  ) {
+  if (!inputDocname) {
 
     alert("error");
 
-  } 
-
-  else {
+  } else {
 
 
     db.collection('consultas').add({
-      cabinet : inputCabinet,
-      date : inputDate,
-      doctorName : inputDocname,
-      floor : inputFloor, 
-      hour : inputHour,
-      local : inputLocal,
-      pavilion : inputPavilion,
-      typeOfConsult : inputTypeofconsult,
-      notes : inputNotes,
-      medicID : medicID
-    
-    
-  }),
-  function(error){
-    if(!error)
-    {
-      const inputCabinet = $("input[name=cabinet]").val();
-      const inputDate = $("input[name=date]").val();
-      const inputDocname = $("input[name=doctorname]").val();
-      const inputHour = $("input[name=hour]").val();
-      const inputFloor = $("input[name=floor]").val();
-      const inputLocal = $("input[name=local]").val();
-      const inputPavilion = $("input[name=pavilion]").val();
-      const inputNotes = $("textarea[name=notes]").val();
-      const inputTypeofconsult = $("select[name=typeofconsult]").find(":selected").text();
-    }
-    else{
-      alert("error")
-    }
+        cabinet: inputCabinet,
+        date: inputDate,
+        doctorName: inputDocname,
+        floor: inputFloor,
+        hour: inputHour,
+        local: inputLocal,
+        pavilion: inputPavilion,
+        typeOfConsult: inputTypeofconsult,
+        notes: inputNotes,
+        medicID: medicID
+
+
+      }),
+      function (error) {
+        if (!error) {
+          const inputCabinet = $("input[name=cabinet]").val();
+          const inputDate = $("input[name=date]").val();
+          const inputDocname = $("input[name=doctorname]").val();
+          const inputHour = $("input[name=hour]").val();
+          const inputFloor = $("input[name=floor]").val();
+          const inputLocal = $("input[name=local]").val();
+          const inputPavilion = $("input[name=pavilion]").val();
+          const inputNotes = $("textarea[name=notes]").val();
+          const inputTypeofconsult = $("select[name=typeofconsult]").find(":selected").text();
+        } else {
+          alert("error")
+        }
+      }
   }
-}
-  dataCel.each(function() {
+  dataCel.each(function () {
     if ($(this).data("day") === inputDate) {
       if (inputDocname != null) {
         $(this).attr("data-name", inputDocname);
@@ -214,10 +226,15 @@ saveBtn.on("click", function() {
       if (inputTypeofconsult != null) {
         $(this).addClass("event--" + inputTypeofconsult);
       }
-      fillEventSidebar($(this));
+
+      // var thisDay = $(this).attr("data-day").slice(8);
+      // var thisMonth = $(this).attr("data-day").slice(5, 7);
+      // var thisYear = $(this).attr("data-day").slice(0,4);
+      // var thisDate = thisYear + "-" + thisMonth + "-" + thisDay;
+      // fillEventSidebar($(this) , thisDate);
     }
 
-    
+
   });
 
 
@@ -228,7 +245,9 @@ saveBtn.on("click", function() {
 });
 
 //fill sidebar event info
-function fillEventSidebar(self) {
+function fillEventSidebar(self, thisDate) {
+  console.log(thisDate)
+
   $(".c-aside__event").remove();
   var thisName = self.attr("data-name");
   var thisNotes = self.attr("data-notes");
@@ -239,80 +258,130 @@ function fillEventSidebar(self) {
   var thisNeurologia = self.hasClass("event--Neurologia");
   var thisPneumologia = self.hasClass("event--Pneumologia");
   var thisEvent = self.hasClass("event");
+
+
+  // switch (true) {
+
+  //   case thisEvent:
+        
+  //     $(".c-aside__eventList").append("<p class='c-aside__event'>" +thisName +" <span> • " +thisNotes +"</span></p>");
+  //     break;
+  // }
   
-  
-  switch (true) {
+  db.collection("consultas").where("medicID", "==", medicID).where("date", "==", thisDate).onSnapshot(function (querySnapshot) { 
+    querySnapshot.forEach(function (doc) {
 
-      case thisFisioterapia:
+      switch (doc.data().typeOfConsult) {
 
-      db.collection("consultas").doc(uid).onSnapshot(function (querySnapshot) { 
-      querySnapshot.forEach(function (doc) {
-      $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Fisioterapia'>" +thisName +" <span> • " +thisNotes +"</span></p>");
-      })
-      })
+          case "Fisioterapia":
+          
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Fisioterapia'>" +doc.data().doctorName +" <span> • " +doc.data().notes +"</span></p>");
+          break;
 
-      break;
+          case "Medicina física":
 
-      case thisMedicina:
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Medicina'>" +doc.data().doctorName +" <span> • " +doc.data().notes +"</span></p>");
+          break;
 
-     
-      $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Medicina'>" +thisName +" <span> • " +thisNotes +"</span></p>");
-      
-      break;
+          case "Reabilitação":
 
-      case thisReabilitação:
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Reabilitação'>" +doc.data().doctorName +" <span> • " +doc.data().notes +"</span></p>");
+          break;
 
+          case "Cuidados Paliativos":
+
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Cuidados'>" +doc.data().doctorName +" <span> • " +doc.data().notes +"</span></p>");
+          break;
+
+          case "Neurologia":
+
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Neurologia'>" +doc.data().doctorName +" <span> • " +doc.data().notes +"</span></p>");
+          break;
+
+          case "Pneumologia":
+
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Pneumologia'>" +doc.data().doctorName +" <span> • " +doc.data().notes +"</span></p>");
+          break;
+
+          // case thisEvent:
         
-      $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Reabilitação'>" +thisName +" <span> • " +thisNotes +"</span></p>");
-        
-      break;
+          // $(".c-aside__eventList").append("<p class='c-aside__event'>" +thisName +" <span> • " +thisNotes +"</span></p>");
+          // break;
 
-      case thisCuidados:
+      }
+    })
+  })
 
-       
-      $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Cuidados'>" +thisName +" <span> • " +thisNotes +"</span></p>");
-        
-      break;
 
-      case thisNeurologia:
+  // db.collection("consultas").where('medicID', "==", medicID).get().then(function (querySnapshot) {
+  //   querySnapshot.forEach(function (doc) {
+  //     switch (true) {
 
-       
-      $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Neurologia'>" +thisName +" <span> • " +thisNotes +"</span></p>");
-        
-      break;
+  //       case thisFisioterapia:
 
-      case thisPneumologia:
 
-      db.collection("consultas").get().then(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {
-      $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Pneumologia'>" +thisName +" <span> • " +thisNotes +"</span></p>");
-      })
-      }) 
-      break;
+  //         $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Fisioterapia'>" + thisName + " <span> • " + thisNotes + "</span></p>");
 
-      case thisEvent:
-    
-      $(".c-aside__eventList").append("<p class='c-aside__event'>" +thisName +" <span> • " +thisNotes +"</span></p>");
-      break;
+  //         break;
 
-   }
+  //       case thisMedicina:
+
+
+  //         $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Medicina'>" + thisName + " <span> • " + thisNotes + "</span></p>");
+
+  //         break;
+
+  //       case thisReabilitação:
+
+
+  //         $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Reabilitação'>" + thisName + " <span> • " + thisNotes + "</span></p>");
+
+  //         break;
+
+  //       case thisCuidados:
+
+
+  //         $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Cuidados'>" + thisName + " <span> • " + thisNotes + "</span></p>");
+
+  //         break;
+
+  //       case thisNeurologia:
+
+
+  //         $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Neurologia'>" + thisName + " <span> • " + thisNotes + "</span></p>");
+
+  //         break;
+
+  //       case thisPneumologia:
+
+
+  //         $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Pneumologia'>" + thisName + " <span> • " + thisNotes + "</span></p>");
+
+  //         break;
+
+  //       case thisEvent:
+
+  //         $(".c-aside__eventList").append("<p class='c-aside__event'>" + thisName + " <span> • " + thisNotes + "</span></p>");
+  //         break;
+
+  //     }
+  //   })
+  // })
 
 };
 
 
-dataCel.on("click", function() {
+dataCel.on("click", function () {
   var thisEl = $(this);
-  var thisDay = $(this)
-  .attr("data-day")
-  .slice(8);
+  var thisDay = $(this).attr("data-day").slice(8);
   var thisMonth = $(this)
-  .attr("data-day")
-  .slice(5, 7);
-  // var thisYear = $(this)
-  // .attr("data-day")
-  // .slice(0,4);
+    .attr("data-day")
+    .slice(5, 7);
+  var thisYear = $(this).attr("data-day").slice(0,4);
+  var thisDate = thisYear + "-" + thisMonth + "-" + thisDay;
 
-  fillEventSidebar($(this));
+  fillEventSidebar($(this), thisDate);
+  console.log(thisDate)
 
   $(".c-aside__num").text(thisDay);
   $(".c-aside__month").text(monthText[thisMonth - 1]);
@@ -338,6 +407,7 @@ function moveNext(fakeClick, indexNext) {
     }
   }
 }
+
 function movePrev(fakeClick, indexPrev) {
   for (var i = 0; i < fakeClick; i++) {
     $(".c-main").css({
@@ -358,7 +428,7 @@ function movePrev(fakeClick, indexPrev) {
 function buttonsPaginator(buttonId, mainClass, monthClass, next, prev) {
   switch (true) {
     case next:
-      $(buttonId).on("click", function() {
+      $(buttonId).on("click", function () {
         if (indexMonth >= 2) {
           $(mainClass).css({
             left: "+=100%"
@@ -372,7 +442,7 @@ function buttonsPaginator(buttonId, mainClass, monthClass, next, prev) {
       });
       break;
     case prev:
-      $(buttonId).on("click", function() {
+      $(buttonId).on("click", function () {
         if (indexMonth <= 11) {
           $(mainClass).css({
             left: "-=100%"
@@ -396,4 +466,4 @@ moveNext(indexMonth - 1, false);
 
 //fill the sidebar with current day
 $(".c-aside__num").text(day);
-$(".c-aside__month").text(monthText[month - 1]);
+$(".c-aside__month").text(monthText[month -1]);

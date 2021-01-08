@@ -21,8 +21,8 @@
 		<script src="/__/firebase/8.1.1/firebase-firestore.js"></script>
 		<script src="/__/firebase/8.1.1/firebase-analytics.js"></script>
 		<!-- Initialize Firebase -->
-		<!--<script src="/__/firebase/init.js"></script> ?useEmulator=true-->
-		<script src="assets/js/main.js"></script>
+    <!--<script src="/__/firebase/init.js"></script> ?useEmulator=true-->
+    <script src="assets/js/firebase.js"></script>
 
 
 
@@ -62,13 +62,7 @@ function fill_table(month, month_length, indexMonth) {
     // fill the first week of days
     for (var i = start_day; i < 8; i++) {
       document.write(
-        "<div data-day='2021-" +
-          indexMonth +
-          "-0" +
-          day +
-          "'class='c-cal__cel'><p>" +
-          day +
-          "</p></div>"
+        "<div data-day='2021-" + indexMonth +"-0" + day + "'class='c-cal__cel'><p>" + day + "</p></div>"
       );
       day++;
     }
@@ -161,7 +155,7 @@ function fill_table(month, month_length, indexMonth) {
       // first day of the week of the new year
       today = new Date("Janeiro 1, " + year);
       //start_day = today.getDay() + 1; // 2020
-       start_day = today.getDay(); // 2021
+      start_day = today.getDay(); // 2021
 
       fill_table("Janeiro", 31, "01");
       fill_table("Fevereiro", 28, "02");
@@ -206,7 +200,7 @@ function fill_table(month, month_length, indexMonth) {
   </div>
 </div>
 
-<nav class="nav nav-closed">
+<!-- <nav class="nav nav-closed">
   <svg class="navExpand" viewBox="0 0 256 512" width="100" title="angle-right">
     <path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z" />
   </svg>
@@ -264,14 +258,14 @@ function fill_table(month, month_length, indexMonth) {
       </a>
     </li>
   </ul>
-</nav>
+</nav> -->
 
 
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.cycle2/2.1.6/jquery.cycle2.core.min.js'></script>
 <script  src="assets/js/calendar.js"></script>
-<script src="assets/js/navbar.js"></script>
+<!-- <script src="assets/js/navbar.js"></script> -->
 
 </body>
 </html>

@@ -567,10 +567,10 @@ header > .wrapper a {
 input,
 textarea,
 select {
-  -webkit-appearance: none;
+  /* -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
-  appearance: none;
+  appearance: none; */
   border-radius: 0px;
   padding: 0;
   border-width: 0;
@@ -583,6 +583,7 @@ select {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+
 }
 input::-ms-expand,
 textarea::-ms-expand,
