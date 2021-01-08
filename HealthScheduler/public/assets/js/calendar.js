@@ -5,7 +5,7 @@
 var medicID = "";
 firebase.auth().onAuthStateChanged(function (user) {
   if (user != null) {
-    document.getElementsByTagName("BODY")[0].style.display = "contents";
+    // document.getElementsByTagName("BODY")[0].style.display = "contents";
     medicID = "" + user.uid;
   }
 });

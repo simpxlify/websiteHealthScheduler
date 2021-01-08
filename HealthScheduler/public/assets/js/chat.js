@@ -104,7 +104,7 @@ db.collection("users").onSnapshot(function (querySnapshot) {
         "timeStamp": timeStamp2
       });
 
-      db.collection('latest_messages').doc(uid).collection('latest_message').doc(toId).update({
+      db.collection('latest_messages').doc(uid).collection('latest_message').doc(toId).set({
         "fromId": uid,
         "message": message,
         "messageType": text,
@@ -112,7 +112,7 @@ db.collection("users").onSnapshot(function (querySnapshot) {
         "timeStamp": timeStamp2
       });
 
-      db.collection('latest_messages').doc(toId).collection('latest_message').doc(uid).update({
+      db.collection('latest_messages').doc(toId).collection('latest_message').doc(uid).set({
         "fromId": uid,
         "message": message,
         "messageType": text,

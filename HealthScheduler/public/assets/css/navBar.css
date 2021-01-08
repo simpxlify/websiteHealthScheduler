@@ -27,13 +27,14 @@
   }
   
   .nav {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
+    position: fixed;
+    z-index: +12232;
     background-color: white;
     box-shadow: 0px 0px 10px var(--clr-gray300);
     height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
   }
   
   .navExpand {
@@ -45,7 +46,7 @@
     border-radius: 50%;
     position: absolute;
     right: -1rem;
-    top: 1rem;
+    top: 1.5rem;
     z-index: 99;
     cursor: pointer;
     transform: rotatez(-180deg);
@@ -93,8 +94,8 @@
   
   .navListitem svg {
     fill: var(--clr-gray400);
-    width: 2rem;
-    height: 2rem;
+    width: 32px;
+    height: 32px;
   }
   
   .navListitem-active {

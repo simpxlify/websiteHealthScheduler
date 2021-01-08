@@ -41,6 +41,10 @@ font-family: 'Roboto', sans-serif;
   }
 }
 
+html{
+  overflow-x: hidden;
+}
+
 .form{
   width: 75%;
   margin: 0;
@@ -118,12 +122,12 @@ font-family: 'Roboto', sans-serif;
 
 .allConsultas{
   width: 100%;
-  height: 100%;
   background: #fff;
   text-align: left;
   padding-top: 10px;
   padding-bottom: 20px;
   padding-left: 50px;
+  overflow-x: hidden;
 }
 
 .descriptionOfConsulta{
@@ -156,6 +160,15 @@ font-family: 'Roboto', sans-serif;
   margin-top: 20px;
 }
 
+@media only screen and (max-width: 1200px){
+  .form{
+    margin-left: 110px;
+    margin-right: 55px;
+    width: 90%;
+  }
+
+}
+
 
 @media only screen and (max-width: 1000px) {
   .form{
@@ -178,5 +191,13 @@ font-family: 'Roboto', sans-serif;
 
   .appointementsContainer{
     width: auto;
+    height: auto;
+    overflow: visible;
+  }
+}
+
+@media only screen and (max-width: 700px){
+  .form{
+    margin-left: 110px;
   }
 }
