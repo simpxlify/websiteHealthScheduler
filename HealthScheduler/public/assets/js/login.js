@@ -6,6 +6,7 @@ function login(){
     
     db.collection("users_medic").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
+            
             if(doc.data().phoneNumberEmail == email.value){
                 auth.signInWithEmailAndPassword(email.value, password.value).then((user) => {
                     window.location.replace("mainpage.html");
@@ -17,6 +18,19 @@ function login(){
                     alert("Verifique o email ou a password!");
                 });
             }
+            
         });
     });
+
+    // password.addEventListener("keyup", function(e) {
+    //     if (e.key === 'Enter') {
+    //      event.preventDefault();
+    //      document.getElementById("button_login").click();
+    //     }
+    //   });
+  
 }
+
+    
+
+

@@ -151,3 +151,22 @@
     margin-right: auto;
     width: 40%;
   }
+
+  .containerButton2{
+    padding-top: 50px;
+    display: flex;
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+  }
+
+  .containerButton3{
+    padding-top: 50px;
+    display: flex;
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+  }
+

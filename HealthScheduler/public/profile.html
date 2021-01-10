@@ -108,11 +108,37 @@
 					<button class="open-button" onclick="openForm()">Mudar Email</button>
 					<div class="chat-popup" id="myForm">
 						<form class="form-container">
-							<input type="email" placeholder="Insira o seu email para que quer mudar"
+							<input type="email" placeholder="Insira o seu novo email"
 								id="email_input_change">
 							<button id="confirmEmail" type="button" class="btn" onclick="updateEmail()">Confirmar
 								mudança de email</button>
 							<button type="button" class="btn cancel" onclick="closeForm()">Fechar</button>
+						</form>
+					</div>
+				</div>
+
+				<div class="containerButton2">
+					<button class="open-button" onclick="openForm2()">Mudar Palavra passe</button>
+					<div class="chat-popup" id="myForm2">
+						<form class="form-container">
+							<input type="password" placeholder="Insira a sua nova palavra passe"
+								id="pw_input_change">
+							<button id="confirmPw" type="button" class="btn" onclick="updatePassword()">Confirmar
+								mudança de palavra passe</button>
+							<button type="button" class="btn cancel" onclick="closeForm2()">Fechar</button>
+						</form>
+					</div>
+				</div>
+
+				<div class="containerButton3">
+					<button class="open-button" onclick="openForm3()">Mudar	Morada</button>
+					<div class="chat-popup" id="myForm3">
+						<form class="form-container">
+							<input type="text" placeholder="Insira a sua nova morada"
+								id="address_input_change">
+							<button id="confirmAddress" type="button" class="btn" onclick="updateAddress()">Confirmar
+								mudança de morada</button>
+							<button type="button" class="btn cancel" onclick="closeForm3()">Fechar</button>
 						</form>
 					</div>
 				</div>
