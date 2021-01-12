@@ -20,7 +20,6 @@
 		<script src="/__/firebase/8.1.1/firebase-analytics.js"></script>
 		<!-- Initialize Firebase -->
 		<script src="assets/js/firebase.js"></script>
-		<script src="assets/js/register.js"></script>
 
 
 
@@ -55,6 +54,13 @@
 						<input type="text" placeholder="Morada" id="morada_input">
 					</div>
 					<div id="input-container">
+						<select class="inputTypeAcc" name="Tipo de conta" id="acc_input" onchange="changeFunc()">
+							<option value="Administrativo" id="Administrativo" >Administrativo</option>
+							<option value="Medico" id="Medico">Médico</option>
+							<option value="Enfermeiro" id="Enfermeiro">Enfermeiro</option>
+						  </select>
+					</div>
+					<div id="input-container">
 						<select class="inputTypeMedic" name="Tipo de médico" id="medic_input">
 							<option value="Neurologia" id="Neurologia">Neurologia</option>
 							<option value="Pneumologia" id="Pneumologia">Pneumologia</option>
@@ -70,5 +76,8 @@
 				<p class="login">Já tem conta? <a href="login.html"><b>Login</b></a></p>
 			</div>
 		</div>
+
+		<script src="assets/js/register.js"></script>
+
   </body>
 </html>
