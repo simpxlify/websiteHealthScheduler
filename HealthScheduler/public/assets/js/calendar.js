@@ -54,8 +54,6 @@ function defaultEvents(dataDay, dataName, dataNotes, classTag) {
 
 }
 
-
-
 // defaultEvents(today, 'HOJE', '', 'important');
 // defaultEvents('2021-12-25', 'FELIZ NATAL', '', 'festivity');
 
@@ -142,6 +140,8 @@ dataCel.each(function () {
     fillEventSidebar($(this), thisDate);
   }
 });
+
+
 var inputTypeofconsult = document.getElementById("typeOfMedic");
 var inputDocname = document.getElementById("medicName");
 
@@ -196,18 +196,16 @@ saveBtn.on("click", function () {
   const inputPavilion = $("input[name=pavilion]").val();
   const inputNotes = $("input[name=notes]").val();
   // const inputTypeofconsult = $("select[name=typeofconsult]").find(":selected").text();
+  var typeOfConsult = inputTypeofconsult.value;
+  var doctorName = inputDocname.value;
 
 
-  if (inputDocname === "" || inputCabinet === "" || inputDate === "" || inputHour === "" || inputFloor === "" || inputLocal === "" ||
-    inputPavilion === "" || inputNotes === "" || inputTypeofconsult === "") {
+  if (doctorName === "" || inputCabinet === "" || inputDate === "" || inputHour === "" || inputFloor === "" || inputLocal === "" ||
+    inputPavilion === "" || inputNotes === "" || typeOfConsult === "") {
 
     alert("Preencha tudo");
 
   } else {
-
-    var typeOfConsult = inputTypeofconsult.value;
-    var doctorName = inputDocname.value;
-
 
     db.collection('consultas').add({
         cabinet: inputCabinet,
@@ -248,15 +246,15 @@ saveBtn.on("click", function () {
   
   dataCel.each(function () {
     if ($(this).data("day") === inputDate) {
-      if (inputDocname != null) {
-        $(this).attr("data-name", inputDocname);
+      if (doctorName != null) {
+        $(this).attr("data-name", doctorName);
       }
       if (inputNotes != null) {
         $(this).attr("data-notes", inputNotes);
       }
       $(this).addClass("event");
-      if (inputTypeofconsult != null) {
-        $(this).addClass("event--" + inputTypeofconsult);
+      if (typeOfConsult != null) {
+        $(this).addClass("event--" + typeOfConsult);
       }
 
       // var thisDay = $(this).attr("data-day").slice(8);
@@ -301,32 +299,32 @@ function fillEventSidebar(self, thisDate) {
 
         case "Fisioterapia":
 
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Fisioterapia'>" + doc.data().doctorName + " <span> • " + doc.data().notes + "</span></p>");
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Fisioterapia'>" + doc.data().hour + " <span> • " + doc.data().notes + "</span></p>");
           break;
 
         case "Medicina física":
 
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Medicina'>" + doc.data().doctorName + " <span> • " + doc.data().notes + "</span></p>");
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Medicina'>" + doc.data().hour + " <span> • " + doc.data().notes + "</span></p>");
           break;
 
         case "Reabilitação":
 
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Reabilitação'>" + doc.data().doctorName + " <span> • " + doc.data().notes + "</span></p>");
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Reabilitação'>" + doc.data().hour + " <span> • " + doc.data().notes + "</span></p>");
           break;
 
         case "Cuidados Paliativos":
 
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Cuidados'>" + doc.data().doctorName + " <span> • " + doc.data().notes + "</span></p>");
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Cuidados'>" + doc.data().hour + " <span> • " + doc.data().notes + "</span></p>");
           break;
 
         case "Neurologia":
 
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Neurologia'>" + doc.data().doctorName + " <span> • " + doc.data().notes + "</span></p>");
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Neurologia'>" + doc.data().hour + " <span> • " + doc.data().notes + "</span></p>");
           break;
 
         case "Pneumologia":
 
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Pneumologia'>" + doc.data().doctorName + " <span> • " + doc.data().notes + "</span></p>");
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Pneumologia'>" + doc.data().hour + " <span> • " + doc.data().notes + "</span></p>");
           break;
 
           // case thisEvent:
