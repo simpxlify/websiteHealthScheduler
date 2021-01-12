@@ -142,10 +142,24 @@ dataCel.each(function () {
     fillEventSidebar($(this), thisDate);
   }
 });
+var inputTypeofconsult = document.getElementById("typeOfMedic");
+var inputDocname = document.getElementById("medicName");
 
 //window event creator
 addBtn.on("click", function () {
   winCreator.addClass("isVisible");
+
+  db.collection("users_medic").doc(medicID)
+    .get().then(function(doc) {
+      if (doc.exists){
+        inputTypeofconsult.value = doc.data().typeOfMedic;
+        inputDocname.value = doc.data().username;
+      } else {
+        console.log("No such document!");
+      }}).catch(function(error) {
+        console.log("Error getting document:", error);
+      });
+
   $("body").addClass("overlay");
   dataCel.each(function () {
     if ($(this).hasClass("isSelected")) {
@@ -166,18 +180,23 @@ closeBtn.on("click", function () {
 });
 
 
+
+
+
+
 saveBtn.on("click", function () {
 
   const inputCabinet = $("input[name=cabinet]").val();
   const inputDate = $("input[name=date]").val();
-  const inputDocname = $("input[name=doctorname]").val();
+  // const inputDocname = $("input[name=doctorname]").val();
   const inputHour = $("input[name=hour]").val();
   const inputFloor = $("input[name=floor]").val();
   // const inputLocal = $("input[name=local]").val();
   const inputLocal = $("select[name=local]").find(":selected").text();
   const inputPavilion = $("input[name=pavilion]").val();
   const inputNotes = $("input[name=notes]").val();
-  const inputTypeofconsult = $("select[name=typeofconsult]").find(":selected").text();
+  // const inputTypeofconsult = $("select[name=typeofconsult]").find(":selected").text();
+
 
   if (inputDocname === "" || inputCabinet === "" || inputDate === "" || inputHour === "" || inputFloor === "" || inputLocal === "" ||
     inputPavilion === "" || inputNotes === "" || inputTypeofconsult === "") {
@@ -186,16 +205,19 @@ saveBtn.on("click", function () {
 
   } else {
 
+    var typeOfConsult = inputTypeofconsult.value;
+    var doctorName = inputDocname.value;
+
 
     db.collection('consultas').add({
         cabinet: inputCabinet,
         date: inputDate,
-        doctorName: inputDocname,
+        doctorName,
         floor: inputFloor,
         hour: inputHour,
         local: inputLocal,
         pavilion: inputPavilion,
-        typeOfConsult: inputTypeofconsult,
+        typeOfConsult,
         notes: inputNotes,
         medicID: medicID
 
