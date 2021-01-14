@@ -83,23 +83,78 @@ html {
 }
 
 .imgAndName {
-  width: 100%;
+  position: absolute;
+  top: 125;
+  padding-left: 50px;
+  width: auto;
   height: auto;
-  padding: 0;
   margin: auto;
   display: block;
 }
 
-.imgAndName img {
+.uploadImage{
   position: absolute;
+  width: auto;
+  left: 53;
+  top: 0;
+  opacity: 0;
+}
+
+.uploadImage input{
+  width: 120px;
+  height: 125px;
+  top: 0;
+  cursor: pointer;
+}
+
+.inputImage{
+  background: none;
+}
+
+.imgAndName:hover{
+  transition: .5s ease;
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+}
+
+.imgAndName img:hover{
+  transition: .5s ease;
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+}
+
+.inputImage::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.inputImage::before {
+  color: #333;
+  content: 'Carregar Imagem';
+  border: none;
+  background: none;
+  padding-left: 95px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  float: center;
+  font-weight: 700;
+  font-size: 10pt;
+}
+.inputImage:hover::before {
+  border-color: black;
+}
+.inputImage:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+.imgAndName img {
   width: 125px;
   height: 125px;
   border-radius: 100px;
   border: 2px solid #1b736f;
-  top: 125;
-  margin-left: 50px;
   cursor: pointer;
 }
+
 
 .imgAndName h1 {
   display: inline-block;
@@ -280,6 +335,12 @@ html {
   color: #fff;
 }
 
+@media only screen and (max-width: 1800px) {
+  .imgAndName{
+    top: 155;
+  }
+}
+
 
 @media only screen and (max-width: 1200px) {
   .form {
@@ -287,7 +348,6 @@ html {
     margin-right: 55px;
     width: 90%;
   }
-
 }
 
 
@@ -315,10 +375,18 @@ html {
     height: auto;
     overflow: visible;
   }
+
+  .imgAndName{
+    top: 75;
+  }
 }
 
 @media only screen and (max-width: 700px) {
   .form {
     margin-left: 110px;
+  }
+
+  .imgAndName{
+    top: 115;
   }
 }

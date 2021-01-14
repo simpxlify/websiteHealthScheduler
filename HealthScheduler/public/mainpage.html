@@ -18,6 +18,7 @@
 	<script src="/__/firebase/8.1.1/firebase-app.js"></script>
 	<script src="/__/firebase/8.1.1/firebase-auth.js"></script>
 	<script src="/__/firebase/8.1.1/firebase-firestore.js"></script>
+	<script src="/__/firebase/8.1.1/firebase-storage.js"></script>
 	<script src="/__/firebase/8.1.1/firebase-analytics.js"></script>
 	<!-- Initialize Firebase -->
 	<!--<script src="/__/firebase/init.js"></script> ?useEmulator=true-->
@@ -82,7 +83,7 @@
 			<div class="info">
 				<div class="imgAndName">
 					<img src="assets/img/picuser.png" alt="Imagem do médico" id="img_user">
-					
+					<div class="uploadImage"><input type="file" class="inputImage" id="photo" onclick="swapImage(event)"></div>
 				</div>
 				<div class="customInfoUser">
 					<div class="addressOfUser">
