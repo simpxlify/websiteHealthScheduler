@@ -69,18 +69,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
   overflow: hidden;
+  height: 100vh;
+  margin-left: 104px;
 }
 
 .chatContainer{
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 .userContainer{
   width: 30%;
-  height: 800px;
+  height: 100%;
   background-color: lightgrey;
   display: inline-block;
   padding: 0;
@@ -89,14 +90,15 @@
 
 .userContainer-overflow{
   min-height: 600px;
+  background-color: lightgrey;
 }
 
 .userContainer::-webkit-scrollbar-track{
-  background-color: #36bfb8;
+  background-color: lightgray;
 }
 
 .userContainer::-webkit-scrollbar{
-  
+  background-color: lightgrey;
   width: 5px;
 }
 
@@ -106,8 +108,8 @@
 }
 
 .chatContainer{
-  width: 70%;
-  height: 800px;
+  width: 100%;
+  height: 100%;
   display: flex;
 }
 
@@ -129,6 +131,8 @@
   position: absolute;
   bottom: 0;
   width: 100%;
+  background-color: #1b736f;
+  border-top: #333;
 }
 
 .bottomMessages{
