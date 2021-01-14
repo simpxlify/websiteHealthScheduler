@@ -1,3 +1,75 @@
+var uid = "";
+firebase.auth().onAuthStateChanged(function (user) {
+  if (user != null) {
+    uid = "" + user.uid;
+  }
+});
+
+function updateEmail() {
+  var emailAddress = document.getElementById("email_input_change").value;
+
+  firebase.auth().onAuthStateChanged(function (user){
+    if (user != null){
+      user.updateEmail(emailAddress).then(function() {
+        db.collection("users_medic").doc(uid).update({
+          phoneNumberEmail: emailAddress
+        })
+        .then(function () {
+          
+        })
+        .catch(function (error) {
+          
+        });
+      }).catch(function(error) {
+        
+      });
+    }
+  });
+}
+
+function updateAddress() {
+  var address = document.getElementById("address_input_change").value;
+
+  db.collection("users_medic").doc(uid).update({
+      address: address
+    })
+    .then(function () {
+
+    })
+    .catch(function (error) {
+
+    });
+}
+
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+
+}
+
+function openForm2() {
+  document.getElementById("myForm2").style.display = "block";
+}
+
+
+function closeForm2() {
+  document.getElementById("myForm2").style.display = "none";
+
+}
+
+function openForm3() {
+  document.getElementById("myForm3").style.display = "block";
+}
+
+
+function closeForm3() {
+  document.getElementById("myForm3").style.display = "none";
+
+}
+
 firebase.auth().onAuthStateChanged(function (user) {
   if (user != null) {
     document.getElementsByTagName("BODY")[0].style.display = "contents";
@@ -26,8 +98,8 @@ firebase.auth().onAuthStateChanged(function (user) {
 
         imageUser.src = imagePath;
 
-        if(listConsultas(uid) != true){
-          
+        if (listConsultas(uid) != true) {
+
         }
       } else {
         console.log("No such document!");
