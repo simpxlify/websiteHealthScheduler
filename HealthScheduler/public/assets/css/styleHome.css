@@ -335,26 +335,21 @@ html {
   color: #fff;
 }
 
-@media only screen and (max-width: 1800px) {
+@media only screen and (max-width: 1700px) {
   .imgAndName{
     top: 155;
   }
 }
 
 
+
 @media only screen and (max-width: 1200px) {
-  .form {
-    margin-left: 110px;
-    margin-right: 55px;
-    width: 90%;
-  }
-}
-
-
-@media only screen and (max-width: 1000px) {
   .form {
     width: auto;
     display: block;
+    margin-left: 110px;
+    margin-right: 55px;
+    width: 90%;
   }
 
   .profileContainer {
@@ -381,12 +376,18 @@ html {
   }
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 800px) {
+  .imgAndName{
+    top: 80;
+  }
+
   .form {
     margin-left: 110px;
   }
+}
 
+@media only screen and (max-width: 600px) {
   .imgAndName{
-    top: 115;
+    top: 120;
   }
 }
