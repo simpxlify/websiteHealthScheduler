@@ -57,12 +57,12 @@
 .listItemsMessages{
   list-style-type: none;
   text-align: left;
+  width: auto;
   padding: 10px 20px 10px 20px;
   background-color: rgb(255,255,255,0.3);
   border-radius: 30px;
+  max-width: 50%;
   display: inline-block;
-
-  margin-right: auto;
 }
 
 .listItemsImages{
@@ -209,11 +209,6 @@
   fill: #fff;
 }
 
-.allMessages{
-  width: 50%;
-  padding: 10px;
-}
-
 .listOfMessages{
   display: flex;
   align-items: left;
@@ -225,7 +220,7 @@
 .allMessagesList{
   width: 100%;
   height: 90%;
-  padding: 50px;
+  padding: 10px 5px 5px 10px;
   
   top: 0;
   right: 0;
@@ -250,23 +245,70 @@
   background-color: #1b736fbd;
 }
 
-.date{
+.messageWithImage{
   display: block;
-  padding: 0;
-  margin: 10px 0 0 0;
+  width: 100%;
+}
 
-  background-color: rgba(255, 255, 255, 0);
+.allMessages{
+  width: 100%;
+  padding: 10px;
+}
+
+.allMessages img{
+  width: 75px;
+  height: 75px;
+  margin-left: 10px;
+  border-radius: 50%;
+  margin: auto 10px auto 10px;
+  border: 1px solid #1b736f;
+  float: left;
 }
 
 .myMessage{
   width: 100%;
+  height: auto;
+  justify-content: right;
   text-align: right;
+  float: right;
+}
+
+.myMessage p{
+  width: 100%;
+  text-align: right;
+}
+
+.myMessage img{
+  display: flex;
+  float: right;
 }
 
 .dateRight{
   display: block;
-  text-align: right;
+  text-align: left;
+  width: 100%;
   padding: 0;
-  margin: 10px 0 0 0;
+  font-size: 12px;
+  padding-top: 15px;
+  color: #1b736f;
+  max-width: 100%;
   background-color: rgba(255, 255, 255, 0);
+}
+
+.date{
+  display: block;
+  text-align: right;
+  float: right;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  color: #1b736f;
+  padding-top: 15px;
+  max-width: 100%;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.hisMessage{
+  overflow: auto;
 }
