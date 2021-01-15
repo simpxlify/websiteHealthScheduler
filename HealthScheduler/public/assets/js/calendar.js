@@ -146,34 +146,35 @@ var inputTypeofconsult = document.getElementById("typeOfMedic");
 var inputDocname = document.getElementById("medicName");
 var inputUsernamePat = document.getElementById("nomePaciente");
 var patientList = document.getElementById("patientList");
+var idList = [];
 
 
-  db.collection("users").get().then(function (querySnapshot) {
-    querySnapshot.forEach(function (doc) {
-      if (doc.exists) {
+db.collection("users").get().then(function (querySnapshot) {
+  querySnapshot.forEach(function (doc) {
+    if (doc.exists) {
 
-        inputUsernamePat = doc.data().username;
+      inputUsernamePat = doc.data().username;
 
-        // inputUidPat = doc.data().userID;
-        console.log(inputUsernamePat);
+      inputUidPat = doc.data().userID;
+      idList.push(inputUidPat)
+      console.log(idList);
 
-        listOptions = document.createElement('option');
-        listOptions.innerHTML = inputUsernamePat;
-        patientList.appendChild(listOptions);
+      listOptions = document.createElement('option');
+      listOptions.innerHTML = inputUsernamePat;
+      patientList.appendChild(listOptions);
 
 
-      } else {
-        console.log("No such document!");
-      }
-    })
+    } else {
+      console.log("No such document!");
+    }
+  })
 
-  });
+});
 
 
 //window event creator
 addBtn.on("click", function () {
 
-  
   winCreator.addClass("isVisible");
 
   db.collection("users_medic").doc(medicID)
@@ -200,7 +201,6 @@ addBtn.on("click", function () {
 });
 
 
-
 closeBtn.on("click", function () {
   winCreator.removeClass("isVisible");
   $("body").removeClass("overlay");
@@ -209,9 +209,8 @@ closeBtn.on("click", function () {
 });
 
 
-
 saveBtn.on("click", function () {
-  
+
   const inputCabinet = $("input[name=cabinet]").val();
   const inputDate = $("input[name=date]").val();
   // const inputDocname = $("input[name=doctorname]").val();
@@ -221,30 +220,17 @@ saveBtn.on("click", function () {
   const inputLocal = $("select[name=local]").find(":selected").text();
   const inputPavilion = $("input[name=pavilion]").val();
   const inputNotes = $("input[name=notes]").val();
-  // const inputTypeofconsult = $("select[name=typeofconsult]").find(":selected").text();
+  //const inputTypeofconsult = $("select[name=typeofconsult]").find(":selected").text();
+  var ind = document.getElementById("patientList").selectedIndex;
+  var opt = document.getElementById("patientList").options;
+  var index = opt[ind].index
+
   var typeOfConsult = inputTypeofconsult.value;
   var doctorName = inputDocname.value;
 
-  var inputUidPat = "";
+  var inputUidPat = idList[index];
 
-db.collection("users").where("username", "==", inputUsernamePat).onSnapshot(function (querySnapshot) {
-  querySnapshot.forEach(function (doc) {
-    if (doc.exists) {
-
-      inputUidPat = doc.data().userID;
-      console.log(inputUidPat);
-
-
-    } else {
-      console.log("No such document!");
-    }
-
-  });
-});
-
-var patientName = document.getElementById("patientList").value;
- 
-  
+  var patientName = document.getElementById("patientList").value;
 
   if (doctorName === "" || inputCabinet === "" || inputDate === "" || inputHour === "" || inputFloor === "" || inputLocal === "" ||
     inputPavilion === "" || inputNotes === "" || typeOfConsult === "" || patientName === "" || inputUidPat === "") {
@@ -252,8 +238,6 @@ var patientName = document.getElementById("patientList").value;
     alert("Preencha tudo");
 
   } else {
-    console.log(inputUidPat);
-
     db.collection('consultas').add({
         cabinet: inputCabinet,
         date: inputDate,
