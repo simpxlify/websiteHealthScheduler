@@ -65,6 +65,19 @@
   margin-right: auto;
 }
 
+.listItemsImages{
+  list-style-type: none;
+  text-align: left;
+  padding: 10px 20px 10px 20px;
+  background-color: rgb(255,255,255,0.3);
+  border-radius: 30px;
+  display: inline-block;
+
+  margin-right: auto;
+
+  width: 500px
+}
+
 .container{
   display: flex;
   justify-content: center;

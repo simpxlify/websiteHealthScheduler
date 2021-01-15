@@ -189,7 +189,39 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 function listConsultas(uid) {
   var consultaContainer = document.getElementById('allConsultas');
-  db.collection("consultas").onSnapshot(function (querySnapshot) {
+
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  var weekDayIndex = today.getDay();
+  var monthIndex = today.getMonth()
+  var days = [
+    'Domingo',
+    'Segunda-Feira',
+    'Terça-Feira',
+    'Quarta-Feira',
+    'Quinta-Feira',
+    'Sexta-Feira',
+    'Sabado'];
+  var monthText = [
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro"];
+  
+  var todayDate = yyyy + '-' + mm + '-' + dd;
+  document.getElementById("consTitle").innerHTML = days[weekDayIndex] + " " + dd + " " + monthText[monthIndex] /*+ " - Consultas"*/;
+
+  db.collection("consultas").where("date", "==", todayDate).onSnapshot(function (querySnapshot) {
     consultaContainer.innerHTML = "";
     querySnapshot.forEach(function (doc) {
       if (doc.data().medicID == uid) {
