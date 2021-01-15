@@ -1,6 +1,5 @@
 //  var myList = new Array();
 
-var text = "text";
 var toId = "";
 // var toId = "0UBWLj6JnRai0DXv08FHlVHPp7M2";
 var username = "";
@@ -66,62 +65,60 @@ db.collection("users").onSnapshot(function (querySnapshot) {
       updateScroll();
       // sendMessage(uid, toId);
       listAllMessages(uid, toId);
-      
+
     });
-    
+
   });
 
-  function updateScroll(){
+  function updateScroll() {
     var element = document.getElementsByClassName("allMessagesList");
     element.scrollTop = element.scrollHeight;
-}
+  }
 
 
   var sendmsg = document.getElementById("sendmsg");
 
-    
+  sendmsg.addEventListener("click", function () {
 
-    sendmsg.addEventListener("click", function () {
+    var text = "text";
+    var timeStamp2 = parseInt(Date.now() / 1000);
 
-      
-      var timeStamp2 = parseInt(Date.now() / 1000);
-      
-      var message = document.getElementById("message").value;
+    var message = document.getElementById("message").value;
 
-      db.collection('chat_messages').doc(uid).collection(toId).add({
-        "fromId": uid,
-        "message": message,
-        "messageType": text,
-        "toId": toId,
-        "timeStamp": timeStamp2
-      });
-  
-      db.collection('chat_messages').doc(toId).collection(uid).add({
-        "fromId": uid,
-        "message": message,
-        "messageType": text,
-        "toId": toId,
-        "timeStamp": timeStamp2
-      });
-
-      db.collection('latest_messages').doc(uid).collection('latest_message').doc(toId).set({
-        "fromId": uid,
-        "message": message,
-        "messageType": text,
-        "toId": toId,
-        "timeStamp": timeStamp2
-      });
-
-      db.collection('latest_messages').doc(toId).collection('latest_message').doc(uid).set({
-        "fromId": uid,
-        "message": message,
-        "messageType": text,
-        "toId": toId,
-        "timeStamp": timeStamp2
-      });
-  
-        message.value = '';
+    db.collection('chat_messages').doc(uid).collection(toId).add({
+      "fromId": uid,
+      "message": message,
+      "messageType": text,
+      "toId": toId,
+      "timeStamp": timeStamp2
     });
+
+    db.collection('chat_messages').doc(toId).collection(uid).add({
+      "fromId": uid,
+      "message": message,
+      "messageType": text,
+      "toId": toId,
+      "timeStamp": timeStamp2
+    });
+
+    db.collection('latest_messages').doc(uid).collection('latest_message').doc(toId).set({
+      "fromId": uid,
+      "message": message,
+      "messageType": text,
+      "toId": toId,
+      "timeStamp": timeStamp2
+    });
+
+    db.collection('latest_messages').doc(toId).collection('latest_message').doc(uid).set({
+      "fromId": uid,
+      "message": message,
+      "messageType": text,
+      "toId": toId,
+      "timeStamp": timeStamp2
+    });
+
+    message.value = '';
+  });
 
   userContainer.appendChild(listContainer);
 });
@@ -130,7 +127,7 @@ db.collection("users").onSnapshot(function (querySnapshot) {
 //   var sendmsg = document.getElementById("sendmsg");
 //   // get message
 //   var timeStamp2 = parseInt(Date.now() / 1000);
-  
+
 
 //   // save in database
 //   sendmsg.addEventListener("click", function () {
@@ -159,7 +156,7 @@ db.collection("users").onSnapshot(function (querySnapshot) {
 // listen for incoming messages
 function listAllMessages(uid, toId) {
   var allMessagesContainer = document.getElementById('allMessagesContainer');
-  
+
 
   var listMessages = document.getElementById('allMessagesList');
 
@@ -168,92 +165,181 @@ function listAllMessages(uid, toId) {
     listMessages.innerHTML = '';
 
     querySnapshot.forEach(function (doc) {
-      var timeStamp = doc.data().timeStamp;
-      var a = new Date(timeStamp * 1000);
-      var months = [
-        "Jan",
-        "Fev",
-        "Mar",
-        "Abr",
-        "Mai",
-        "Jun",
-        "Jul",
-        "Ago",
-        "Set",
-        "Out",
-        "Nov",
-        "Dez"
-      ];
-      var year = a.getFullYear();
-      var month = months[a.getMonth()];
-      var date = a.getDate();
-      var hour = a.getHours();
-      hour = (hour<10) ? '0' + hour : hour;
-      var min = a.getMinutes();
-      min = (min<10) ? '0' + min : min;
-      var sec = a.getSeconds();
-      var formattedTime = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min; //+ ':' + sec;
 
-      // var containerMessages = document.createElement('div');
-      // containerMessages.className = 'messageBox';
+      if (doc.data().messageType == 'text') {
 
-      // listMessages.appendChild(containerMessages);
+        var timeStamp = doc.data().timeStamp;
+        var a = new Date(timeStamp * 1000);
+        var months = [
+          "Jan",
+          "Fev",
+          "Mar",
+          "Abr",
+          "Mai",
+          "Jun",
+          "Jul",
+          "Ago",
+          "Set",
+          "Out",
+          "Nov",
+          "Dez"
+        ];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var hour = a.getHours();
+        hour = (hour < 10) ? '0' + hour : hour;
+        var min = a.getMinutes();
+        min = (min < 10) ? '0' + min : min;
+        var sec = a.getSeconds();
+        var formattedTime = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min; //+ ':' + sec;
 
-      // Make the list
-      var listElement = document.createElement('ul');
+        // var containerMessages = document.createElement('div');
+        // containerMessages.className = 'messageBox';
 
-      // Make the list
-      // var listElement = document.createElement('ul');
-      // listElement.className = 'listOfMessages';
-      // Set up a loop that goes through the items in listItems one at a time
+        // listMessages.appendChild(containerMessages);
 
-      // let div = document.createElement('div')
-      document.getElementsByTagName('body')[0].appendChild(listMessages);
-      listMessages.appendChild(listElement);
+        // Make the list
+        var listElement = document.createElement('ul');
 
+        // Make the list
+        // var listElement = document.createElement('ul');
+        // listElement.className = 'listOfMessages';
+        // Set up a loop that goes through the items in listItems one at a time
 
-      // listItem3 = document.createElement('li');
-      // listItem3.className = 'listItemsMessages';
-
-      listItem4 = document.createElement('li');
-      listItem4.className = 'listItemsMessages';
+        // let div = document.createElement('div')
+        document.getElementsByTagName('body')[0].appendChild(listMessages);
+        listMessages.appendChild(listElement);
 
 
-      listItem6 = document.createElement('li');
-      listItem6.className = 'listItemsMessages date';
+        // listItem3 = document.createElement('li');
+        // listItem3.className = 'listItemsMessages';
 
-      if (doc.data().fromId == uid) {
-        listElement.className = 'allMessages myMessage';
-        listItem6.className = 'listItemsMessages dateRight';
-      } else {
-        listElement.className = 'allMessages';
+        listItem4 = document.createElement('li');
+        listItem4.className = 'listItemsMessages';
+
+
+        listItem6 = document.createElement('li');
+        listItem6.className = 'listItemsMessages date';
+
+        if (doc.data().fromId == uid) {
+          listElement.className = 'allMessages myMessage';
+          listItem6.className = 'listItemsMessages dateRight';
+        } else {
+          listElement.className = 'allMessages';
+        }
+
+        // listItem5 = document.createElement('li');
+        // listItem5.className = 'listItemsMessages';
+
+
+        // // Add the item text
+        // listItem3.innerHTML = doc.data().fromId;
+        // listItem5.innerHTML = doc.data().toId;
+        listItem4.innerHTML = doc.data().message;
+        listItem6.innerHTML = formattedTime;
+
+
+
+        // Add listItem to the listElement
+        listElement.appendChild(listItem4);
+        // listElement.appendChild(listItem5);
+        // listElement.appendChild(listItem3);
+        listElement.appendChild(listItem6);
+
       }
 
-      // listItem5 = document.createElement('li');
-      // listItem5.className = 'listItemsMessages';
+      else if (doc.data().messageType == 'image') {
+
+        var timeStamp = doc.data().timeStamp;
+        var a = new Date(timeStamp * 1000);
+        var months = [
+          "Jan",
+          "Fev",
+          "Mar",
+          "Abr",
+          "Mai",
+          "Jun",
+          "Jul",
+          "Ago",
+          "Set",
+          "Out",
+          "Nov",
+          "Dez"
+        ];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var hour = a.getHours();
+        hour = (hour < 10) ? '0' + hour : hour;
+        var min = a.getMinutes();
+        min = (min < 10) ? '0' + min : min;
+        var sec = a.getSeconds();
+        var formattedTime = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min; //+ ':' + sec;
+
+        // var containerMessages = document.createElement('div');
+        // containerMessages.className = 'messageBox';
+
+        // listMessages.appendChild(containerMessages);
+
+        // Make the list
+        var listElement = document.createElement('ul');
+
+        // Make the list
+        // var listElement = document.createElement('ul');
+        // listElement.className = 'listOfMessages';
+        // Set up a loop that goes through the items in listItems one at a time
+
+        // let div = document.createElement('div')
+        document.getElementsByTagName('body')[0].appendChild(listMessages);
+        listMessages.appendChild(listElement);
 
 
-      // // Add the item text
-      // listItem3.innerHTML = doc.data().fromId;
-      // listItem5.innerHTML = doc.data().toId;
-      listItem4.innerHTML = doc.data().message;
-      listItem6.innerHTML = formattedTime;
+        // listItem3 = document.createElement('li');
+        // listItem3.className = 'listItemsMessages';
+
+        listItem4 = document.createElement('img');
+        listItem4.className = 'listItemsImages';
+
+
+        listItem6 = document.createElement('li');
+        listItem6.className = 'listItemsMessages date';
+
+        if (doc.data().fromId == uid) {
+          listElement.className = 'allMessages myMessage';
+          listItem6.className = 'listItemsMessages dateRight';
+        } else {
+          listElement.className = 'allMessages';
+        }
+
+        // listItem5 = document.createElement('li');
+        // listItem5.className = 'listItemsMessages';
+
+
+        // // Add the item text
+        // listItem3.innerHTML = doc.data().fromId;
+        // listItem5.innerHTML = doc.data().toId;
+        listItem4.src = doc.data().message;
+        listItem6.innerHTML = formattedTime;
 
 
 
-      // Add listItem to the listElement
-      listElement.appendChild(listItem4);
-      // listElement.appendChild(listItem5);
-      // listElement.appendChild(listItem3);
-      listElement.appendChild(listItem6);
-
-
+        // Add listItem to the listElement
+        listElement.appendChild(listItem4);
+        // listElement.appendChild(listItem5);
+        // listElement.appendChild(listItem3);
+        listElement.appendChild(listItem6);
+      }
 
     });
     allMessagesContainer.appendChild(listMessages);
-
+    scrollToBottom ()
   });
+}
 
+scrollingElement = (document.getElementById('allMessagesList'));
+function scrollToBottom () {
+   scrollingElement.scrollTop = scrollingElement.scrollHeight;
 }
 
 // function deleteMessage(self) {
