@@ -144,21 +144,49 @@ dataCel.each(function () {
 
 var inputTypeofconsult = document.getElementById("typeOfMedic");
 var inputDocname = document.getElementById("medicName");
+var inputUsernamePat = document.getElementById("nomePaciente");
+var patientList = document.getElementById("patientList");
+
+
+  db.collection("users").get().then(function (querySnapshot) {
+    querySnapshot.forEach(function (doc) {
+      if (doc.exists) {
+
+        inputUsernamePat = doc.data().username;
+
+        // inputUidPat = doc.data().userID;
+        console.log(inputUsernamePat);
+
+        listOptions = document.createElement('option');
+        listOptions.innerHTML = inputUsernamePat;
+        patientList.appendChild(listOptions);
+
+
+      } else {
+        console.log("No such document!");
+      }
+    })
+
+  });
+
 
 //window event creator
 addBtn.on("click", function () {
+
+  
   winCreator.addClass("isVisible");
 
   db.collection("users_medic").doc(medicID)
-    .get().then(function(doc) {
-      if (doc.exists){
+    .get().then(function (doc) {
+      if (doc.exists) {
         inputTypeofconsult.value = doc.data().typeOfMedic;
         inputDocname.value = doc.data().username;
       } else {
         console.log("No such document!");
-      }}).catch(function(error) {
-        console.log("Error getting document:", error);
-      });
+      }
+    }).catch(function (error) {
+      console.log("Error getting document:", error);
+    });
 
   $("body").addClass("overlay");
   dataCel.each(function () {
@@ -172,6 +200,7 @@ addBtn.on("click", function () {
 });
 
 
+
 closeBtn.on("click", function () {
   winCreator.removeClass("isVisible");
   $("body").removeClass("overlay");
@@ -181,11 +210,8 @@ closeBtn.on("click", function () {
 
 
 
-
-
-
 saveBtn.on("click", function () {
-
+  
   const inputCabinet = $("input[name=cabinet]").val();
   const inputDate = $("input[name=date]").val();
   // const inputDocname = $("input[name=doctorname]").val();
@@ -199,13 +225,34 @@ saveBtn.on("click", function () {
   var typeOfConsult = inputTypeofconsult.value;
   var doctorName = inputDocname.value;
 
+  var inputUidPat = "";
+
+db.collection("users").where("username", "==", inputUsernamePat).onSnapshot(function (querySnapshot) {
+  querySnapshot.forEach(function (doc) {
+    if (doc.exists) {
+
+      inputUidPat = doc.data().userID;
+      console.log(inputUidPat);
+
+
+    } else {
+      console.log("No such document!");
+    }
+
+  });
+});
+
+var patientName = document.getElementById("patientList").value;
+ 
+  
 
   if (doctorName === "" || inputCabinet === "" || inputDate === "" || inputHour === "" || inputFloor === "" || inputLocal === "" ||
-    inputPavilion === "" || inputNotes === "" || typeOfConsult === "") {
+    inputPavilion === "" || inputNotes === "" || typeOfConsult === "" || patientName === "" || inputUidPat === "") {
 
     alert("Preencha tudo");
 
   } else {
+    console.log(inputUidPat);
 
     db.collection('consultas').add({
         cabinet: inputCabinet,
@@ -217,6 +264,8 @@ saveBtn.on("click", function () {
         pavilion: inputPavilion,
         typeOfConsult,
         notes: inputNotes,
+        patientName,
+        userID: inputUidPat,
         medicID: medicID
 
 
@@ -225,7 +274,7 @@ saveBtn.on("click", function () {
         if (!error) {
           const inputCabinet = $("input[name=cabinet]").val();
           const inputDate = $("input[name=date]").val();
-          const inputDocname = $("input[name=doctorname]").val();
+          // const inputDocname = $("input[name=doctorname]").val();
           const inputHour = $("input[name=hour]").val();
           const inputFloor = $("input[name=floor]").val();
           // const inputLocal = $("input[name=local]").val();
@@ -239,11 +288,11 @@ saveBtn.on("click", function () {
       }
 
 
-      winCreator.removeClass("isVisible");
-      $("body").removeClass("overlay");
-      $("#addEvent")[0].reset();
+    winCreator.removeClass("isVisible");
+    $("body").removeClass("overlay");
+    $("#addEvent")[0].reset();
   }
-  
+
   dataCel.each(function () {
     if ($(this).data("day") === inputDate) {
       if (doctorName != null) {
@@ -268,6 +317,8 @@ saveBtn.on("click", function () {
   });
 
 });
+
+
 
 //fill sidebar event info
 function fillEventSidebar(self, thisDate) {
