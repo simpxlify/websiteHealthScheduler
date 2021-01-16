@@ -225,10 +225,9 @@ function listAllMessages(uid, toId) {
           db.collection("users_medic").get().then(function (querySnapshot) {
               querySnapshot.forEach(function (doc) {
                 if (medicIdForImage == doc.data().medicID) {
-                  console.log("medico");
                   source = doc.data().imagePath;
                   allMessagesImageOfMessage.src = source;
-                  console.log(source);
+                  allMessagesImageOfMessage.className = "imageOfUser";
                   listElement.appendChild(allMessagesImageOfMessage);
                 }
               });
@@ -240,14 +239,12 @@ function listAllMessages(uid, toId) {
           var source = "";
           var allMessagesImageOfMessage = document.createElement('img');
           var userIdForImage = doc.data().fromId;
-          console.log(userIdForImage);
           db.collection("users").get().then(function (querySnapshot) {
               querySnapshot.forEach(function (doc) {
                 if (userIdForImage == doc.data().userID) {
-                  console.log("medico");
                   source = doc.data().imagePath;
                   allMessagesImageOfMessage.src = source;
-                  console.log(source);
+                  allMessagesImageOfMessage.className = "imageOfUser";
                   listElement.appendChild(allMessagesImageOfMessage);
                 }
               });
@@ -297,25 +294,70 @@ function listAllMessages(uid, toId) {
         document.getElementsByTagName('body')[0].appendChild(listMessages);
         listMessages.appendChild(listElement);
 
-        listItem4 = document.createElement('img');
-        listItem4.className = 'listItemsImages';
+        listItem4 = document.createElement('li');
+        listItem4.className = 'listItemsMessages';
 
+        divMessageListItem4 = document.createElement('div');
+        divMessageListItem4.className = 'messageWithImage';
+        listItem4.appendChild(divMessageListItem4);
+
+        messageListItem4 = document.createElement('img');
+        messageListItem4.className = "imageChat"
+
+        divMessageListItem4.appendChild(messageListItem4);
+
+        var medicIdForImage = "";
+        medicIdForImage = doc.data().fromId;
 
         listItem6 = document.createElement('li');
         listItem6.className = 'listItemsMessages date';
 
+        
+
         if (doc.data().fromId == uid) {
           listElement.className = 'allMessages myMessage';
           listItem6.className = 'listItemsMessages dateRight';
+          var source = "";
+          var allMessagesImageOfMessage = document.createElement('img');
+
+          db.collection("users_medic").get().then(function (querySnapshot) {
+              querySnapshot.forEach(function (doc) {
+                if (medicIdForImage == doc.data().medicID) {
+                  source = doc.data().imagePath;
+                  allMessagesImageOfMessage.src = source;
+                  allMessagesImageOfMessage.className = "imageOfUser";
+                  listElement.appendChild(allMessagesImageOfMessage);
+                }
+              });
+            })
+            .catch(function (error) {
+              console.log("Error getting documents: ", error);
+            });
         } else {
-          listElement.className = 'allMessages';
+          var source = "";
+          var allMessagesImageOfMessage = document.createElement('img');
+          var userIdForImage = doc.data().fromId;
+          db.collection("users").get().then(function (querySnapshot) {
+              querySnapshot.forEach(function (doc) {
+                if (userIdForImage == doc.data().userID) {
+                  source = doc.data().imagePath;
+                  allMessagesImageOfMessage.src = source;
+                  allMessagesImageOfMessage.className = "imageOfUser";
+                  listElement.appendChild(allMessagesImageOfMessage);
+                }
+              });
+            })
+            .catch(function (error) {
+              console.log("Error getting documents: ", error);
+            });
+
+          listElement.className = 'allMessages hisMessage';
         }
 
-        listItem4.src = doc.data().message;
+        messageListItem4.src = doc.data().message;
         listItem6.innerHTML = formattedTime;
-
         listElement.appendChild(listItem4);
-        listElement.appendChild(listItem6);
+        divMessageListItem4.appendChild(listItem6);
       }
 
     });

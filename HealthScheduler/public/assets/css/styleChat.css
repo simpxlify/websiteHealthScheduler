@@ -255,7 +255,7 @@
   padding: 10px;
 }
 
-.allMessages img{
+.imageOfUser{
   width: 75px;
   height: 75px;
   margin-left: 10px;
@@ -281,6 +281,10 @@
 .myMessage img{
   display: flex;
   float: right;
+}
+
+.myMessage li{
+  border-top-right-radius: 0;
 }
 
 .dateRight{
@@ -311,4 +315,16 @@
 
 .hisMessage{
   overflow: auto;
+}
+
+.hisMessage li{
+  border-top-left-radius: 0;
+}
+
+.imageChat{
+  display: block;
+  max-width: NaNwi;
+  max-height: NaNwi;
+  padding: 0;
+  margin: auto;
 }
