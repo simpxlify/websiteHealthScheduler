@@ -158,7 +158,7 @@
 
 .input{
   margin: 10px 10px 10px 10px;
-  width: 90%;
+  width: 94%;
 }
 
 .input input{
@@ -179,7 +179,7 @@
 }
 
 .buttonMessage{
-  width: 10%;
+  width: auto;
 }
 
 .buttonMessage button{

@@ -603,3 +603,9 @@ select::-ms-expand {
 input {
   height: 40px;
 }
+
+.c-aside__eventList{
+  width: 100%;
+  white-space: initial;
+  word-break: break-word;
+}
