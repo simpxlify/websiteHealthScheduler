@@ -62,19 +62,10 @@ db.collection("users").onSnapshot(function (querySnapshot) {
     listElement.addEventListener("click", function () {
       toId = doc.data().userID;
       listElement.className = 'listOfUsers';
-      updateScroll();
-      // sendMessage(uid, toId);
+      //sendMessage(uid, toId);
       listAllMessages(uid, toId);
-
     });
-
   });
-
-  function updateScroll() {
-    var element = document.getElementsByClassName("allMessagesList");
-    element.scrollTop = element.scrollHeight;
-  }
-
 
   var sendmsg = document.getElementById("sendmsg");
 
@@ -117,46 +108,14 @@ db.collection("users").onSnapshot(function (querySnapshot) {
       "toId": toId,
       "timeStamp": timeStamp2
     });
-    message.value = '';
+    document.getElementById('message').value = '';
   });
-
   userContainer.appendChild(listContainer);
 });
-
-// function sendMessage(uid, toId) {
-//   var sendmsg = document.getElementById("sendmsg");
-//   // get message
-//   var timeStamp2 = parseInt(Date.now() / 1000);
-
-
-//   // save in database
-//   sendmsg.addEventListener("click", function () {
-//     console.log(uid + ' + ' + toId);
-//     var message = document.getElementById("message").value;
-//     db.collection('chat_messages').doc(uid).collection(toId).add({
-//         "fromId": uid,
-//         "message": message,
-//         "messageType": text,
-//         "toId": toId,
-//         "timeStamp": timeStamp2
-//       });
-
-//       db.collection('chat_messages').doc(toId).collection(uid).add({
-//         "fromId": uid,
-//         "message": message,
-//         "messageType": text,
-//         "toId": toId,
-//         "timeStamp": timeStamp2
-//       });
-
-//       message.value = '';
-//   });
-// }
 
 // listen for incoming messages
 function listAllMessages(uid, toId) {
   var allMessagesContainer = document.getElementById('allMessagesContainer');
-
 
   var listMessages = document.getElementById('allMessagesList');
 
@@ -310,9 +269,7 @@ function listAllMessages(uid, toId) {
         medicIdForImage = doc.data().fromId;
 
         listItem6 = document.createElement('li');
-        listItem6.className = 'listItemsMessages date';
-
-        
+        listItem6.className = 'listItemsMessages date';      
 
         if (doc.data().fromId == uid) {
           listElement.className = 'allMessages myMessage';
@@ -366,10 +323,16 @@ function listAllMessages(uid, toId) {
   });
 }
 
-scrollingElement = (document.getElementById('allMessagesList'));
-
 function scrollToBottom() {
-  scrollingElement.scrollTop = scrollingElement.scrollHeight;
+  var scrollingElement = document.getElementById('allMessagesList');
+  scrollingElement.scrollTop = scrollingElement.scrollHeight - scrollingElement.clientHeight;
+}
+
+function myFunction(event) {
+  var x = event.key;
+  if (x === 'Enter') {
+      document.getElementById("sendmsg").click();
+  }
 }
 
 // function deleteMessage(self) {

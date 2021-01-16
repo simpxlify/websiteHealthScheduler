@@ -23,11 +23,15 @@ function signIn(imagePath) {
 	var typeOfMedic = document.getElementById("medic_input").value;
 	var typeOfAcc = document.getElementById("acc_input").value;
 
+	console.log()
+
 
 	if (typeOfAcc != "Medico") {
 		typeOfMedic = "";
 	}
-	if (passwordRegister == passwordVerifyRegister) {
+	if (passwordRegister == passwordVerifyRegister && phoneNumberEmail != "" &&
+		passwordRegister != "" && passwordVerifyRegister != "" &&
+		username != "" && address != "" ){
 		auth.createUserWithEmailAndPassword(phoneNumberEmail, passwordRegister)
 			.then((user) => {
 				auth.signInWithEmailAndPassword(phoneNumberEmail, passwordRegister)
