@@ -50,10 +50,11 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  font-size: 14px;
 }
 
 .usernameOfUser{
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
 }
 
@@ -115,14 +116,9 @@
   margin-left: 104px;
 }
 
-.chatContainer{
-  width: 100%;
-  height: 100%;
-}
-
 .userContainer{
   width: 30%;
-  height: 100%;
+  height: 800px;
   background-color: lightgrey;
   display: inline-block;
   padding: 0;
@@ -149,9 +145,12 @@
 }
 
 .chatContainer{
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 800px;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 31px -2px rgba(0, 0, 0, .3);
 }
 
 .allUsersContainer{
@@ -170,6 +169,7 @@
 
 .sendMessage{
   position: absolute;
+  display: block;
   bottom: 0;
   width: 100%;
   background-color: #1b736f;
@@ -247,8 +247,8 @@
 
 .allMessagesList{
   width: 100%;
-  height: 90%;
-  padding: 10px 5px 45px 10px;
+  height: 85%;
+  padding: 10px 0px 10px 10px;
   
   top: 0;
   right: 0;
@@ -362,14 +362,27 @@
   padding: 20px 10px 20px 10px;
   text-align: center;
   color: white;
+  font-size: 20px;
   background-color: #1b736f;
   margin: auto;
 }
 
 .tab {
   overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  text-align: center;
+  padding: 0;
+  width: 100%;
+  background-color: #1b736f;
+}
+
+.tablinks{
+  text-align: center;
+  padding: 0;
+  width: 33.33%;
+  color: white;
 }
 
 /* Style the buttons inside the tab */
@@ -379,7 +392,7 @@
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
+  padding: 14px 0px 14px 0;
   transition: 0.3s;
   font-size: 17px;
 }
@@ -387,6 +400,7 @@
 /* Change background color of buttons on hover */
 .tab button:hover {
   background-color: #ddd;
+  color: #333;
 }
 
 /* Create an active/current tablink class */
