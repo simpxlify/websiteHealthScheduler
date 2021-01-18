@@ -15,6 +15,7 @@ firebase.auth().onAuthStateChanged(function (user) {
   }
 
 });
+//david nabo
 
 // por o nome em cima, por a foto do contacto a falar, fazer o css do 
 // chat e fazer o css do enter message tambem
