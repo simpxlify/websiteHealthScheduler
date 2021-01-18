@@ -219,7 +219,7 @@ function listConsultas(uid) {
     "Dezembro"];
   
   var todayDate = yyyy + '-' + mm + '-' + dd;
-  document.getElementById("consTitle").innerHTML = days[weekDayIndex] + " " + dd + " " + monthText[monthIndex] /*+ " - Consultas"*/;
+  document.getElementById("consTitle").innerHTML = days[weekDayIndex] + ", " + dd + " de " + monthText[monthIndex] /*+ " - Consultas"*/;
 
   db.collection("consultas").where("date", "==", todayDate).onSnapshot(function (querySnapshot) {
     consultaContainer.innerHTML = "";

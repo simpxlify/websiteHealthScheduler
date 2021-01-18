@@ -405,5 +405,5 @@
 
 /* Create an active/current tablink class */
 .tab button.active {
-  background-color: #ccc;
+  background-color: rgb(235, 116, 116);
 }
