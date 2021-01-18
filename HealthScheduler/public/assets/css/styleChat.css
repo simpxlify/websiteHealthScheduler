@@ -23,6 +23,7 @@
 }
 
 .listOfUsers{
+  width: 100%;
   display: flex;
   align-items: left;
   list-style-type: none;
@@ -31,7 +32,32 @@
   padding: 20px;
 }
 
-.listOfUsers:hover{
+
+.divInsideUsersImg{
+  width: 30%;
+  float: left;
+  margin: 0;
+}
+
+.divOfUsersInsideBox{
+  width: 70%;
+  float: right;
+  margin: 0;
+}
+
+.latestMessage{
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.usernameOfUser{
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.usersBox:hover{
   background-color: grey;
 }
 
@@ -47,12 +73,14 @@
 }
 
 .listItems{
-  display: flex;
-  align-items: center;
-  list-style-type: none;
-  justify-content: center;
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  padding: 2px 10px 2px 2px;
+  /* align-items: center; */
   text-align: left;
 }
+
 
 .listItemsMessages{
   list-style-type: none;
@@ -220,7 +248,7 @@
 .allMessagesList{
   width: 100%;
   height: 90%;
-  padding: 10px 5px 5px 10px;
+  padding: 10px 5px 45px 10px;
   
   top: 0;
   right: 0;
@@ -326,5 +354,13 @@
   max-width: NaNwi;
   max-height: NaNwi;
   padding: 0;
-  margin: auto;
+  margin: 10px auto;
+  border-radius: 10px;
+}
+
+.nameOfTheUser{
+  padding: 20px 10px 20px 10px;
+  text-align: center;
+  color: white;
+  background-color: #1b736f;
 }
