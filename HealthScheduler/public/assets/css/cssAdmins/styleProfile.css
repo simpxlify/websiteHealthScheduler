@@ -1,0 +1,172 @@
+.open-button {
+    position: absolute;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    padding: 12px 10px;
+    border: none;
+    float: right;
+    cursor: pointer;
+    opacity: 1;
+    position: fixed;
+    width: 130px;
+  }
+  
+  /* The popup chat - hidden by default */
+  .chat-popup {
+    display: none;
+    position: fixed;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+  }
+  
+  /* Add styles to the form container */
+  .form-container {
+    width: auto;
+    padding: 10px;
+    background-color: white;
+  }
+
+  .form-container input{
+    width: 100%;
+    padding: 13px 15px;
+    margin: 0.7em auto;
+    border-radius: 100px;
+    border: 1px #111 solid;
+    background: rgb(255,255,255,0.3);
+    outline: none;
+    color: #111;
+  }
+  
+  /* Full-width textarea */
+  .form-container textarea {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+    resize: none;
+    min-height: 100px;
+  }
+  
+  /* When the textarea gets focus, do something */
+  .form-container textarea:focus {
+    background-color: #ddd;
+    outline: 1px;
+  }
+  
+  /* Set a style for the submit/send button */
+  .form-container .btn {
+    background-color: #000000;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 49%;
+    margin-bottom:10px;
+    opacity: 1;
+  }
+  
+  /* Add a red background color to the cancel button */
+  .form-container .cancel {
+    background-color: rgb(0, 0, 0);
+  }
+  
+  /* Add some hover effects to buttons */
+  .form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+  }
+
+
+  .form{
+    width: 75%;
+    margin: 0;
+    padding: 0;
+    margin-left: 268px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .profileContainer{
+    margin-left: 268px;
+  }
+
+  .profileContainer{
+    background: #1b736f;
+    width: 66%;
+    margin: 50px;
+    height: 100%;
+    padding-top: 100px;
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1), 0 1px 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius);
+  }
+  
+  
+  .info{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: auto;
+    background: #fff;
+  }
+  
+  .imgAndName{
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: auto;
+  }
+  
+  .imgAndName img{
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    border-radius: 100px;
+    border: 2px solid #1b736f;
+    top: 155px;
+    margin-left: 50px;
+    cursor: pointer;
+  }
+  
+  .imgAndName h1 {
+    display: inline-block;
+    padding-top: 35px;
+    padding-left: 50px;
+    width: 100%;
+  }
+  
+  .customInfoUser{
+    display: inline-block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 50px;
+    width: 50%;
+    margin: auto;
+  }
+
+  .containerButton{
+    display: flex;
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+  }
+
+  .containerButton2{
+    padding-top: 50px;
+    display: flex;
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+  }
+
+  .containerButton3{
+    padding-top: 50px;
+    display: flex;
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+  }
+

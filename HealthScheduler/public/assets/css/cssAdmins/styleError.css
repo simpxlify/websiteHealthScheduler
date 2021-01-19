@@ -1,0 +1,77 @@
+/*
+Palete de cores:
+    #fff
+    #49b3ad - verde mais claro
+    #36bfb8 - verde da aplicação
+    #1b736f - verde mais escuro
+
+Degrade row:
+    #2a5c5a - verde mais escuro 50%
+    #227e74 - verde mais claro 82%
+
+p: #333;
+a: #333;
+h: #333;
+
+font-family: 'Roboto', sans-serif;
+*/
+
+/*fade in up*/
+
+@keyframes fadeInUp {
+    from { 
+      opacity: 0;
+      -webkit-transform: translate3d(0, 100%, 0);
+      transform: translate3d(0, 100%, 0);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
+  }
+
+/*fade in*/
+
+@keyframes fadeIn {
+    from { 
+    opacity: 0;
+    }
+
+    to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+    }
+}
+
+a, p, h1{
+    color: #333;
+}
+
+a{
+    text-decoration: none;
+}
+  
+a:hover{
+    color: #1b736f;
+}
+
+img{
+    width: 200px;
+    height: 200px;
+}
+
+body{
+    margin: auto;
+}
+
+.centered {
+    text-align: center;
+    position: absolute;
+    top: 200px;
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+}
