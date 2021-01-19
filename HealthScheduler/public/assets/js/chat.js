@@ -1,5 +1,5 @@
 //  var myList = new Array();
-var TipoDeLista = "";
+var TipoDeLista;
 var groupID = "room_1";
 var toId = "";
 // var toId = "0UBWLj6JnRai0DXv08FHlVHPp7M2";
@@ -28,10 +28,7 @@ var listContainer = document.getElementById('allUsersContainer');
 function openTab(evt, TipoDeLista) {
   var i, tablinks;
   tabcontent = document.getElementsByClassName("allUsersContainer");
-  // for (i = 0; i < tabcontent.length; i++) {
-  //   // tabcontent[i].style.display = "none";
-  //   tabcontent[i].innerHTML = '';
-  // }
+  
   tablinks = document.getElementsByClassName("tablinks");
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
@@ -40,20 +37,19 @@ function openTab(evt, TipoDeLista) {
 
   if (TipoDeLista == "Pacientes") {
     Pacientes();
-    sendMessage(TipoDeLista);
 
   }
   if (TipoDeLista == "Medicos") {
     Medicos();
-    sendMessage(TipoDeLista);
 
   }
   if (TipoDeLista == "Grupos") {
     Grupos();
-    sendMessage(TipoDeLista);
 
   }
+  console.log(TipoDeLista)
 
+  return TipoDeLista;
 }
 
 function Grupos() {
@@ -95,12 +91,11 @@ function Grupos() {
       // para funcionar todos basta mudar para snapshot, erro!
 
       db.collection("chat_grupo").doc(groupID).collection("latest_messages").doc("latest_message").onSnapshot(function (doc3) {
-        listItemLatestMessage.innerHTML = "";
         if (doc3.exists) {
-          console.log("data:" + doc2.data())
 
           if (doc3.data().messageType == "text") {
             listItemLatestMessage = document.createElement('span');
+            listItemLatestMessage.innerHTML = "";
             listItemLatestMessage.className = 'listItems latestMessage';
             listItemLatestMessage.innerHTML = doc3.data().message;
             divInsideUsers.appendChild(listItemLatestMessage);
@@ -139,7 +134,7 @@ function Grupos() {
 
       });
 
-      // sendMessageGrupo(groupID);
+        // sendMessageGrupo(groupID);
 
     });
     userContainer.appendChild(listContainer);
@@ -273,18 +268,17 @@ function Medicos() {
 
         // para funcionar todos basta mudar para snapshot, erro!
 
-        db.collection("latest_messages").doc(uid).collection("latest_message").doc(doc.data().medicID).onSnapshot(function (doc2) {
+        db.collection("latest_messages").doc(uid).collection("latest_message").doc(doc.data().medicID).onSnapshot(function (doc4) {
           // listItemLatestMessage.innerHTML = "";
-          if (doc2.exists) {
-            console.log("data:" + doc2.data())
+          if (doc4.exists) {
 
-            if (doc2.data().messageType == "text") {
+            if (doc4.data().messageType == "text") {
               listItemLatestMessage = document.createElement('span');
               listItemLatestMessage.className = 'listItems latestMessage';
-              listItemLatestMessage.innerHTML = doc2.data().message;
+              listItemLatestMessage.innerHTML = doc4.data().message;
               divInsideUsers.appendChild(listItemLatestMessage);
 
-            } else if (doc2.data().messageType == "image") {
+            } else if (doc4.data().messageType == "image") {
               listItemLatestMessage = document.createElement('span');
               listItemLatestMessage.className = 'listItems latestMessage';
               listItemLatestMessage.innerHTML = "Imagem.";
@@ -317,6 +311,7 @@ function Medicos() {
           listAllMessages(uid, toId);
         });
       }
+      
     });
     userContainer.appendChild(listContainer);
   });
@@ -753,103 +748,159 @@ function myFunction(event) {
   }
 }
 
-// function sendMessageGrupo(groupID) {
-//   var sendmsg2 = document.getElementById("sendmsg");
+function sendMessageGrupo(groupID) {
 
-//   sendmsg2.addEventListener("click", function () {
+  var text1 = "text";
 
-//     var text1 = "text";
+  var timeStamp3 = parseInt(Date.now() / 1000);
 
-//     var timeStamp3 = parseInt(Date.now() / 1000);
+  var message1 = document.getElementById("message").value;
 
-//     var message1 = document.getElementById("message").value;
+  db.collection('chat_grupo').doc(groupID).collection("messages").add({
+    "senderID": uid,
+    "message": message1,
+    "messageType": text1,
+    "timeStamp": timeStamp3
+  });
 
-//     db.collection('chat_grupo').doc(groupID).collection("messages").add({
-//       "senderID": uid,
-//       "message": message1,
-//       "messageType": text1,
-//       "timeStamp": timeStamp3
-//     });
+  db.collection('chat_grupo').doc(groupID).collection('latest_messages').doc("latest_message").set({
+    "senderID": uid,
+    "message": message1,
+    "messageType": text1,
+    "timeStamp": timeStamp3
+  });
 
-//     db.collection('chat_grupo').doc(groupID).collection('latest_messages').doc("latest_message").set({
-//       "senderID": uid,
-//       "message": message1,
-//       "messageType": text1,
-//       "timeStamp": timeStamp3
-//     });
+  document.getElementById('message').value = '';
 
-//     document.getElementById('message').value = '';
+}
+
+// function sendMessage(TipoDeLista) {
+//   var sendmsg = document.getElementById("sendmsg");
+
+//   sendmsg.addEventListener("click", function () {
+//     console.log(TipoDeLista)
+//     if (TipoDeLista == 'Medicos' || TipoDeLista == 'Pacientes'  ) {
+//       var text = "text";
+
+//       var timeStamp2 = parseInt(Date.now() / 1000);
+
+//       var message = document.getElementById("message").value;
+
+//       db.collection('chat_messages').doc(uid).collection(toId).add({
+//         "fromId": uid,
+//         "message": message,
+//         "messageType": text,
+//         "toId": toId,
+//         "timeStamp": timeStamp2
+//       });
+
+//       db.collection('chat_messages').doc(toId).collection(uid).add({
+//         "fromId": uid,
+//         "message": message,
+//         "messageType": text,
+//         "toId": toId,
+//         "timeStamp": timeStamp2
+//       });
+
+//       db.collection('latest_messages').doc(uid).collection('latest_message').doc(toId).set({
+//         "fromId": uid,
+//         "message": message,
+//         "messageType": text,
+//         "toId": toId,
+//         "timeStamp": timeStamp2
+//       });
+
+//       db.collection('latest_messages').doc(toId).collection('latest_message').doc(uid).set({
+//         "fromId": uid,
+//         "message": message,
+//         "messageType": text,
+//         "toId": toId,
+//         "timeStamp": timeStamp2
+//       });
+//       document.getElementById('message').value = '';
+
+//     } else {
+
+//       var text1 = "text";
+
+//       var timeStamp3 = parseInt(Date.now() / 1000);
+
+//       var message1 = document.getElementById("message").value;
+
+//       db.collection('chat_grupo').doc(groupID).collection("messages").add({
+//         "senderID": uid,
+//         "message": message1,
+//         "messageType": text1,
+//         "timeStamp": timeStamp3
+//       });
+
+//       db.collection('chat_grupo').doc(groupID).collection('latest_messages').doc("latest_message").set({
+//         "senderID": uid,
+//         "message": message1,
+//         "messageType": text1,
+//         "timeStamp": timeStamp3
+//       });
+
+//       document.getElementById('message').value = '';
+//     }
 //   });
 // }
 
-function sendMessage(TipoDeLista) {
-  var sendmsg = document.getElementById("sendmsg");
+function sendMessageUsersMedics() {
 
-  sendmsg.addEventListener("click", function () {
-    console.log(TipoDeLista)
-    if (TipoDeLista == "Medicos" || TipoDeLista == "Pacientes"  ) {
-      var text = "text";
 
-      var timeStamp2 = parseInt(Date.now() / 1000);
+  var text = "text";
 
-      var message = document.getElementById("message").value;
+  var timeStamp2 = parseInt(Date.now() / 1000);
 
-      db.collection('chat_messages').doc(uid).collection(toId).add({
-        "fromId": uid,
-        "message": message,
-        "messageType": text,
-        "toId": toId,
-        "timeStamp": timeStamp2
-      });
+  var message = document.getElementById("message").value;
 
-      db.collection('chat_messages').doc(toId).collection(uid).add({
-        "fromId": uid,
-        "message": message,
-        "messageType": text,
-        "toId": toId,
-        "timeStamp": timeStamp2
-      });
-
-      db.collection('latest_messages').doc(uid).collection('latest_message').doc(toId).set({
-        "fromId": uid,
-        "message": message,
-        "messageType": text,
-        "toId": toId,
-        "timeStamp": timeStamp2
-      });
-
-      db.collection('latest_messages').doc(toId).collection('latest_message').doc(uid).set({
-        "fromId": uid,
-        "message": message,
-        "messageType": text,
-        "toId": toId,
-        "timeStamp": timeStamp2
-      });
-      document.getElementById('message').value = '';
-
-    } else {
-
-      var text1 = "text";
-
-      var timeStamp3 = parseInt(Date.now() / 1000);
-
-      var message1 = document.getElementById("message").value;
-
-      db.collection('chat_grupo').doc(groupID).collection("messages").add({
-        "senderID": uid,
-        "message": message1,
-        "messageType": text1,
-        "timeStamp": timeStamp3
-      });
-
-      db.collection('chat_grupo').doc(groupID).collection('latest_messages').doc("latest_message").set({
-        "senderID": uid,
-        "message": message1,
-        "messageType": text1,
-        "timeStamp": timeStamp3
-      });
-
-      document.getElementById('message').value = '';
-    }
+  db.collection('chat_messages').doc(uid).collection(toId).add({
+    "fromId": uid,
+    "message": message,
+    "messageType": text,
+    "toId": toId,
+    "timeStamp": timeStamp2
   });
+
+  db.collection('chat_messages').doc(toId).collection(uid).add({
+    "fromId": uid,
+    "message": message,
+    "messageType": text,
+    "toId": toId,
+    "timeStamp": timeStamp2
+  });
+
+  db.collection('latest_messages').doc(uid).collection('latest_message').doc(toId).set({
+    "fromId": uid,
+    "message": message,
+    "messageType": text,
+    "toId": toId,
+    "timeStamp": timeStamp2
+  });
+
+  db.collection('latest_messages').doc(toId).collection('latest_message').doc(uid).set({
+    "fromId": uid,
+    "message": message,
+    "messageType": text,
+    "toId": toId,
+    "timeStamp": timeStamp2
+  });
+  document.getElementById('message').value = '';
+
+
+}
+
+function sendAllTypeMsg() {
+  console.log(TipoDeLista);
+
+  if (TipoDeLista == "Medicos" || TipoDeLista == "Pacientes") {
+    sendMessageUsersMedics();
+    console.log(TipoDeLista);
+
+  } else if (TipoDeLista == "Grupos") {
+    sendMessageGrupo(groupID);
+    console.log(TipoDeLista);
+
+  }
 }
