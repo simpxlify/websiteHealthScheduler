@@ -1,3 +1,10 @@
+function logOut() {
+	firebase.auth().signOut().then(function () {
+	}).catch(function (error) {
+		// An error happened.
+	});
+}
+
 function changeFunc() {
 	var typeOfAcc = document.getElementById("acc_input").value;
 	var eleTypeMed = document.getElementById("medic_input")
@@ -32,29 +39,39 @@ function signIn(imagePath) {
 	if (passwordRegister == passwordVerifyRegister && phoneNumberEmail != "" &&
 		passwordRegister != "" && passwordVerifyRegister != "" &&
 		username != "" && address != "") {
-		auth.createUserWithEmailAndPassword(phoneNumberEmail, passwordRegister)
-			.then((user) => {
+		auth.createUserWithEmailAndPassword(phoneNumberEmail, passwordRegister).then((user) => {
 				auth.signInWithEmailAndPassword(phoneNumberEmail, passwordRegister)
 					.then((user) => {
 						auth.onAuthStateChanged(function (user) {
 							if (user) {
 								const medicID = "" + user.uid;
 
-								db.collection('users_medic').doc("" + medicID).set({
-									address,
-									imagePath,
-									phoneNumberEmail,
-									medicID,
-									typeOfMedic,
-									typeOfAcc,
-									username
+									db.collection('users_medic').doc("" + medicID).set({
+										address,
+										imagePath,
+										phoneNumberEmail,
+										medicID,
+										typeOfMedic,
+										typeOfAcc,
+										username
+									});
+									user.sendEmailVerification().then(function () {
+									console.log(user);
+								
+
+									logOut();
+
+									setTimeout(function () {
+										window.location = "login.html";
+									}, 3000);
+
+								}).catch(function (error) {
+									// An error happened.
 								});
-								setTimeout(function () {
-									window.location = "login.html";
-								}, 3000);
 							} else {
 
 							}
+
 						});
 					})
 					.catch(error => {
@@ -70,6 +87,9 @@ function signIn(imagePath) {
 
 				alert("Verifique que todos os campos estejam preenchidos conforme o pedido.");
 			});
+
+
+
 	} else {
 		alert("Verifique que todos os campos estejam preenchidos conforme o pedido.");
 	}
