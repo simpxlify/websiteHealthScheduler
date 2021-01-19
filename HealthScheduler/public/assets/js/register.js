@@ -31,7 +31,7 @@ function signIn(imagePath) {
 	}
 	if (passwordRegister == passwordVerifyRegister && phoneNumberEmail != "" &&
 		passwordRegister != "" && passwordVerifyRegister != "" &&
-		username != "" && address != "" ){
+		username != "" && address != "") {
 		auth.createUserWithEmailAndPassword(phoneNumberEmail, passwordRegister)
 			.then((user) => {
 				auth.signInWithEmailAndPassword(phoneNumberEmail, passwordRegister)
@@ -76,58 +76,68 @@ function signIn(imagePath) {
 }
 
 function swapImage() {
-	var fileButton = document.getElementById('photo');
-	var buttonRegister = document.getElementById('register');
-	var photoRegister = document.getElementById('imgRegister');
 
-	fileButton.addEventListener('change', function (e) {
-		var file = e.target.files[0];
-		photoRegister.src = file.name;
-		photoRegister.src = URL.createObjectURL(event.target.files[0]);
-		photoRegister.onload = function () {
-			URL.revokeObjectURL(photoRegister.src);
-			buttonRegister.addEventListener("click", function () {
-				var fileImg = document.getElementById("photo").files[0];
-				var durl = '';
 
-				var metadata = {
-					contentType: 'image/jpeg'
-				};
-
-				var files = photoRegister.src;
-
-				var filename = files.replace('blob:http://localhost:5000/', '');
-
-				var uploadTask = firebase.storage().ref().child('images/' + filename).put(fileImg, metadata);
-
-				// Register three observers:
-				// 1. 'state_changed' observer, called any time the state changes
-				// 2. Error observer, called on failure
-				// 3. Completion observer, called on successful completion
-				uploadTask.on('state_changed', function (snapshot) {
-					// Observe state change events such as progress, pause, and resume
-					// Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-					//var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-					//console.log('Upload is ' + progress + '% done');
-					switch (snapshot.state) {
-						case firebase.storage.TaskState.PAUSED: // or 'paused'
-							//console.log('Upload is paused');
-							break;
-						case firebase.storage.TaskState.RUNNING: // or 'running'
-							//console.log('Upload is running');
-							break;
-					}
-				}, function (error) {
-					// Handle unsuccessful uploads
-				}, function () {
-					// Handle successful uploads on complete
-					// For instance, get the download URL: https://firebasestorage.googleapis.com/...
-					uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-						//console.log('File available at', downloadURL);
-						signIn(downloadURL);
-					});
-				});
-			});
-		}
-	});
 }
+
+
+var fileButton = document.getElementById('photo');
+var buttonRegister = document.getElementById('register');
+var photoRegister = document.getElementById('imgRegister');
+fileButton.addEventListener('change', function (e) {
+	var file = e.target.files[0];
+	photoRegister.src = file.name;
+	photoRegister.src = URL.createObjectURL(e.target.files[0]);
+	photoRegister.onload = function () {
+		URL.revokeObjectURL(photoRegister.src);
+
+	}
+});
+
+buttonRegister.addEventListener("click", function () {
+	var fileImg = document.getElementById("photo").files[0];
+	var durl = '';
+
+	if (fileImg != undefined) {
+		var metadata = {
+			contentType: 'image/jpeg'
+		};
+
+		var files = photoRegister.src;
+
+		var filename = files.replace('blob:http://localhost:5000/', '');
+
+		var uploadTask = firebase.storage().ref().child('images/' + filename).put(fileImg, metadata);
+
+		// Register three observers:
+		// 1. 'state_changed' observer, called any time the state changes
+		// 2. Error observer, called on failure
+		// 3. Completion observer, called on successful completion
+		uploadTask.on('state_changed', function (snapshot) {
+			// Observe state change events such as progress, pause, and resume
+			// Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+			//var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+			//console.log('Upload is ' + progress + '% done');
+			switch (snapshot.state) {
+				case firebase.storage.TaskState.PAUSED: // or 'paused'
+					//console.log('Upload is paused');
+					break;
+				case firebase.storage.TaskState.RUNNING: // or 'running'
+					//console.log('Upload is running');
+					break;
+			}
+		}, function (error) {
+			// Handle unsuccessful uploads
+		}, function () {
+			// Handle successful uploads on complete
+			// For instance, get the download URL: https://firebasestorage.googleapis.com/...
+			uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+				//console.log('File available at', downloadURL);
+				signIn(downloadURL);
+			});
+		});
+	} else {
+
+		signIn("");
+	}
+});

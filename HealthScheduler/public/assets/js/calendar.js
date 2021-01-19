@@ -334,32 +334,32 @@ function fillEventSidebar(self, thisDate) {
 
         case "Fisioterapia":
 
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Fisioterapia'>" + doc.data().hour + " <span> • " + doc.data().notes + "</span></p>");
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Fisioterapia'> <span> " + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
           break;
 
         case "Medicina física":
 
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Medicina'>" + doc.data().hour + " <span> • " + doc.data().notes + "</span></p>");
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Medicina'> <span> " + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
           break;
 
         case "Reabilitação":
 
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Reabilitação'>" + doc.data().hour + " <span> • " + doc.data().notes + "</span></p>");
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Reabilitação'> <span> " + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
           break;
 
         case "Cuidados Paliativos":
 
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Cuidados'>" + doc.data().hour + " <span> • " + doc.data().notes + "</span></p>");
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Cuidados'> <span> " + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
           break;
 
         case "Neurologia":
 
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Neurologia'>" + doc.data().hour + " <span> • " + doc.data().notes + "</span></p>");
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Neurologia'> <span> " + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
           break;
 
         case "Pneumologia":
 
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Pneumologia'>" + doc.data().hour + " <span> • " + doc.data().notes + "</span></p>");
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Pneumologia'> <span> " + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
           break;
 
           // case thisEvent:

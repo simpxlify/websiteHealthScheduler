@@ -39,13 +39,14 @@ function openTab(evt, TipoDeLista) {
 
   if (TipoDeLista == "Pacientes") {
     Pacientes();
-    message
+    
   }
   if (TipoDeLista == "Medicos") {
     Medicos();
   }
   if (TipoDeLista == "Grupos") {
     Grupos();
+    
   }
 }
 
