@@ -59,6 +59,7 @@ html {
 .profileContainer {
   background: #1b736f;
   width: 66%;
+  text-align: right;
   margin: 50px;
   height: 100%;
   box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1), 0 1px 10px 0 rgba(0, 0, 0, 0.1);
@@ -66,7 +67,7 @@ html {
 }
 
 .nomeDoMedico{
-  padding: 31px 30px 31px 200px;
+  padding: 31px 30px 31px 174px;
   width: 100%;
   
   color: white;
@@ -164,6 +165,7 @@ html {
 }
 
 .customInfoUser {
+  text-align: left;
   padding: 0;
 }
 
@@ -335,15 +337,31 @@ html {
   color: #fff;
 }
 
-@media only screen and (max-width: 1700px) {
+/* @media only screen and (max-width: 1700px) {
   .imgAndName{
     top: 155;
   }
+
+  .nomeDoMedico{
+    padding: 31px 30px 31px 200px;
+    width: 100%;
+    
+    color: white;
+  }
+} */
+
+
+@media only screen and (max-width: 1660px) {
+  .imgAndName{
+    top: 155;
+  }
+
+  .customInfoUser{
+    padding-top: 40px;
+  }
 }
 
-
-
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1400px) {
   .form {
     width: auto;
     display: block;
