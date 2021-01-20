@@ -54,9 +54,6 @@ function defaultEvents(dataDay, dataName, dataNotes, classTag) {
 
 }
 
-// defaultEvents(today, 'HOJE', '', 'important');
-// defaultEvents('2021-12-25', 'FELIZ NATAL', '', 'festivity');
-
 db.collection("consultas").get().then(function (querySnapshot) {
   querySnapshot.forEach(function (doc) {
     if (doc.data().medicID == medicID) {
@@ -89,17 +86,9 @@ db.collection("consultas").get().then(function (querySnapshot) {
         if (doc.data().typeOfConsult == 'Pneumologia') {
           defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Pneumologia');
         }
-        // defaultEvents(doc.data().date,doc.data().doctorName,doc.data().notes,'Medicina');
-        // defaultEvents(doc.data().date,doc.data().doctorName,doc.data().notes,'Reabilitação');
-        // defaultEvents(doc.data().date,doc.data().doctorName,doc.data().notes,'Cuidados');
-        // defaultEvents(doc.data().date,doc.data().doctorName,doc.data().notes,'Neurologia');
-        // defaultEvents(doc.data().date,doc.data().doctorName,doc.data().notes,'Pneumologia');
-
 
       }
-      // else {
-      //   alert('error');
-      // }
+      
     }
   });
 });
@@ -370,62 +359,6 @@ function fillEventSidebar(self, thisDate) {
       }
     })
   })
-
-
-  // db.collection("consultas").where('medicID', "==", medicID).get().then(function (querySnapshot) {
-  //   querySnapshot.forEach(function (doc) {
-  //     switch (true) {
-
-  //       case thisFisioterapia:
-
-
-  //         $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Fisioterapia'>" + thisName + " <span> • " + thisNotes + "</span></p>");
-
-  //         break;
-
-  //       case thisMedicina:
-
-
-  //         $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Medicina'>" + thisName + " <span> • " + thisNotes + "</span></p>");
-
-  //         break;
-
-  //       case thisReabilitação:
-
-
-  //         $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Reabilitação'>" + thisName + " <span> • " + thisNotes + "</span></p>");
-
-  //         break;
-
-  //       case thisCuidados:
-
-
-  //         $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Cuidados'>" + thisName + " <span> • " + thisNotes + "</span></p>");
-
-  //         break;
-
-  //       case thisNeurologia:
-
-
-  //         $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Neurologia'>" + thisName + " <span> • " + thisNotes + "</span></p>");
-
-  //         break;
-
-  //       case thisPneumologia:
-
-
-  //         $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Pneumologia'>" + thisName + " <span> • " + thisNotes + "</span></p>");
-
-  //         break;
-
-  //       case thisEvent:
-
-  //         $(".c-aside__eventList").append("<p class='c-aside__event'>" + thisName + " <span> • " + thisNotes + "</span></p>");
-  //         break;
-
-  //     }
-  //   })
-  // })
 
 };
 
