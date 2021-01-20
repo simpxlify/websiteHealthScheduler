@@ -217,7 +217,7 @@ saveBtn.on("click", function () {
   const inputHour = $("input[name=hour]").val();
   const inputFloor = $("input[name=floor]").val();
   // const inputLocal = $("input[name=local]").val();
-  const inputLocal = $("select[name=local]").find(":selected").text();
+  const inputLocal = $("input[name=local]").val();
   const inputPavilion = $("input[name=pavilion]").val();
   const inputNotes = $("input[name=notes]").val();
   //const inputTypeofconsult = $("select[name=typeofconsult]").find(":selected").text();
@@ -232,8 +232,8 @@ saveBtn.on("click", function () {
 
   var patientName = document.getElementById("patientList").value;
 
-  // console.log(doctorName + " " + inputCabinet + " " + inputDate + " " + inputHour + " " + inputFloor + " " + inputLocal + " " 
-  // + inputPavilion + " " + inputNotes + " " + typeOfConsult + " " + patientName + " " + inputUidPat + " ");
+  //console.log(doctorName + " " + inputCabinet + " " + inputDate + " " + inputHour + " " + inputFloor + " " + inputLocal + " " 
+  //+ inputPavilion + " " + inputNotes + " " + typeOfConsult + " " + patientName + " " + inputUidPat + " ");
 
   if (doctorName === "" || inputCabinet === "" || inputDate === "" || inputHour === "" || inputFloor === "" || inputLocal === "" ||
     inputPavilion === "" || inputNotes === "" || typeOfConsult === "" || patientName === "" || inputUidPat === "") {
