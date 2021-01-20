@@ -18,6 +18,25 @@ function changeFunc() {
 }
 
 
+
+
+// var strongRegex = new RegExp("^(?=.{14,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+// var mediumRegex = new RegExp("^(?=.{10,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+// var enoughRegex = new RegExp("(?=.{8,}).*", "g");
+
+
+function passwordStrength(event) {
+	var pwd = document.getElementById("password_input_register");
+	var strength = document.getElementById('strength');
+	if (pwd.value.length < 7){
+		strength.innerHTML = '<span style="color:red"><b>Pequena</b></span>'
+	} else if (pwd.value.length > 7 && pwd.value.length <= 10){
+		strength.innerHTML = '<span style="color:yellow"><b>Média</b></span>'
+	} else if (pwd.value.length > 10){
+		strength.innerHTML = '<span style="color:green"><b>Forte</b></span>'
+	}
+}
+
 function signIn(imagePath) {
 	const db = firebase.firestore();
 	const auth = firebase.auth();
@@ -94,12 +113,6 @@ function signIn(imagePath) {
 		alert("Verifique que todos os campos estejam preenchidos conforme o pedido.");
 	}
 }
-
-function swapImage() {
-
-
-}
-
 
 var fileButton = document.getElementById('photo');
 var buttonRegister = document.getElementById('register');

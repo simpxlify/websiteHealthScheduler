@@ -359,7 +359,7 @@
 }
 
 .nameOfTheUser{
-  padding: 20px 10px 20px 10px;
+  padding: 13px 10px 13px 10px;
   text-align: center;
   color: white;
   font-size: 20px;
@@ -392,7 +392,7 @@
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 0px 14px 0;
+  padding: 14px 0px 15px 0;
   transition: 0.3s;
   font-size: 17px;
 }
@@ -405,5 +405,6 @@
 
 /* Create an active/current tablink class */
 .tab button.active {
-  background-color: rgb(235, 116, 116);
+  background-color: grey;
+  color: white;
 }

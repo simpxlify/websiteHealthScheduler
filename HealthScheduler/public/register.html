@@ -39,7 +39,8 @@
 					</div>
 					<div id="input-container">
 						<img draggable="false" src="assets/img/round_vpn_key_white_18dp.png" alt="">
-						<input type="password" placeholder="Password" id="password_input_register">
+						<span id="strength" class="passwordStrength"></span>
+						<input onkeydown="passwordStrength(event)" type="password" placeholder="Password" id="password_input_register">
 					</div>
 					<div id="input-container">
 						<img draggable="false" src="assets/img/round_vpn_key_white_18dp.png" alt="">

@@ -339,3 +339,9 @@ button:hover{
 select option {
   color: #1b736f;
 }
+
+.passwordStrength{
+  position: absolute;
+  right: 110px;
+  top: 22px;
+}
