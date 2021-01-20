@@ -181,9 +181,7 @@ function fill_table(month, month_length, indexMonth) {
       <input placeholder="Nome do médico" type="text" name="doctorname" readonly="readonly" id="medicName">
       <input placeholder="Gabinete" type="text" name="cabinet">
       <!-- <input placeholder="Local da consulta" type="text" name="local"> -->
-      <select  name="local">
-        <option value="Gaia">Gaia</option>
-      </select>
+      <input type="text" name="local" value="Gaia" readonly="readonly">
       <select id="patientList">
       </select>
       <input placeholder="Pavilhão" type="text" name="pavilion">
@@ -213,13 +211,13 @@ function fill_table(month, month_length, indexMonth) {
 
   <ul class="nav__list">
     <li class="navListitem">
-      <a href="mainpage.html">
+      <a href="mainpageAdmins.html">
         <img src="assets/img/logo.png" alt="HealthScheduler" class="logoHealthSchedular">
         <p>HealthScheduler</p>
       </a>
     </li>
     <li class="navListitem navListitem-active">
-      <a href="calendar.html">
+      <a href="calendarAdmins.html">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <path
             d="M7 11H9V13H7zM7 15H9V17H7zM11 11H13V13H11zM11 15H13V17H11zM15 11H17V13H15zM15 15H17V17H15z">
@@ -229,19 +227,6 @@ function fill_table(month, month_length, indexMonth) {
           </path>
         </svg>
         <p>Calendário</p>
-      </a>
-    </li>
-    <li class="navListitem">
-      <a href="chat.html">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path
-            d="M5,18v3.766l1.515-0.909l0,0L11.277,18H16c1.103,0,2-0.897,2-2V8c0-1.103-0.897-2-2-2H4C2.897,6,2,6.897,2,8v8 c0,1.103,0.897,2,2,2H5z M4,8h12v8h-5.277L7,18.234V16H4V8z">
-          </path>
-          <path
-            d="M20,2h-1h-2.002H8C6.897,2,6,2.897,6,4h10.586H18c1.103,0,2,0.897,2,2v1.414V12v2c1.103,0,2-0.897,2-2V7V5V4 C22,2.897,21.103,2,20,2z">
-          </path>
-        </svg>
-        <p>Chat</p>
       </a>
     </li>
     <li class="navListitem logOut">
@@ -260,7 +245,7 @@ function fill_table(month, month_length, indexMonth) {
     <script src="assets/js/navbar.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.cycle2/2.1.6/jquery.cycle2.core.min.js'></script>
-<script  src="assets/js/calendar.js"></script>
+<script  src="assets/js/calendarAdmins.js"></script>
 <!-- <script src="assets/js/navbar.js"></script> -->
 
 </body>
