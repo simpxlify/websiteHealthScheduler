@@ -147,7 +147,7 @@ function updateImage(imagePath) {
 
 firebase.auth().onAuthStateChanged(function (user) {
   if (user != null) {
-    document.getElementsByTagName("BODY")[0].style.display = "contents";
+    // document.getElementsByTagName("BODY")[0].style.display = "contents";
     const uid = "" + user.uid;
 
     db.collection('users_medic').doc(uid + "").get().then(function (doc) {
@@ -171,11 +171,12 @@ firebase.auth().onAuthStateChanged(function (user) {
         addressUser.innerHTML = "" + addressUsers.replace(/^"(.*)"$/, '$1');
         emailUser.innerHTML = "" + emailUsers.replace(/^"(.*)"$/, '$1');
 
-        imageUser.src = imagePath;
-
-        if (listConsultas(uid) != true) {
-
+        if(imagePath == ""){
+          imageUser.src = "https://firebasestorage.googleapis.com/v0/b/healthscheduler-834e9.appspot.com/o/images%2Fpicuser.png?alt=media&token=ec435ba3-5fad-4223-a46a-7879db069ca5"
+        } else{
+          imageUser.src = imagePath;
         }
+        listConsultas(uid);
       } else {
         console.log("No such document!");
       }
@@ -219,7 +220,7 @@ function listConsultas(uid) {
     "Dezembro"];
   
   var todayDate = yyyy + '-' + mm + '-' + dd;
-  document.getElementById("consTitle").innerHTML = days[weekDayIndex] + ", " + dd + " de " + monthText[monthIndex] /*+ " - Consultas"*/;
+  document.getElementById("appointmentsTitle").innerHTML = days[weekDayIndex] + ", " + dd + " de " + monthText[monthIndex] /*+ " - Consultas"*/;
 
   db.collection("consultas").where("date", "==", todayDate).onSnapshot(function (querySnapshot) {
     consultaContainer.innerHTML = "";
