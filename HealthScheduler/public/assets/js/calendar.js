@@ -232,6 +232,9 @@ saveBtn.on("click", function () {
 
   var patientName = document.getElementById("patientList").value;
 
+  // console.log(doctorName + " " + inputCabinet + " " + inputDate + " " + inputHour + " " + inputFloor + " " + inputLocal + " " 
+  // + inputPavilion + " " + inputNotes + " " + typeOfConsult + " " + patientName + " " + inputUidPat + " ");
+
   if (doctorName === "" || inputCabinet === "" || inputDate === "" || inputHour === "" || inputFloor === "" || inputLocal === "" ||
     inputPavilion === "" || inputNotes === "" || typeOfConsult === "" || patientName === "" || inputUidPat === "") {
 
