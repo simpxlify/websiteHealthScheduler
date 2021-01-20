@@ -29,7 +29,7 @@ function passwordStrength(event) {
 	var pwd = document.getElementById("password_input_register");
 	var strength = document.getElementById('strength');
 	if (pwd.value.length < 7){
-		strength.innerHTML = '<span style="color:red"><b>Pequena</b></span>'
+		strength.innerHTML = '<span style="color:red"><b>Fraca</b></span>'
 	} else if (pwd.value.length > 7 && pwd.value.length <= 10){
 		strength.innerHTML = '<span style="color:yellow"><b>Média</b></span>'
 	} else if (pwd.value.length > 10){
