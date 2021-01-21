@@ -181,7 +181,7 @@ addBtn.on("click", function () {
   $("body").addClass("overlay");
   dataCel.each(function () {
     if ($(this).hasClass("isSelected")) {
-      today = $(this).data("day");
+      today = $(this).data("day"); 
       document.querySelector('input[type="date"]').value = today;
     } else {
       document.querySelector('input[type="date"]').value = today;

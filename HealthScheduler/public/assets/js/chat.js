@@ -521,75 +521,84 @@ function myFunction(event) {
     document.getElementById("sendmsg").click();
   }
 }
+function sendImage() {
+  var fileButton = document.getElementById('photo');
 
-// function deleteMessage(self) {
-//   // get message ID
-//   var messageId = self.getAttribute("data-id");
+  fileButton.addEventListener('change', function (e) {
+    var file = e.target.files[0];
 
-//   // delete message
-//   db.collection("messages").child(messageId).remove();
-// }
+    var fileImg = document.getElementById("photo").files[0];
+    var durl = '';
 
-// // attach listener for delete message
-// db.collection("messages").on("child_removed", function (snapshot) {
-//   // remove message node
-//   document.getElementById("message-" + snapshot.key).innerHTML = "This message has been removed";
-// });
+    var metadata = {
+      contentType: 'image/jpeg'
+    };
 
-// Animation Styles
-// $(function() {
+    var files = file.name;
 
-//   var index = 0;
+    var uploadTask = firebase.storage().ref().child('images/' + files).put(fileImg, metadata);
 
-//   function initScroll() {
-//     $(".message-wrap").animate({ 
-//       scrollTop: $("main").height() 
-//     }, 1000);
-//   }
+    uploadTask.on('state_changed', function (snapshot) {
+      switch (snapshot.state) {
+        case firebase.storage.TaskState.PAUSED: // or 'paused'
+          // console.log('Upload is paused');
+          break;
+        case firebase.storage.TaskState.RUNNING: // or 'running'
+          // console.log('Upload is running');
+          break;
+      }
+    }, function (error) {
+      // Handle unsuccessful uploads
+    }, function () {
+      // Handle successful uploads on complete
+      // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+      uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
 
-//   function scroll() {
-//     $(".message-wrap").animate({
-//       scrollTop: 9000
-//     }, 1000);
-//   }
+          var image = "image";
 
-//   $("input[type='submit']").click(function() {
-//     scroll();
-//   });
+          var timeStamp2 = parseInt(Date.now() / 1000);
 
-//   $("aside").find("li").click(function() {
-//     initScroll();
-//     $(".init").animate({
-//       'opacity': '0'
-//     }, 500);
-//   });
+          var message = downloadURL;
 
-//   $("aside").find("li").click(function() {
-//     if (index == 1) {
-//       index = 0;
-//       $(".message-wrap").find(".message").css({
-//         'opacity': '1'
-//       });
-//     } else {
-//       index = 0;
-//       $(".message-wrap").find(".message").css({
-//         'opacity': '0'
-//       });
-//       $(".loader").delay(500).animate({
-//         'opacity': '1'
-//       });
-//       setTimeout(function() {
-//         index = 0;
-//         $(".message-wrap").find(".message").css({
-//           'opacity': '1'
-//         });
-//         $(".loader").animate({
-//           'opacity': '0'
-//         });
-//       }, 3000)
-//     }
-//   });
-// });
+          db.collection('chat_messages').doc(uid).collection(toId).add({
+            "fromId": uid,
+            "message": message,
+            "messageType": image,
+            "toId": toId,
+            "timeStamp": timeStamp2
+          });
+
+          db.collection('chat_messages').doc(toId).collection(uid).add({
+            "fromId": uid,
+            "message": message,
+            "messageType": image,
+            "toId": toId,
+            "timeStamp": timeStamp2
+          });
+
+          db.collection('latest_messages').doc(uid).collection('latest_message').doc(toId).set({
+            "fromId": uid,
+            "message": message,
+            "messageType": image,
+            "toId": toId,
+            "timeStamp": timeStamp2
+          });
+
+          db.collection('latest_messages').doc(toId).collection('latest_message').doc(uid).set({
+            "fromId": uid,
+            "message": message,
+            "messageType": image,
+            "toId": toId,
+            "timeStamp": timeStamp2
+          });
+          document.getElementById('message').value = '';
+        
+      });
+    });
+  });
+
+}
+
 var sendmsg = document.getElementById("sendmsg");
 
 sendmsg.addEventListener("click", function () {
@@ -632,26 +641,4 @@ sendmsg.addEventListener("click", function () {
     "timeStamp": timeStamp2
   });
   document.getElementById('message').value = '';
-
-  // db.collection("latest_messages").doc(uid).collection("latest_message").doc(toId).get().then(function (doc2) {
-  //   console.log(toId);
-  //   listItemLatestMessage.innerHTML = ""
-  //   if (doc2.exists) {
-  //     console.log(doc2.data());
-  //     if (doc2.data().messageType == "text") {
-  //       listItemLatestMessage.innerHTML = doc2.data().message;
-
-
-  //     } else if (doc2.data().messageType == "image") {
-  //       listItemLatestMessage.innerHTML = "Imagem.";
-  //       // divInsideUsers.appendChild(listItemLatestMessage);
-
-  //     } else {
-  //       listItemLatestMessage.innerHTML = "Audio.";
-  //       // divInsideUsers.appendChild(listItemLatestMessage);
-
-  //     }
-
-  //   }
-  // });
 });
