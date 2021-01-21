@@ -39,14 +39,14 @@ function openTab(evt, TipoDeLista) {
 
   if (TipoDeLista == "Pacientes") {
     Pacientes();
-    
+
   }
   if (TipoDeLista == "Medicos") {
     Medicos();
   }
   if (TipoDeLista == "Grupos") {
     Grupos();
-    
+
   }
 }
 
@@ -90,7 +90,6 @@ function Grupos() {
 
       db.collection("latest_messages").doc(uid).collection("latest_message").doc(doc.data().medicID).onSnapshot(function (doc2) {
         if (doc2.exists) {
-          console.log("data:" + doc2.data())
 
           if (doc2.data().messageType == "text") {
             listItemLatestMessage = document.createElement('span');
@@ -160,6 +159,8 @@ function Pacientes() {
       document.getElementsByTagName('body')[0].appendChild(listContainer);
       containerUsers.appendChild(listElement);
 
+      // listItemLatestMessage.id = "latestMessage"
+
       var divInsideUsers = document.createElement('div');
       divInsideUsers.className = "divOfUsersInsideBox"
       listElement.appendChild(divInsideUsers);
@@ -170,30 +171,6 @@ function Pacientes() {
 
       listItem2 = document.createElement('span');
       listItem2.className = 'listItems usernameOfUser';
-
-
-      // para funcionar todos basta mudar para snapshot, erro!
-
-      db.collection("latest_messages").doc(uid).collection("latest_message").doc(doc.data().userID).onSnapshot(function (doc2) {
-        if (doc2.exists) {
-          if (doc2.data().messageType == "text") {
-            listItemLatestMessage = document.createElement('span');
-            listItemLatestMessage.className = 'listItems latestMessage';
-            listItemLatestMessage.innerHTML = doc2.data().message;
-            divInsideUsers.appendChild(listItemLatestMessage);
-
-          } else if (doc2.data().messageType == "image") {
-            listItemLatestMessage = document.createElement('span');
-            listItemLatestMessage.className = 'listItems latestMessage';
-            listItemLatestMessage.innerHTML = "Imagem.";
-            divInsideUsers.appendChild(listItemLatestMessage);
-
-          } else {
-            listItemLatestMessage.innerHTML = "Audio.";
-            divInsideUsers.appendChild(listItemLatestMessage);
-          }
-        }
-      });
 
       listItem = document.createElement('img');
       listItem.className = 'imgRedonda'
@@ -206,8 +183,18 @@ function Pacientes() {
       divInsideUsers.appendChild(listItem2);
 
 
+      listItemLatestMessage = document.createElement('span');
+      listItemLatestMessage.className = 'listItems latestMessage';
+
+      listLatestMessages(uid, doc.data().userID, listItemLatestMessage);
+
+
+      divInsideUsers.appendChild(listItemLatestMessage);
+
+
       listElement.addEventListener("click", function () {
         toId = doc.data().userID;
+        // listLatestMessages(uid, doc.data().userID);
         listElement.className = 'listOfUsers';
         var nameOfTheUser = document.getElementById("nameOfTheUser");
         nameOfTheUser.className = "nameOfTheUser";
@@ -222,13 +209,12 @@ function Pacientes() {
 
 function Medicos() {
 
-  db.collection("users_medic").onSnapshot(function (querySnapshot) {
+  db.collection("users_medic").where("typeOfAcc", "==", "Medico").onSnapshot(function (querySnapshot) {
 
     listContainer.innerHTML = '';
 
     querySnapshot.forEach(function (doc) {
       if (doc.data().medicID != uid) {
-
         // var listContainer = document.createElement('div');
 
         var containerUsers = document.createElement('div');
@@ -245,6 +231,8 @@ function Medicos() {
         document.getElementsByTagName('body')[0].appendChild(listContainer);
         containerUsers.appendChild(listElement);
 
+        // listItemLatestMessage.id = "latestMessage"
+
         var divInsideUsers = document.createElement('div');
         divInsideUsers.className = "divOfUsersInsideBox"
         listElement.appendChild(divInsideUsers);
@@ -255,34 +243,6 @@ function Medicos() {
 
         listItem2 = document.createElement('span');
         listItem2.className = 'listItems usernameOfUser';
-
-        listItemLatestMessage = document.createElement('span');
-        listItemLatestMessage.className = 'listItems latestMessage';
-
-        // para funcionar todos basta mudar para snapshot, erro!
-
-        db.collection("latest_messages").doc(uid).collection("latest_message").doc(doc.data().medicID).onSnapshot(function (doc2) {
-          if (doc2.exists) {
-            console.log("data:" + doc2.data())
-
-            if (doc2.data().messageType == "text") {
-              listItemLatestMessage = document.createElement('span');
-              listItemLatestMessage.className = 'listItems latestMessage';
-              listItemLatestMessage.innerHTML = doc2.data().message;
-              divInsideUsers.appendChild(listItemLatestMessage);
-
-            } else if (doc2.data().messageType == "image") {
-              listItemLatestMessage = document.createElement('span');
-              listItemLatestMessage.className = 'listItems latestMessage';
-              listItemLatestMessage.innerHTML = "Imagem.";
-              divInsideUsers.appendChild(listItemLatestMessage);
-
-            } else {
-              listItemLatestMessage.innerHTML = "Audio.";
-              divInsideUsers.appendChild(listItemLatestMessage);
-            }
-          }
-        });
 
         listItem = document.createElement('img');
         listItem.className = 'imgRedonda'
@@ -295,8 +255,18 @@ function Medicos() {
         divInsideUsers.appendChild(listItem2);
 
 
+        listItemLatestMessage = document.createElement('span');
+        listItemLatestMessage.className = 'listItems latestMessage';
+
+        listLatestMessages(uid, doc.data().medicID, listItemLatestMessage);
+
+
+        divInsideUsers.appendChild(listItemLatestMessage);
+
+
         listElement.addEventListener("click", function () {
           toId = doc.data().medicID;
+          // listLatestMessages(uid, doc.data().userID);
           listElement.className = 'listOfUsers';
           var nameOfTheUser = document.getElementById("nameOfTheUser");
           nameOfTheUser.className = "nameOfTheUser";
@@ -304,136 +274,31 @@ function Medicos() {
           //sendMessage(uid, toId);
           listAllMessages(uid, toId);
         });
+      } else {
+
       }
+
+
     });
     userContainer.appendChild(listContainer);
   });
 }
 
-// db.collection("users").onSnapshot(function (querySnapshot) {
+function listLatestMessages(medicID, userID, listItemLatestMessage) {
+  db.collection("latest_messages").doc(medicID).collection("latest_message").doc(userID).onSnapshot(function (doc2) {
+    if (doc2.exists) {
+      if (doc2.data().messageType == "text") {
+        listItemLatestMessage.innerHTML = doc2.data().message;
 
-//   listContainer.innerHTML = '';
+      } else if (doc2.data().messageType == "image") {
+        listItemLatestMessage.innerHTML = "Imagem.";
 
-//   querySnapshot.forEach(function (doc) {
-
-//     // var listContainer = document.createElement('div');
-
-//     var containerUsers = document.createElement('div');
-//     containerUsers.className = 'usersBox';
-
-//     listContainer.appendChild(containerUsers);
-
-//     // Make the list
-//     var listElement = document.createElement('ul');
-//     listElement.className = 'listOfUsers';
-//     // Set up a loop that goes through the items in listItems one at a time
-
-//     // let div = document.createElement('div')
-//     document.getElementsByTagName('body')[0].appendChild(listContainer);
-//     containerUsers.appendChild(listElement);
-
-//     var divInsideUsers = document.createElement('div');
-//     divInsideUsers.className = "divOfUsersInsideBox"
-//     listElement.appendChild(divInsideUsers);
-
-//     var divInsideUsersImg = document.createElement('div');
-//     divInsideUsersImg.className = "divInsideUsersImg"
-//     listElement.appendChild(divInsideUsersImg);
-
-//     listItem2 = document.createElement('span');
-//     listItem2.className = 'listItems usernameOfUser';
-
-//     listItemLatestMessage = document.createElement('span');
-//     listItemLatestMessage.className = 'listItems latestMessage';
-
-//     // para funcionar todos basta mudar para snapshot, erro!
-
-//     db.collection("latest_messages").doc(uid)
-//     .collection("latest_message").doc(doc.data().userID)
-//     .get().then(function (doc) {
-//       if (doc.exists) {
-//         // console.log("Document data:", doc.data());
-//         if (doc.data().messageType == "text") {
-//           listItemLatestMessage.innerHTML = doc.data().message;
-//           divInsideUsers.appendChild(listItemLatestMessage);
-//         } else if (doc.data().messageType == "image") {
-//           listItemLatestMessage.innerHTML = "Imagem.";
-//           divInsideUsers.appendChild(listItemLatestMessage);
-//         } else {
-//           listItemLatestMessage.innerHTML = "Audio.";
-//           divInsideUsers.appendChild(listItemLatestMessage);
-//         }
-//       }
-//     });
-
-//     listItem = document.createElement('img');
-//     listItem.className = 'imgRedonda'
-//     // Add the item text
-//     listItem2.innerHTML = doc.data().username;
-//     listItem.src = doc.data().imagePath;
-
-//     // Add listItem to the listElement
-//     divInsideUsersImg.appendChild(listItem);
-//     divInsideUsers.appendChild(listItem2);
-
-
-//     listElement.addEventListener("click", function () {
-//       toId = doc.data().userID;
-//       listElement.className = 'listOfUsers';
-//       var nameOfTheUser = document.getElementById("nameOfTheUser");
-//       nameOfTheUser.className = "nameOfTheUser";
-//       nameOfTheUser.innerHTML = doc.data().username;
-//       //sendMessage(uid, toId);
-//       listAllMessages(uid, toId);
-//     });
-//   });
-
-//   var sendmsg = document.getElementById("sendmsg");
-
-//   sendmsg.addEventListener("click", function () {
-
-//     var text = "text";
-
-//     var timeStamp2 = parseInt(Date.now() / 1000);
-
-//     var message = document.getElementById("message").value;
-
-//     db.collection('chat_messages').doc(uid).collection(toId).add({
-//       "fromId": uid,
-//       "message": message,
-//       "messageType": text,
-//       "toId": toId,
-//       "timeStamp": timeStamp2
-//     });
-
-//     db.collection('chat_messages').doc(toId).collection(uid).add({
-//       "fromId": uid,
-//       "message": message,
-//       "messageType": text,
-//       "toId": toId,
-//       "timeStamp": timeStamp2
-//     });
-
-//     db.collection('latest_messages').doc(uid).collection('latest_message').doc(toId).set({
-//       "fromId": uid,
-//       "message": message,
-//       "messageType": text,
-//       "toId": toId,
-//       "timeStamp": timeStamp2
-//     });
-
-//     db.collection('latest_messages').doc(toId).collection('latest_message').doc(uid).set({
-//       "fromId": uid,
-//       "message": message,
-//       "messageType": text,
-//       "toId": toId,
-//       "timeStamp": timeStamp2
-//     });
-//     document.getElementById('message').value = '';
-//   });
-//   userContainer.appendChild(listContainer);
-// });
-
+      } else {
+        listItemLatestMessage.innerHTML = "Audio.";
+      }
+    }
+  });
+}
 
 // listen for incoming messages
 function listAllMessages(uid, toId) {
@@ -767,4 +632,26 @@ sendmsg.addEventListener("click", function () {
     "timeStamp": timeStamp2
   });
   document.getElementById('message').value = '';
+
+  // db.collection("latest_messages").doc(uid).collection("latest_message").doc(toId).get().then(function (doc2) {
+  //   console.log(toId);
+  //   listItemLatestMessage.innerHTML = ""
+  //   if (doc2.exists) {
+  //     console.log(doc2.data());
+  //     if (doc2.data().messageType == "text") {
+  //       listItemLatestMessage.innerHTML = doc2.data().message;
+
+
+  //     } else if (doc2.data().messageType == "image") {
+  //       listItemLatestMessage.innerHTML = "Imagem.";
+  //       // divInsideUsers.appendChild(listItemLatestMessage);
+
+  //     } else {
+  //       listItemLatestMessage.innerHTML = "Audio.";
+  //       // divInsideUsers.appendChild(listItemLatestMessage);
+
+  //     }
+
+  //   }
+  // });
 });

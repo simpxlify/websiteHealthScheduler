@@ -254,7 +254,7 @@ function listConsultas(uid) {
 
         hours.appendChild(hourText);
 
-        var titleText = document.createTextNode(doc.data().typeOfConsult);
+        var titleText = document.createTextNode(doc.data().patientName);
 
         titles.appendChild(titleText);
 
