@@ -157,7 +157,6 @@ db.collection("users").get().then(function (querySnapshot) {
 
       inputUidPat = doc.data().userID;
       idList.push(inputUidPat)
-      console.log(idList);
 
       listOptions = document.createElement('option');
       listOptions.innerHTML = inputUsernamePat;
@@ -210,6 +209,7 @@ closeBtn.on("click", function () {
 
 
 saveBtn.on("click", function () {
+  
 
   const inputCabinet = $("input[name=cabinet]").val();
   const inputDate = $("input[name=date]").val();
@@ -241,6 +241,7 @@ saveBtn.on("click", function () {
     alert("Preencha tudo");
 
   } else {
+    $(".c-aside__eventList").html('');
     db.collection('consultas').add({
         cabinet: inputCabinet,
         date: inputDate,
@@ -330,49 +331,45 @@ function fillEventSidebar(self, thisDate) {
   //     break;
   // }
 
-  db.collection("consultas").where("medicID", "==", medicID).where("date", "==", thisDate).onSnapshot(function (querySnapshot) {
+  db.collection("consultas").orderBy("hour").onSnapshot(function (querySnapshot) {
+    $(".c-aside__eventList").html('');
     querySnapshot.forEach(function (doc) {
-
-      switch (doc.data().typeOfConsult) {
-
-        case "Fisioterapia":
-
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Fisioterapia'> <span> " + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
-          break;
-
-        case "Medicina física":
-
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Medicina'> <span> " + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
-          break;
-
-        case "Reabilitação":
-
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Reabilitação'> <span> " + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
-          break;
-
-        case "Cuidados Paliativos":
-
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Cuidados'> <span> " + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
-          break;
-
-        case "Neurologia":
-
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Neurologia'> <span> " + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
-          break;
-
-        case "Pneumologia":
-
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Pneumologia'> <span> " + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
-          break;
-
-          // case thisEvent:
-
-          // $(".c-aside__eventList").append("<p class='c-aside__event'>" +thisName +" <span> • " +thisNotes +"</span></p>");
-          // break;
-
+      if(doc.data().medicID == medicID && doc.data().date == thisDate){
+        limparConsultas(doc.data().typeOfConsult, doc.data().patientName, doc.data().hour, doc.data().notes);
       }
+      
     })
   })
+
+  function limparConsultas(typeOfMedico, patientName, hour, notes){
+    switch (typeOfMedico) {
+
+      case "Fisioterapia":
+        $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Fisioterapia'> <span> " + patientName + " <span> • " + hour + " <br> <span> " + notes + "</span></p>");
+        break;
+
+      case "Medicina física":
+        $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Medicina'> <span> " + patientName + " <span> • " + hour + " <br> <span> " + notes + "</span></p>");
+        break;
+
+      case "Reabilitação":
+        $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Reabilitação'> <span> " + patientName + " <span> • " + hour + " <br> <span> " + notes + "</span></p>");
+        break;
+
+      case "Cuidados Paliativos":
+        $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Cuidados'> <span> " + patientName + " <span> • " + hour + " <br> <span> " + notes + "</span></p>");
+        break;
+
+      case "Neurologia":
+        $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Neurologia'> <span> " + patientName + " <span> • " + hour + " <br> <span> " + notes + "</span></p>");
+        break;
+
+      case "Pneumologia":
+        $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Pneumologia'> <span> " + patientName + " <span> • " + hour + " <br> <span> " + notes + "</span></p>");
+        break;
+
+    }
+  }
 
 
   // db.collection("consultas").where('medicID', "==", medicID).get().then(function (querySnapshot) {
