@@ -246,7 +246,7 @@ function listConsultas(uid) {
         var divider = document.createElement("hr");
         divider.className = "inConsultaDivider";
 
-        var spanText = document.createTextNode(notes);
+        var spanText = document.createTextNode("Descrição: " + notes);
 
         spans.appendChild(spanText);
 
@@ -254,7 +254,7 @@ function listConsultas(uid) {
 
         hours.appendChild(hourText);
 
-        var titleText = document.createTextNode(doc.data().patientName);
+        var titleText = document.createTextNode("Paciente: " + doc.data().patientName);
 
         titles.appendChild(titleText);
 

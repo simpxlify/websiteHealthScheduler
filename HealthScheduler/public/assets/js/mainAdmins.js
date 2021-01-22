@@ -147,7 +147,7 @@ function updateImage(imagePath) {
 
 firebase.auth().onAuthStateChanged(function (user) {
   if (user != null) {
-    document.getElementsByTagName("BODY")[0].style.display = "contents";
+    // document.getElementsByTagName("BODY")[0].style.display = "contents";
     const uid = "" + user.uid;
 
     db.collection('users_medic').doc(uid + "").get().then(function (doc) {
@@ -171,11 +171,12 @@ firebase.auth().onAuthStateChanged(function (user) {
         addressUser.innerHTML = "" + addressUsers.replace(/^"(.*)"$/, '$1');
         emailUser.innerHTML = "" + emailUsers.replace(/^"(.*)"$/, '$1');
 
-        imageUser.src = imagePath;
-
-        if (listConsultas(uid) != true) {
-
+        if(imagePath == ""){
+          imageUser.src = "https://firebasestorage.googleapis.com/v0/b/healthscheduler-834e9.appspot.com/o/images%2Fpicuser.png?alt=media&token=ec435ba3-5fad-4223-a46a-7879db069ca5"
+        } else{
+          imageUser.src = imagePath;
         }
+        listConsultas(uid);
       } else {
         console.log("No such document!");
       }
@@ -224,7 +225,7 @@ function listConsultas(uid) {
   db.collection("consultas").where("date", "==", todayDate).onSnapshot(function (querySnapshot) {
     consultaContainer.innerHTML = "";
     querySnapshot.forEach(function (doc) {
-      if (doc.data().medicID == uid) {
+        console.log(doc.data());
         var notes = doc.data().notes;
         var hour = doc.data().hour;
         var consultaContainer = document.getElementById('allConsultas');
@@ -240,12 +241,13 @@ function listConsultas(uid) {
 
 
         var titles = document.createElement("h1");
+        var titlePaciente = document.createElement("h1");
         var spans = document.createElement("span");
         var hours = document.createElement("p");
         var divider = document.createElement("hr");
         divider.className = "inConsultaDivider";
 
-        var spanText = document.createTextNode(notes);
+        var spanText = document.createTextNode("Descrição: " + notes);
 
         spans.appendChild(spanText);
 
@@ -253,17 +255,20 @@ function listConsultas(uid) {
 
         hours.appendChild(hourText);
 
-        var titleText = document.createTextNode(doc.data().typeOfConsult);
+        var titleText = document.createTextNode("Doutor: " + doc.data().doctorName);
+
+        var titlePatient = document.createTextNode("Paciente: " + doc.data().patientName);
 
         titles.appendChild(titleText);
+        titlePaciente.appendChild(titlePatient);
 
         titleOfConsulta.append(titles);
+        titleOfConsulta.append(titlePaciente);
         descriptionOfConsulta.append(spans);
         descriptionOfConsulta.append(hours);
         descriptionOfConsulta.append(divider);
 
         return true;
-      }
     });
   });
 }

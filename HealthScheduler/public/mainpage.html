@@ -87,7 +87,7 @@
 				</div>
 				<div class="customInfoUser">
 					<div class="addressOfUser">
-						<p class="userWidth"><span id="address_user"></span></p>
+						<p class="userWidth">Morada: <span id="address_user"></span></p>
 						<svg onclick="openForm3()" id="buttonEditNameUser" class="iconEditUser" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path transform="rotate(45.001 16.357 4.656)" d="M14.235 3.039H18.478V6.273H14.235z"></path><path d="M4 14L4 17 7 17 15.299 8.713 12.299 5.713zM4 20H20V22H4z"></path></svg>
 						<div class="chat-popup" id="myForm3">
 							<form class="form-container">
@@ -99,15 +99,28 @@
 						</div>
 					</div>
 					<div class="emailOfUser">
-						<p class="userWidth"><span id="email_user"></span></p>
-						<svg onclick="openForm()" id="buttonEditEmailUser" class="iconEditUser" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path transform="rotate(45.001 16.357 4.656)" d="M14.235 3.039H18.478V6.273H14.235z"></path><path d="M4 14L4 17 7 17 15.299 8.713 12.299 5.713zM4 20H20V22H4z"></path></svg>
-						<div class="chat-popup" id="myForm">
+						<p class="userWidth">Email: <span id="email_user"></span></p>
+						<!-- <svg onclick="openForm()" id="buttonEditEmailUser" class="iconEditUser" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path transform="rotate(45.001 16.357 4.656)" d="M14.235 3.039H18.478V6.273H14.235z"></path><path d="M4 14L4 17 7 17 15.299 8.713 12.299 5.713zM4 20H20V22H4z"></path></svg> -->
+						<!-- <div class="chat-popup" id="myForm">
 							<form class="form-container">
 								<input type="email" placeholder="Insira o seu novo email"
 									id="email_input_change">
 								<button id="confirmEmail" type="button" class="btn" onclick="updateEmail()">Confirmar
 									mudança de email</button>
 								<button type="button" class="btn cancel" onclick="closeForm()">Fechar</button>
+							</form>
+						</div> -->
+					</div>
+					<div class="passwordOfUser">
+						<p class="passwordWidth">Palavra-passe: <span>••••••••</span></p>
+						<svg onclick="openForm2()" id="buttonEditEmailUser" class="iconEditUser" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path transform="rotate(45.001 16.357 4.656)" d="M14.235 3.039H18.478V6.273H14.235z"></path><path d="M4 14L4 17 7 17 15.299 8.713 12.299 5.713zM4 20H20V22H4z"></path></svg>
+						<div class="chat-popup" id="myForm2">
+							<form class="form-container">
+								<input type="password" placeholder="Insira a sua nova palavra passe"
+									id="pw_input_change">
+								<button id="confirmPw" type="button" class="btn" onclick="updatePassword()">Confirmar
+									mudança de palavra passe</button>
+								<button type="button" class="btn cancel" onclick="closeForm2()">Fechar</button>
 							</form>
 						</div>
 					</div>

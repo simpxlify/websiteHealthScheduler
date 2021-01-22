@@ -167,9 +167,6 @@ html {
 .customInfoUser {
   text-align: left;
   padding: 0;
-}
-
-.customInfoUser {
   padding-bottom: 20px;
   padding-top: 20px;
   padding-left: 50px;
@@ -233,6 +230,17 @@ html {
   width: 100%;
   margin-top: 10px;
   display: flex;
+}
+
+.passwordOfUser{
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+}
+
+.passwordWidth{
+  margin: 0;
+  width: 80%;
 }
 
 .userWidth {
