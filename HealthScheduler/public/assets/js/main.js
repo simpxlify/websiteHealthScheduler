@@ -5,6 +5,37 @@ firebase.auth().onAuthStateChanged(function (user) {
   }
 });
 
+function updatePassword() {
+  // var newPassword = getASecureRandomPassword();
+
+  const auth = firebase.auth().currentUser;
+  var confirmPw = document.getElementById("confirmPw");
+
+  confirmPw.addEventListener("click", function () {
+
+      var newPassword = document.getElementById("pw_input_change").value;
+
+
+      auth.updatePassword(newPassword).then(function () {
+
+
+          // return db.collection("users_medic").doc(uid).update({
+          //     phoneNumberEmail: emailAddress
+          // })
+          // .then(function() {
+
+          // })
+          // .catch(function(error) {
+
+          // });
+
+      }).catch(function (error) {
+
+          alert("Error");
+      });
+  })
+}
+
 function updateEmail() {
   var emailAddress = document.getElementById("email_input_change").value;
 
