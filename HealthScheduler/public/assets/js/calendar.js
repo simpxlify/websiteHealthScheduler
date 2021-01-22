@@ -373,63 +373,6 @@ function fillEventSidebar(self, thisDate) {
       }
     })
   })
-
-
-  // db.collection("consultas").where('medicID', "==", medicID).get().then(function (querySnapshot) {
-  //   querySnapshot.forEach(function (doc) {
-  //     switch (true) {
-
-  //       case thisFisioterapia:
-
-
-  //         $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Fisioterapia'>" + thisName + " <span> • " + thisNotes + "</span></p>");
-
-  //         break;
-
-  //       case thisMedicina:
-
-
-  //         $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Medicina'>" + thisName + " <span> • " + thisNotes + "</span></p>");
-
-  //         break;
-
-  //       case thisReabilitação:
-
-
-  //         $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Reabilitação'>" + thisName + " <span> • " + thisNotes + "</span></p>");
-
-  //         break;
-
-  //       case thisCuidados:
-
-
-  //         $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Cuidados'>" + thisName + " <span> • " + thisNotes + "</span></p>");
-
-  //         break;
-
-  //       case thisNeurologia:
-
-
-  //         $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Neurologia'>" + thisName + " <span> • " + thisNotes + "</span></p>");
-
-  //         break;
-
-  //       case thisPneumologia:
-
-
-  //         $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Pneumologia'>" + thisName + " <span> • " + thisNotes + "</span></p>");
-
-  //         break;
-
-  //       case thisEvent:
-
-  //         $(".c-aside__eventList").append("<p class='c-aside__event'>" + thisName + " <span> • " + thisNotes + "</span></p>");
-  //         break;
-
-  //     }
-  //   })
-  // })
-
 };
 
 

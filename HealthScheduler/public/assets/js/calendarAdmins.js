@@ -56,40 +56,40 @@ function defaultEvents(dataDay, dataName, dataNotes, classTag) {
 
 db.collection("consultas").get().then(function (querySnapshot) {
   querySnapshot.forEach(function (doc) {
-    if (doc.data().medicID == medicID) {
 
 
-      var thisYear = (doc.data().date).slice(0, 4);
+
+    var thisYear = (doc.data().date).slice(0, 4);
 
 
-      if (year == thisYear) {
+    if (year == thisYear) {
 
 
-        if (doc.data().typeOfConsult == 'Fisioterapia') {
-          defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Fisioterapia');
-        }
-        if (doc.data().typeOfConsult == 'Medicina física') {
-          defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Medicina');
-
-        }
-        if (doc.data().typeOfConsult == 'Reabilitação') {
-          defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Reabilitação');
-
-        }
-        if (doc.data().typeOfConsult == 'Cuidados Paliativos') {
-          defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Cuidados');
-        }
-        if (doc.data().typeOfConsult == 'Neurologia') {
-          defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Neurologia');
-
-        }
-        if (doc.data().typeOfConsult == 'Pneumologia') {
-          defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Pneumologia');
-        }
+      if (doc.data().typeOfConsult == 'Fisioterapia') {
+        defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Fisioterapia');
+      }
+      if (doc.data().typeOfConsult == 'Medicina física') {
+        defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Medicina');
 
       }
-      
+      if (doc.data().typeOfConsult == 'Reabilitação') {
+        defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Reabilitação');
+
+      }
+      if (doc.data().typeOfConsult == 'Cuidados Paliativos') {
+        defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Cuidados');
+      }
+      if (doc.data().typeOfConsult == 'Neurologia') {
+        defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Neurologia');
+
+      }
+      if (doc.data().typeOfConsult == 'Pneumologia') {
+        defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Pneumologia');
+      }
+
     }
+
+
   });
 });
 
@@ -130,13 +130,9 @@ dataCel.each(function () {
   }
 });
 
-
-var inputTypeofconsult = document.getElementById("typeOfMedic");
-var inputDocname = document.getElementById("medicName");
 var inputUsernamePat = document.getElementById("nomePaciente");
 var patientList = document.getElementById("patientList");
 var idList = [];
-
 
 db.collection("users").get().then(function (querySnapshot) {
   querySnapshot.forEach(function (doc) {
@@ -154,34 +150,70 @@ db.collection("users").get().then(function (querySnapshot) {
 
 
     } else {
-      console.log("No such document!");
+      alert("No such document!");
     }
   })
 
 });
 
+var medicName;
+var medicList = document.getElementById("medicList");
+var idList1 = [];
+var inputTypeofconsult = document.getElementById("typeOfMedic");
+
+db.collection("users_medic").where("typeOfAcc", "==", "Medico").get().then(function (querySnapshot) {
+  querySnapshot.forEach(function (doc) {
+    if (doc.exists) {
+
+      medicName = doc.data().username;
+
+      inputMidMedic = doc.data().medicID;
+      idList1.push(inputMidMedic)
+
+      listOptions1 = document.createElement('option');
+      listOptions1.innerHTML = medicName;
+      medicList.appendChild(listOptions1);
+     
+    } else {
+      alert("No such document!");
+    }
+  })
+
+});
 
 //window event creator
 addBtn.on("click", function () {
 
   winCreator.addClass("isVisible");
 
-  db.collection("users_medic").doc(medicID)
-    .get().then(function (doc) {
+  db.collection("users_medic").where("typeOfAcc", "==", "Medico").get().then(function (querySnapshot) {
+    querySnapshot.forEach(function (doc) {
       if (doc.exists) {
+        inputTypeofconsult.innerHTML = "";
         inputTypeofconsult.value = doc.data().typeOfMedic;
-        inputDocname.value = doc.data().username;
+       
       } else {
-        console.log("No such document!");
+        alert("No such document!");
       }
-    }).catch(function (error) {
-      console.log("Error getting document:", error);
-    });
+    })
+  
+  });
+
+  // db.collection("users_medic").doc(medicID).get().then(function (doc) {
+  //   if (doc.exists) {
+  //     inputTypeofconsult.value = doc.data().typeOfMedic;
+  //     inputDocname.value = doc.data().username;
+  //   } else {
+  //     console.log("No such document!");
+  //   }
+  // }).catch(function (error) {
+  //   console.log("Error getting document:", error);
+  // });
 
   $("body").addClass("overlay");
   dataCel.each(function () {
     if ($(this).hasClass("isSelected")) {
-      today = $(this).data("day"); 
+      today = $(this).data("day");
       document.querySelector('input[type="date"]').value = today;
     } else {
       document.querySelector('input[type="date"]').value = today;
@@ -206,19 +238,23 @@ saveBtn.on("click", function () {
   const inputHour = $("input[name=hour]").val();
   const inputFloor = $("input[name=floor]").val();
   // const inputLocal = $("input[name=local]").val();
-  const inputLocal = $("select[name=local]").find(":selected").text();
+  const inputLocal = $("input[name=local]").val();
   const inputPavilion = $("input[name=pavilion]").val();
   const inputNotes = $("input[name=notes]").val();
   //const inputTypeofconsult = $("select[name=typeofconsult]").find(":selected").text();
   var ind = document.getElementById("patientList").selectedIndex;
   var opt = document.getElementById("patientList").options;
+  var ind1 = document.getElementById("medicList").selectedIndex;
+  var opt1 = document.getElementById("medicList").options;
   var index = opt[ind].index
+  var index1 = opt1[ind1].index
 
   var typeOfConsult = inputTypeofconsult.value;
-  var doctorName = inputDocname.value;
+  
 
-  var inputUidPat = idList[index];
-
+  var inputUidPat = idList[index]; 
+  var inputMidMed = idList1[index1];
+  var doctorName = document.getElementById("medicList").value;
   var patientName = document.getElementById("patientList").value;
 
   if (doctorName === "" || inputCabinet === "" || inputDate === "" || inputHour === "" || inputFloor === "" || inputLocal === "" ||
@@ -239,7 +275,7 @@ saveBtn.on("click", function () {
         notes: inputNotes,
         patientName,
         userID: inputUidPat,
-        medicID: medicID
+        medicID: inputMidMed
 
 
       }),
@@ -316,39 +352,39 @@ function fillEventSidebar(self, thisDate) {
   //     break;
   // }
 
-  db.collection("consultas").where("medicID", "==", medicID).where("date", "==", thisDate).onSnapshot(function (querySnapshot) {
+  db.collection("consultas").where("date", "==", thisDate).onSnapshot(function (querySnapshot) {
     querySnapshot.forEach(function (doc) {
 
       switch (doc.data().typeOfConsult) {
 
         case "Fisioterapia":
 
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Fisioterapia'> <span> " + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Fisioterapia'> <span> Dr. " + doc.data().doctorName + "<br>" + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
           break;
 
         case "Medicina física":
 
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Medicina'> <span> " + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Medicina'> <span> Dr. " + doc.data().doctorName + "<br>" + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
           break;
 
         case "Reabilitação":
 
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Reabilitação'> <span> " + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Reabilitação'> <span> Dr. " + doc.data().doctorName + "<br>" + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
           break;
 
         case "Cuidados Paliativos":
 
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Cuidados'> <span> " + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Cuidados'> <span> Dr. " + doc.data().doctorName + "<br>" + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
           break;
 
         case "Neurologia":
 
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Neurologia'> <span> " + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Neurologia'> <span> Dr. " + doc.data().doctorName + "<br>" + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
           break;
 
         case "Pneumologia":
 
-          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Pneumologia'> <span> " + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
+          $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Pneumologia'> <span> Dr. " + doc.data().doctorName + "<br>" + doc.data().patientName + " <span> • " + doc.data().hour + " <br> <span> " + doc.data().notes + "</span></p>");
           break;
 
           // case thisEvent:
