@@ -223,7 +223,7 @@ saveBtn.on("click", function () {
   //const inputTypeofconsult = $("select[name=typeofconsult]").find(":selected").text();
   var ind = document.getElementById("patientList").selectedIndex;
   var opt = document.getElementById("patientList").options;
-  var index = opt[ind].index
+  var index = opt[ind-1].index
 
   var typeOfConsult = inputTypeofconsult.value;
   var doctorName = inputDocname.value;
