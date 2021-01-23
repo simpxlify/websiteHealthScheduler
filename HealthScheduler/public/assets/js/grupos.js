@@ -363,45 +363,79 @@ sendmsg.addEventListener("click", function () {
 
 });
 
-function createGroup(){
+function createGroup() {
     var groupName = "";
-    var imagePath ="";
-    var arrayMedic = [];
+    var imagePath = "";
+    var arrayMedic = [uid];
+
+    var inputElements = document.getElementsByClassName('checkbox');
+    for (var i = 0; inputElements[i]; ++i) {
+        if (inputElements[i].checked) {
+            arrayMedic.push(inputElements[i].value);
+        }
+    }
+    console.log(arrayMedic);
 
     groupName = document.getElementById("groupName").value;
     imagePath = document.getElementById("image").value;
-    arrayMedic = 
+
     db.collection("chat_grupo").add({
-        "groupName": groupName,
-        "imagePath": imagePath,
-        "medicID": arrayMedic
-    })
+        // "groupName": groupName,
+        // "imagePath": imagePath,
+        // "medicID": arrayMedic
+    }).then(function (docRef) {
+        //testar adicionar groupID
+        console.log(docRef.id);
+
+        db.collection("chat_grupo").doc(docRef.id).set({
+            "groupID": docRef.id,
+            "groupName": groupName,
+            "imagePath": imagePath,
+            "medicID": arrayMedic
+        });
+    });
+    document.getElementById("myForm3").style.display = "none";
 }
 
 function openForm3() {
+
     document.getElementById("myForm3").style.display = "block";
 
-    checkBox = document.createElement('input');
-    checkBox.setAttribute("type", "checkbox");
-
     db.collection("users_medic").get().then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          if (doc.exists) {
-    
-            checkBox.value = doc.data().username;
-            document.getElementById("myForm3").appendChild(checkBox);
-          } else {
-            console.log("No such document!");
-          }
-        })
-      
-      });
-    
-  }
-  
-  function closeForm3() {
-    document.getElementById("myForm3").style.display = "none";
-  
-  }
 
-    
+        querySnapshot.forEach(function (doc) {
+
+            if (doc.data().medicID != uid) {
+
+                checkBox = document.createElement('input');
+                checkBox.type = "checkbox";
+                checkBox.className = "checkbox";
+
+                label = document.createElement('label');
+                br = document.createElement('br');
+
+                if (doc.exists) {
+
+                    checkBox.name = "" + doc.data().username;
+                    checkBox.value = "" + doc.data().medicID
+                    //checkBox.id = "" + doc.data().medicID
+
+                    label.setAttribute("for", "" + doc.data().medicID)
+                    label.innerHTML = doc.data().username;
+
+                } else {
+                    console.log("No such document!");
+                }
+
+                document.getElementById("formCheckbox").appendChild(checkBox);
+                document.getElementById("formCheckbox").appendChild(label);
+                document.getElementById("formCheckbox").appendChild(br);
+            }
+        })
+    });
+}
+
+function closeForm3() {
+    document.getElementById("myForm3").style.display = "none";
+
+}
