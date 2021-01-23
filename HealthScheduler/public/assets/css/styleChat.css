@@ -445,3 +445,77 @@
   background-color: grey;
   color: white;
 }
+
+.chat-popup {
+  width: auto;
+  display: none;
+  position: fixed;
+  border: 3px solid #f1f1f1;
+  box-shadow: black;
+  border-radius: 10px;
+  margin-left: 100px;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1), 0 1px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.form-container input {
+  display: block;
+  padding: 13px 15px;
+  width: 200px;
+  margin: 0.7em auto;
+  border: none;
+  border: 1px solid #333;
+  background: rgb(255, 255, 255, 0.3);
+  outline: none;
+  color: #111;
+}
+
+/* Full-width textarea */
+.form-container textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  resize: none;
+  min-height: 100px;
+}
+
+/* When the textarea gets focus, do something */
+.form-container textarea:focus {
+  background-color: #ddd;
+  outline: 1px;
+}
+
+.btn{
+  width: auto;
+  background-color: #1b736f;
+  padding: 10px;
+  border: none;
+  color: white;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover,
+.open-button:hover {
+  opacity: 1;
+}
+
+.form {
+  width: 75%;
+  margin: 0;
+  padding: 0;
+  margin-left: 268px;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+
