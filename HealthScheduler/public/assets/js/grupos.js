@@ -60,26 +60,28 @@ db.collection("chat_grupo").onSnapshot(function (querySnapshot) {
                 listItem2.className = 'listItems usernameOfUser';
 
 
+
+
                 // para funcionar todos basta mudar para snapshot, erro!
 
-                // db.collection("chat_grupo").doc().collection("latest_messages").doc("latest_message").onSnapshot(function (doc3) {
+                // db.collection("chat_grupo").doc(doc.data().groupID).collection("latest_messages").doc("latest_message").onSnapshot(function (doc3) {
                 //     listItemLatestMessage.innerHTML = "";
                 //     if (doc3.exists) {
-                //         console.log("data:" + doc2.data())
+                //         console.log("data:" + doc3.data())
 
                 //         if (doc3.data().messageType == "text") {
                 //             listItemLatestMessage = document.createElement('span');
                 //             listItemLatestMessage.className = 'listItems latestMessage';
                 //             listItemLatestMessage.innerHTML = doc3.data().message;
                 //             divInsideUsers.appendChild(listItemLatestMessage);
-
-                //         } else if (doc3.data().messageType == "image") {
+                //         } 
+                //         else if (doc3.data().messageType == "image") {
                 //             listItemLatestMessage = document.createElement('span');
                 //             listItemLatestMessage.className = 'listItems latestMessage';
                 //             listItemLatestMessage.innerHTML = "Imagem.";
                 //             divInsideUsers.appendChild(listItemLatestMessage);
-
-                //         } else {
+                //         } 
+                //         else {
                 //             listItemLatestMessage.innerHTML = "Audio.";
                 //             divInsideUsers.appendChild(listItemLatestMessage);
                 //         }
@@ -96,6 +98,24 @@ db.collection("chat_grupo").onSnapshot(function (querySnapshot) {
                 divInsideUsersImg.appendChild(listItem);
                 divInsideUsers.appendChild(listItem2);
 
+                for (i = 0; i < doc.data().medicID.length; i++) {
+
+                    db.collection("users_medic").doc(doc.data().medicID[i]).get().then(function (doc) {
+
+                        if (doc.exists) {
+                            
+                            br = document.createElement('br');
+                            listItem3 = document.createElement('span');
+                            listItem3.className = 'listItems usernameOfUser';
+
+                            username = doc.data().username;
+                            listItem3.innerHTML = username;
+
+                            divInsideUsers.appendChild(br);
+                            divInsideUsers.appendChild(listItem3);
+                        }
+                    });
+                }
 
                 listElement.addEventListener("click", function () {
                     groupID = doc.data().groupID;
@@ -104,12 +124,9 @@ db.collection("chat_grupo").onSnapshot(function (querySnapshot) {
                     nameOfTheUser.className = "nameOfTheUser";
                     nameOfTheUser.innerHTML = doc.data().groupName;
                     listAllGroupMessages(groupID);
-
                 });
-
             }
         }
-
     });
     userContainer.appendChild(listContainer);
 });
@@ -360,7 +377,14 @@ sendmsg.addEventListener("click", function () {
     });
 
     document.getElementById('message').value = '';
+});
 
+
+
+var fileButton = document.getElementById('image');
+var file
+fileButton.addEventListener('change', function (e) {
+    file = e.target.files[0];
 });
 
 
@@ -370,6 +394,7 @@ function createGroup() {
     var imagePath = "";
 
     var inputElements = document.getElementsByClassName('checkbox');
+
     for (var i = 0; inputElements[i]; ++i) {
         if (inputElements[i].checked) {
             arrayMedic.push(inputElements[i].value);
@@ -379,63 +404,57 @@ function createGroup() {
 
     groupName = document.getElementById("groupName").value;
 
-    var fileButton = document.getElementById('image');
+    var fileImg = document.getElementById("image").files[0];
+    var durl = '';
 
-    fileButton.addEventListener('change', function (e) {
-        var file = e.target.files[0];
+    var metadata = {
+        contentType: 'image/jpeg'
+    };
 
-        var fileImg = document.getElementById("image").files[0];
-        var durl = '';
+    var files = file.name;
 
-        var metadata = {
-            contentType: 'image/jpeg'
-        };
+    var uploadTask = firebase.storage().ref().child('images/' + filename).put(fileImg, metadata);
 
-        var files = file.name;
+    var filename = files.replace('blob:http://localhost:5000/', '');
 
-        var uploadTask = firebase.storage().ref().child('images/' + files).put(fileImg, metadata);
+    uploadTask.on('state_changed', function (snapshot) {
+        switch (snapshot.state) {
+            case firebase.storage.TaskState.PAUSED: // or 'paused'
+                // console.log('Upload is paused');
+                break;
+            case firebase.storage.TaskState.RUNNING: // or 'running'
+                // console.log('Upload is running');
+                break;
+        }
+    }, function (error) {
+        // Handle unsuccessful uploads
+    }, function () {
+        // Handle successful uploads on complete
+        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
 
-        uploadTask.on('state_changed', function (snapshot) {
-            switch (snapshot.state) {
-                case firebase.storage.TaskState.PAUSED: // or 'paused'
-                    // console.log('Upload is paused');
-                    break;
-                case firebase.storage.TaskState.RUNNING: // or 'running'
-                    // console.log('Upload is running');
-                    break;
-            }
-        }, function (error) {
-            // Handle unsuccessful uploads
-        }, function () {
-            // Handle successful uploads on complete
-            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-            uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+            imagePath = downloadURL;
 
+            db.collection("chat_grupo").add({
+                // "groupName": groupName,
+                // "imagePath": imagePath,
+                // "medicID": arrayMedic
+            }).then(function (docRef) {
+                //testar adicionar groupID
+                console.log(docRef.id);
 
-                imagePath = downloadURL;
-
-                console.log(imagePath);
-
+                db.collection("chat_grupo").doc(docRef.id).set({
+                    "groupID": docRef.id,
+                    "groupName": groupName,
+                    "imagePath": imagePath,
+                    "medicID": arrayMedic
+                });
             });
+
+            console.log(imagePath);
         });
     });
 
-
-    db.collection("chat_grupo").add({
-        // "groupName": groupName,
-        // "imagePath": imagePath,
-        // "medicID": arrayMedic
-    }).then(function (docRef) {
-        //testar adicionar groupID
-        console.log(docRef.id);
-
-        db.collection("chat_grupo").doc(docRef.id).set({
-            "groupID": docRef.id,
-            "groupName": groupName,
-            "imagePath": imagePath,
-            "medicID": arrayMedic
-        });
-    });
     document.getElementById("myForm3").style.display = "none";
 }
 
