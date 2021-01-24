@@ -363,10 +363,11 @@ sendmsg.addEventListener("click", function () {
 
 });
 
+
 function createGroup() {
     var groupName = "";
-    var imagePath = "";
     var arrayMedic = [uid];
+    var imagePath = "";
 
     var inputElements = document.getElementsByClassName('checkbox');
     for (var i = 0; inputElements[i]; ++i) {
@@ -377,7 +378,48 @@ function createGroup() {
     console.log(arrayMedic);
 
     groupName = document.getElementById("groupName").value;
-    imagePath = document.getElementById("image").value;
+
+    var fileButton = document.getElementById('image');
+
+    fileButton.addEventListener('change', function (e) {
+        var file = e.target.files[0];
+
+        var fileImg = document.getElementById("image").files[0];
+        var durl = '';
+
+        var metadata = {
+            contentType: 'image/jpeg'
+        };
+
+        var files = file.name;
+
+        var uploadTask = firebase.storage().ref().child('images/' + files).put(fileImg, metadata);
+
+        uploadTask.on('state_changed', function (snapshot) {
+            switch (snapshot.state) {
+                case firebase.storage.TaskState.PAUSED: // or 'paused'
+                    // console.log('Upload is paused');
+                    break;
+                case firebase.storage.TaskState.RUNNING: // or 'running'
+                    // console.log('Upload is running');
+                    break;
+            }
+        }, function (error) {
+            // Handle unsuccessful uploads
+        }, function () {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+
+
+                imagePath = downloadURL;
+
+                console.log(imagePath);
+
+            });
+        });
+    });
+
 
     db.collection("chat_grupo").add({
         // "groupName": groupName,
