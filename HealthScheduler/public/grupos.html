@@ -8,7 +8,7 @@
   <link rel="shortcut icon" href="assets/img/logo.png">
   <link href='https://fonts.googleapis.com/css?family=Montserrat:700,400' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="assets/css/styleChat.css">
+  <link rel="stylesheet" href="assets/css/styleChatGroup.css">
   <link rel="stylesheet" href="assets/css/navBar.css">
 
 
@@ -60,7 +60,7 @@
           <p>Calendário</p>
         </a>
       </li>
-      <li class="navListitem navListitem-active">
+      <li class="navListitem">
         <a href="chat.html">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path
@@ -77,13 +77,13 @@
         <a href="grupos.html">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path
-              d="M5,18v3.766l1.515-0.909l0,0L11.277,18H16c1.103,0,2-0.897,2-2V8c0-1.103-0.897-2-2-2H4C2.897,6,2,6.897,2,8v8 c0,1.103,0.897,2,2,2H5z M4,8h12v8h-5.277L7,18.234V16H4V8z">
+              d="M16.604,11.048c0.604-1.029,0.872-2.228,0.751-3.44c-0.179-1.784-1.175-3.361-2.803-4.44l-1.105,1.666 c1.119,0.742,1.8,1.799,1.918,2.974c0.11,1.105-0.28,2.194-1.072,2.986l-1.192,1.192l1.618,0.475C18.951,13.701,19,17.957,19,18h2 C21,16.211,20.044,12.715,16.604,11.048z">
             </path>
             <path
-              d="M20,2h-1h-2.002H8C6.897,2,6,2.897,6,4h10.586H18c1.103,0,2,0.897,2,2v1.414V12v2c1.103,0,2-0.897,2-2V7V5V4 C22,2.897,21.103,2,20,2z">
+              d="M9.5 12c2.206 0 4-1.794 4-4s-1.794-4-4-4-4 1.794-4 4S7.294 12 9.5 12zM9.5 6c1.103 0 2 .897 2 2s-.897 2-2 2-2-.897-2-2S8.397 6 9.5 6zM11 13H8c-3.309 0-6 2.691-6 6v1h2v-1c0-2.206 1.794-4 4-4h3c2.206 0 4 1.794 4 4v1h2v-1C17 15.691 14.309 13 11 13z">
             </path>
           </svg>
-          <p>Chat</p>
+          <p>Chat de grupo</p>
         </a>
       </li>
       <li class="navListitem logOut">
@@ -99,18 +99,18 @@
   <div class="container">
     <div class="chatContainer">
       <div class="userContainer" id="userContainer">
-        <svg onclick="openForm3()" id="buttonEditNameUser" class="iconEditUser" xmlns="http://www.w3.org/2000/svg"
-          width="24" height="24" viewBox="0 0 24 24">
-          <path transform="rotate(45.001 16.357 4.656)" d="M14.235 3.039H18.478V6.273H14.235z"></path>
-          <path d="M4 14L4 17 7 17 15.299 8.713 12.299 5.713zM4 20H20V22H4z"></path>
-        </svg>
+        <div class="settingGroup">
+          <svg onclick="openForm3()" id="buttonEditNameUser" class="iconEditUser" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:rgba(0, 0, 0, 1);transform:;-ms-filter:"><path d="M19 11L13 11 13 5 11 5 11 11 5 11 5 13 11 13 11 19 13 19 13 13 19 13z"></path></svg>
+        </div>
         <div class="chat-popup" id="myForm3">
           <form class="form-container" id="formCheckbox">
             <input type="text" placeholder="Insira o nome do seu grupo" id="groupName">
             <input type="file" id="image">
+            <div class="classBtns">
+              <button id="createGroup" type="button" class="btn" onclick="createGroup(event)">Criar Grupo</button>
+              <button type="button" class="btn cancel" onclick="closeForm3()">Fechar</button>
+            </div>
           </form>
-          <button id="createGroup" type="button" class="btn" onclick="createGroup(event)">Criar Grupo</button>
-          <button type="button" class="btn cancel" onclick="closeForm3()">Fechar</button>
           </form>
         </div>
         <div class="allUsersContainer" id="allUsersContainer">
