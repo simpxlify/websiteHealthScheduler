@@ -45,95 +45,95 @@ function openTab(evt, TipoDeLista) {
     Medicos();
   }
   if (TipoDeLista == "Grupos") {
-    window.location.replace("grupos.html");
+    // window.location.replace("grupos.html");
 
   }
 }
 
-function Grupos() {
+// function Grupos() {
 
-  db.collection("chat_grupo").onSnapshot(function (querySnapshot) {
+//   db.collection("chat_grupo").onSnapshot(function (querySnapshot) {
 
-    listContainer.innerHTML = '';
+//     listContainer.innerHTML = '';
 
-    querySnapshot.forEach(function (doc) {
+//     querySnapshot.forEach(function (doc) {
 
-      // var listContainer = document.createElement('div');
+//       // var listContainer = document.createElement('div');
 
-      var containerUsers = document.createElement('div');
-      containerUsers.className = 'usersBox';
+//       var containerUsers = document.createElement('div');
+//       containerUsers.className = 'usersBox';
 
-      listContainer.appendChild(containerUsers);
+//       listContainer.appendChild(containerUsers);
 
-      // Make the list
-      var listElement = document.createElement('ul');
-      listElement.className = 'listOfUsers';
-      // Set up a loop that goes through the items in listItems one at a time
+//       // Make the list
+//       var listElement = document.createElement('ul');
+//       listElement.className = 'listOfUsers';
+//       // Set up a loop that goes through the items in listItems one at a time
 
-      // let div = document.createElement('div')
-      document.getElementsByTagName('body')[0].appendChild(listContainer);
-      containerUsers.appendChild(listElement);
+//       // let div = document.createElement('div')
+//       document.getElementsByTagName('body')[0].appendChild(listContainer);
+//       containerUsers.appendChild(listElement);
 
-      var divInsideUsers = document.createElement('div');
-      divInsideUsers.className = "divOfUsersInsideBox"
-      listElement.appendChild(divInsideUsers);
+//       var divInsideUsers = document.createElement('div');
+//       divInsideUsers.className = "divOfUsersInsideBox"
+//       listElement.appendChild(divInsideUsers);
 
-      var divInsideUsersImg = document.createElement('div');
-      divInsideUsersImg.className = "divInsideUsersImg"
-      listElement.appendChild(divInsideUsersImg);
+//       var divInsideUsersImg = document.createElement('div');
+//       divInsideUsersImg.className = "divInsideUsersImg"
+//       listElement.appendChild(divInsideUsersImg);
 
-      listItem2 = document.createElement('span');
-      listItem2.className = 'listItems usernameOfUser';
-
-
-      // para funcionar todos basta mudar para snapshot, erro!
-
-      db.collection("latest_messages").doc(uid).collection("latest_message").doc(doc.data().medicID).onSnapshot(function (doc2) {
-        if (doc2.exists) {
-
-          if (doc2.data().messageType == "text") {
-            listItemLatestMessage = document.createElement('span');
-            listItemLatestMessage.className = 'listItems latestMessage';
-            listItemLatestMessage.innerHTML = doc2.data().message;
-            divInsideUsers.appendChild(listItemLatestMessage);
-
-          } else if (doc2.data().messageType == "image") {
-            listItemLatestMessage = document.createElement('span');
-            listItemLatestMessage.className = 'listItems latestMessage';
-            listItemLatestMessage.innerHTML = "Imagem.";
-            divInsideUsers.appendChild(listItemLatestMessage);
-
-          } else {
-            listItemLatestMessage.innerHTML = "Audio.";
-            divInsideUsers.appendChild(listItemLatestMessage);
-          }
-        }
-      });
-
-      listItem = document.createElement('img');
-      listItem.className = 'imgRedonda'
-      // Add the item text
-      listItem2.innerHTML = doc.data().username;
-      listItem.src = doc.data().imagePath;
-
-      // Add listItem to the listElement
-      divInsideUsersImg.appendChild(listItem);
-      divInsideUsers.appendChild(listItem2);
+//       listItem2 = document.createElement('span');
+//       listItem2.className = 'listItems usernameOfUser';
 
 
-      listElement.addEventListener("click", function () {
-        toId = doc.data().userID;
-        listElement.className = 'listOfUsers';
-        var nameOfTheUser = document.getElementById("nameOfTheUser");
-        nameOfTheUser.className = "nameOfTheUser";
-        nameOfTheUser.innerHTML = doc.data().username;
-        //sendMessage(uid, toId);
-        listAllMessages(uid, toId);
-      });
-    });
-    userContainer.appendChild(listContainer);
-  });
-}
+//       // para funcionar todos basta mudar para snapshot, erro!
+
+//       db.collection("latest_messages").doc(uid).collection("latest_message").doc(doc.data().medicID).onSnapshot(function (doc2) {
+//         if (doc2.exists) {
+
+//           if (doc2.data().messageType == "text") {
+//             listItemLatestMessage = document.createElement('span');
+//             listItemLatestMessage.className = 'listItems latestMessage';
+//             listItemLatestMessage.innerHTML = doc2.data().message;
+//             divInsideUsers.appendChild(listItemLatestMessage);
+
+//           } else if (doc2.data().messageType == "image") {
+//             listItemLatestMessage = document.createElement('span');
+//             listItemLatestMessage.className = 'listItems latestMessage';
+//             listItemLatestMessage.innerHTML = "Imagem.";
+//             divInsideUsers.appendChild(listItemLatestMessage);
+
+//           } else {
+//             listItemLatestMessage.innerHTML = "Audio.";
+//             divInsideUsers.appendChild(listItemLatestMessage);
+//           }
+//         }
+//       });
+
+//       listItem = document.createElement('img');
+//       listItem.className = 'imgRedonda'
+//       // Add the item text
+//       listItem2.innerHTML = doc.data().username;
+//       listItem.src = doc.data().imagePath;
+
+//       // Add listItem to the listElement
+//       divInsideUsersImg.appendChild(listItem);
+//       divInsideUsers.appendChild(listItem2);
+
+
+//       listElement.addEventListener("click", function () {
+//         toId = doc.data().userID;
+//         listElement.className = 'listOfUsers';
+//         var nameOfTheUser = document.getElementById("nameOfTheUser");
+//         nameOfTheUser.className = "nameOfTheUser";
+//         nameOfTheUser.innerHTML = doc.data().username;
+//         //sendMessage(uid, toId);
+//         listAllMessages(uid, toId);
+//       });
+//     });
+//     userContainer.appendChild(listContainer);
+//   });
+// }
 
 function Pacientes() {
 

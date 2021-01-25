@@ -59,35 +59,6 @@ db.collection("chat_grupo").onSnapshot(function (querySnapshot) {
                 listItem2 = document.createElement('span');
                 listItem2.className = 'listItems usernameOfUser';
 
-
-
-
-                // para funcionar todos basta mudar para snapshot, erro!
-
-                // db.collection("chat_grupo").doc(doc.data().groupID).collection("latest_messages").doc("latest_message").onSnapshot(function (doc3) {
-                //     listItemLatestMessage.innerHTML = "";
-                //     if (doc3.exists) {
-                //         console.log("data:" + doc3.data())
-
-                //         if (doc3.data().messageType == "text") {
-                //             listItemLatestMessage = document.createElement('span');
-                //             listItemLatestMessage.className = 'listItems latestMessage';
-                //             listItemLatestMessage.innerHTML = doc3.data().message;
-                //             divInsideUsers.appendChild(listItemLatestMessage);
-                //         } 
-                //         else if (doc3.data().messageType == "image") {
-                //             listItemLatestMessage = document.createElement('span');
-                //             listItemLatestMessage.className = 'listItems latestMessage';
-                //             listItemLatestMessage.innerHTML = "Imagem.";
-                //             divInsideUsers.appendChild(listItemLatestMessage);
-                //         } 
-                //         else {
-                //             listItemLatestMessage.innerHTML = "Audio.";
-                //             divInsideUsers.appendChild(listItemLatestMessage);
-                //         }
-                //     }
-                // });
-
                 listItem = document.createElement('img');
                 listItem.className = 'imgRedonda'
                 // Add the item text
@@ -98,23 +69,25 @@ db.collection("chat_grupo").onSnapshot(function (querySnapshot) {
                 divInsideUsersImg.appendChild(listItem);
                 divInsideUsers.appendChild(listItem2);
 
+                var listSelectPatients = document.createElement('select');
                 for (i = 0; i < doc.data().medicID.length; i++) {
 
                     db.collection("users_medic").doc(doc.data().medicID[i]).get().then(function (doc) {
 
                         if (doc.exists) {
 
-                            br = document.createElement('br');
-                            listItem3 = document.createElement('span');
+                            listItem3 = document.createElement('option');
                             listItem3.className = 'listItems usernameOfUser';
 
                             username = doc.data().username;
                             listItem3.innerHTML = username;
-
-                            divInsideUsers.appendChild(br);
-                            divInsideUsers.appendChild(listItem3);
+                            
+                            listSelectPatients.appendChild(listItem3);
+                        
                         }
                     });
+
+                    divInsideUsers.appendChild(listSelectPatients);
                 }
 
                 listElement.addEventListener("click", function () {
@@ -123,6 +96,10 @@ db.collection("chat_grupo").onSnapshot(function (querySnapshot) {
                     var nameOfTheUser = document.getElementById("nameOfTheUser");
                     nameOfTheUser.className = "nameOfTheUser";
                     nameOfTheUser.innerHTML = doc.data().groupName;
+                    // var btn = document.createElement('button');
+                    // btn.id = "buttonOptions";
+                    // btn.className = "iconOptions";
+                    // nameOfTheUser.appendChild(btn);
                     listAllGroupMessages(groupID);
                 });
             }
@@ -418,7 +395,6 @@ buttonCreateGroup.addEventListener("click", function () {
 
     var uploadTask = firebase.storage().ref().child('images/' + filename).put(fileImg, metadata);
 
-
     uploadTask.on('state_changed', function (snapshot) {
         switch (snapshot.state) {
             case firebase.storage.TaskState.PAUSED: // or 'paused'
@@ -502,15 +478,5 @@ function openForm3() {
 
 function closeForm3() {
     document.getElementById("myForm3").style.display = "none";
-
-}
-
-function openForm4() {
-
-    document.getElementById("myForm4").style.display = "block";
-}
-
-function closeForm4() {
-    document.getElementById("myForm4").style.display = "none";
 
 }
