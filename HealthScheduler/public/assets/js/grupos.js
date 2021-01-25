@@ -337,27 +337,33 @@ var sendmsg = document.getElementById("sendmsg");
 
 sendmsg.addEventListener("click", function () {
 
-    var text1 = "text";
+    var mensagem = document.getElementById('message').value;
 
-    var timeStamp3 = parseInt(Date.now() / 1000);
+    if(mensagem == ""){
 
-    var message1 = document.getElementById("message").value;
+    } else{
+        var text1 = "text";
 
-    db.collection('chat_grupo').doc(groupID).collection("messages").add({
-        "senderID": uid,
-        "message": message1,
-        "messageType": text1,
-        "timeStamp": timeStamp3
-    });
-
-    db.collection('chat_grupo').doc(groupID).collection('latest_messages').doc("latest_message").set({
-        "senderID": uid,
-        "message": message1,
-        "messageType": text1,
-        "timeStamp": timeStamp3
-    });
-
-    document.getElementById('message').value = '';
+        var timeStamp3 = parseInt(Date.now() / 1000);
+    
+        var message1 = document.getElementById("message").value;
+    
+        db.collection('chat_grupo').doc(groupID).collection("messages").add({
+            "senderID": uid,
+            "message": message1,
+            "messageType": text1,
+            "timeStamp": timeStamp3
+        });
+    
+        db.collection('chat_grupo').doc(groupID).collection('latest_messages').doc("latest_message").set({
+            "senderID": uid,
+            "message": message1,
+            "messageType": text1,
+            "timeStamp": timeStamp3
+        });
+    
+        document.getElementById('message').value = '';
+    }
 });
 
 

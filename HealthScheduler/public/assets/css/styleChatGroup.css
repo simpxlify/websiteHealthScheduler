@@ -219,8 +219,7 @@ select::-ms-expand {
 }
 
 .input {
-  width: 90%;
-  padding: 10px 0 10px 10px;
+  width: 100%;
 }
 
 .input input {
@@ -246,7 +245,7 @@ select::-ms-expand {
 }
 
 .buttonMessage {
-  width: 5%;
+  width: 100%;
   margin: auto;
 }
 
@@ -610,6 +609,10 @@ select::-ms-expand {
 
 .settingGroup {
   display: flex;
+  background: lightgray;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   justify-content: center;
   align-items: center;
   text-align: center;
