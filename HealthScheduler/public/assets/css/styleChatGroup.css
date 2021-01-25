@@ -450,6 +450,7 @@
 .chat-popup {
   width: auto;
   display: none;
+  overflow-y: auto;
   position: fixed;
   border: 3px solid #f1f1f1;
   box-shadow: black;
@@ -463,7 +464,7 @@
 .form-container {
   width: 100%;
   padding: 10px;
-  height: 240px;
+  height: 100%;
   background-color: white;
   box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1), 0 1px 10px 0 rgba(0, 0, 0, 0.1);
 }

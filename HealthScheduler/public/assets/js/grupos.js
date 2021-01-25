@@ -463,15 +463,13 @@ buttonCreateGroup.addEventListener("click", function () {
 function openForm3() {
 
     document.getElementById("myForm3").style.display = "block";
-
     db.collection("users_medic").get().then(function (querySnapshot) {
 
         querySnapshot.forEach(function (doc) {
+            divOfMedicsList = document.createElement('div');
+            divOfMedicsList.className = "divOfMedicsList";
 
             if (doc.data().medicID != uid) {
-
-                divOfMedicsList = document.createElement('div');
-                divOfMedicsList.className = "divOfMedicsList";
 
                 checkBox = document.createElement('input');
                 checkBox.type = "checkbox";
