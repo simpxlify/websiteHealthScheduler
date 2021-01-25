@@ -70,6 +70,11 @@ db.collection("chat_grupo").onSnapshot(function (querySnapshot) {
                 divInsideUsers.appendChild(listItem2);
 
                 var listSelectPatients = document.createElement('select');
+                var optionDefault = document.createElement('option');
+                optionDefault.style = "display:none";
+                optionDefault.value = "";
+                optionDefault.innerHTML = "Ver participantes";
+                listSelectPatients.appendChild(optionDefault);
                 for (i = 0; i < doc.data().medicID.length; i++) {
 
                     db.collection("users_medic").doc(doc.data().medicID[i]).get().then(function (doc) {
@@ -86,7 +91,6 @@ db.collection("chat_grupo").onSnapshot(function (querySnapshot) {
                         
                         }
                     });
-
                     divInsideUsers.appendChild(listSelectPatients);
                 }
 
