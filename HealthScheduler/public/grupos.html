@@ -99,10 +99,19 @@
   <div class="container">
     <div class="chatContainer">
       <div class="userContainer" id="userContainer">
-        <div class="tab">
-          <button class="tablinks" onclick="openTab(event, 'Pacientes')">Pacientes</button>
-          <button class="tablinks" onclick="openTab(event, 'Medicos')">Médicos</button>
-          <button class="tablinks" onclick="openTab(event, 'Grupos')">Grupos</button>
+        <svg onclick="openForm3()" id="buttonEditNameUser" class="iconEditUser" xmlns="http://www.w3.org/2000/svg"
+          width="24" height="24" viewBox="0 0 24 24">
+          <path transform="rotate(45.001 16.357 4.656)" d="M14.235 3.039H18.478V6.273H14.235z"></path>
+          <path d="M4 14L4 17 7 17 15.299 8.713 12.299 5.713zM4 20H20V22H4z"></path>
+        </svg>
+        <div class="chat-popup" id="myForm3">
+          <form class="form-container" id="formCheckbox">
+            <input type="text" placeholder="Insira o nome do seu grupo" id="groupName">
+            <input type="file" id="image">
+          </form>
+          <button id="createGroup" type="button" class="btn" onclick="createGroup(event)">Criar Grupo</button>
+          <button type="button" class="btn cancel" onclick="closeForm3()">Fechar</button>
+          </form>
         </div>
         <div class="allUsersContainer" id="allUsersContainer">
         </div>
@@ -115,37 +124,19 @@
           <div class="allMessagesList" id="allMessagesList">
 
           </div>
-          <!-- <form onclick="return sendMessage();"> -->
           <div class="sendMessage">
             <div class="bottomMessages">
-              <div class="sendMessageInput">
-                <div class="input">
-                  <input id="message" placeholder="Enter message" autocomplete="off" onkeydown="myFunction(event)">
-                </div>
+              <div class="input">
+                <input id="message" placeholder="Enter message" autocomplete="off" onkeydown="myFunction(event)">
               </div>
-              <div class="buttonsForChatMessage">
-                <div class="buttonMessage">
-                  <button id="sendimg">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                      <path d="M4,5h13v7h2V5c0-1.103-0.897-2-2-2H4C2.897,3,2,3.897,2,5v12c0,1.103,0.897,2,2,2h8v-2H4V5z">
-                      </path>
-                      <path d="M8 11L5 15 16 15 12 9 9 13z"></path>
-                      <path d="M19 14L17 14 17 17 14 17 14 19 17 19 17 22 19 22 19 19 22 19 22 17 19 17z"></path>
-                    </svg>
-                    <div class="uploadImage"><input type="file" class="inputImage" id="photo" onclick="sendImage(event)">
-                    </div>
-                    
-                  </button>
-                  <button id="sendmsg">
-                    <svg class="sendIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                      <path
-                        d="M21.426,11.095l-17-8c-0.35-0.163-0.763-0.112-1.061,0.133C3.066,3.473,2.937,3.868,3.03,4.242L4.969,12L3.03,19.758 c-0.094,0.374,0.036,0.77,0.335,1.015C3.548,20.923,3.772,21,4,21c0.145,0,0.29-0.031,0.426-0.095l17-8 C21.776,12.74,22,12.388,22,12S21.776,11.26,21.426,11.095z M5.481,18.197L6.32,14.84L12,12L6.32,9.16L5.481,5.803L18.651,12 L5.481,18.197z">
-                      </path>
-                    </svg></button>
-                </div>
+              <div class="buttonMessage">
+                <button id="sendmsg">
+                  <svg class="sendIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                      d="M21.426,11.095l-17-8c-0.35-0.163-0.763-0.112-1.061,0.133C3.066,3.473,2.937,3.868,3.03,4.242L4.969,12L3.03,19.758 c-0.094,0.374,0.036,0.77,0.335,1.015C3.548,20.923,3.772,21,4,21c0.145,0,0.29-0.031,0.426-0.095l17-8 C21.776,12.74,22,12.388,22,12S21.776,11.26,21.426,11.095z M5.481,18.197L6.32,14.84L12,12L6.32,9.16L5.481,5.803L18.651,12 L5.481,18.197z">
+                    </path>
+                  </svg></button>
               </div>
-              <!-- <input type="submit">
-              </form> -->
             </div>
           </div>
         </div>
@@ -167,7 +158,7 @@
 <!-- partial -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src="assets/js/chat.js"></script>
+<script src="assets/js/grupos.js"></script>
 <script src="assets/js/navbar.js"></script>
 
 
