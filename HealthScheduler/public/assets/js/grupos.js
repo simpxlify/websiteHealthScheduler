@@ -480,3 +480,64 @@ function closeForm3() {
     document.getElementById("myForm3").style.display = "none";
 
 }
+
+function sendImage() {
+    var fileButton1 = document.getElementById('photo');
+  
+    fileButton1.addEventListener('change', function (e) {
+      var file1 = e.target.files[0];
+  
+      var fileImg1 = document.getElementById("photo").files[0];
+      var durl = '';
+  
+      var metadata1 = {
+        contentType: 'image/jpeg'
+      };
+  
+      var files1 = file1.name;
+  
+      var uploadTask1 = firebase.storage().ref().child('images/' + files1).put(fileImg1, metadata1);
+  
+      uploadTask1.on('state_changed', function (snapshot) {
+        switch (snapshot.state) {
+          case firebase.storage.TaskState.PAUSED: // or 'paused'
+            // console.log('Upload is paused');
+            break;
+          case firebase.storage.TaskState.RUNNING: // or 'running'
+            // console.log('Upload is running');
+            break;
+        }
+      }, function (error) {
+        // Handle unsuccessful uploads
+      }, function () {
+        // Handle successful uploads on complete
+        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+        uploadTask1.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+  
+            var image1 = "image";
+  
+            var timeStamp3 = parseInt(Date.now() / 1000);
+  
+            var message1 = downloadURL;
+  
+            db.collection('chat_grupo').doc(groupID).collection("messages").add({
+                "senderID": uid,
+                "message": message1,
+                "messageType": image1,
+                "timeStamp": timeStamp3
+            });
+        
+            db.collection('chat_grupo').doc(groupID).collection('latest_messages').doc("latest_message").set({
+                "senderID": uid,
+                "message": message1,
+                "messageType": image1,
+                "timeStamp": timeStamp3
+            });
+
+            document.getElementById('message').value = '';
+          
+        });
+      });
+    });
+  
+  }

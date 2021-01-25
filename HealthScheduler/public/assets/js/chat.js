@@ -44,10 +44,10 @@ function openTab(evt, TipoDeLista) {
   if (TipoDeLista == "Medicos") {
     Medicos();
   }
-  if (TipoDeLista == "Grupos") {
-    // window.location.replace("grupos.html");
+  // if (TipoDeLista == "Grupos") {
+  //   // window.location.replace("grupos.html");
 
-  }
+  // }
 }
 
 // function Grupos() {
