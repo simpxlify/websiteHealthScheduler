@@ -103,7 +103,7 @@ db.collection("chat_grupo").onSnapshot(function (querySnapshot) {
                     db.collection("users_medic").doc(doc.data().medicID[i]).get().then(function (doc) {
 
                         if (doc.exists) {
-                            
+
                             br = document.createElement('br');
                             listItem3 = document.createElement('span');
                             listItem3.className = 'listItems usernameOfUser';
@@ -388,7 +388,8 @@ fileButton.addEventListener('change', function (e) {
 });
 
 
-function createGroup() {
+var buttonCreateGroup = document.getElementById("createGroup");
+buttonCreateGroup.addEventListener("click", function () {
     var groupName = "";
     var arrayMedic = [uid];
     var imagePath = "";
@@ -412,10 +413,11 @@ function createGroup() {
     };
 
     var files = file.name;
+    
+    var filename = files.replace('blob:http://localhost:5000/', '');
 
     var uploadTask = firebase.storage().ref().child('images/' + filename).put(fileImg, metadata);
 
-    var filename = files.replace('blob:http://localhost:5000/', '');
 
     uploadTask.on('state_changed', function (snapshot) {
         switch (snapshot.state) {
@@ -456,7 +458,7 @@ function createGroup() {
     });
 
     document.getElementById("myForm3").style.display = "none";
-}
+});
 
 function openForm3() {
 
@@ -467,6 +469,9 @@ function openForm3() {
         querySnapshot.forEach(function (doc) {
 
             if (doc.data().medicID != uid) {
+
+                divOfMedicsList = document.createElement('div');
+                divOfMedicsList.className = "divOfMedicsList";
 
                 checkBox = document.createElement('input');
                 checkBox.type = "checkbox";
@@ -488,9 +493,10 @@ function openForm3() {
                     console.log("No such document!");
                 }
 
-                document.getElementById("formCheckbox").appendChild(checkBox);
-                document.getElementById("formCheckbox").appendChild(label);
-                document.getElementById("formCheckbox").appendChild(br);
+                document.getElementById("formCheckbox").appendChild(divOfMedicsList);
+                divOfMedicsList.appendChild(label);
+                divOfMedicsList.appendChild(checkBox);
+                divOfMedicsList.appendChild(br);
             }
         })
     });
