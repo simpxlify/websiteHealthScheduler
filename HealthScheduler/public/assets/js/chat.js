@@ -45,7 +45,7 @@ function openTab(evt, TipoDeLista) {
     Medicos();
   }
   if (TipoDeLista == "Grupos") {
-    Grupos();
+    window.location.replace("grupos.html");
 
   }
 }

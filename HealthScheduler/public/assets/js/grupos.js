@@ -500,3 +500,13 @@ function closeForm3() {
     document.getElementById("myForm3").style.display = "none";
 
 }
+
+function openForm4() {
+
+    document.getElementById("myForm4").style.display = "block";
+}
+
+function closeForm4() {
+    document.getElementById("myForm4").style.display = "none";
+
+}

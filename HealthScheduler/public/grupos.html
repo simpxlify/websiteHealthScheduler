@@ -111,7 +111,6 @@
               <button type="button" class="btn cancel" onclick="closeForm3()">Fechar</button>
             </div>
           </form>
-          </form>
         </div>
         <div class="allUsersContainer" id="allUsersContainer">
         </div>
@@ -120,6 +119,22 @@
         <div class="allMessagesContainer" id="allMessagesContainer">
           <div class="nameOfUser">
             <h1 id="nameOfTheUser"></h1>
+            <svg onclick="openForm4()" id="buttonOptions" class="iconOptions" xmlns="http://www.w3.org/2000/svg"
+            width="24" height="24" viewBox="0 0 24 24">
+            <path transform="rotate(45.001 16.357 4.656)" d="M14.235 3.039H18.478V6.273H14.235z"></path>
+            <path d="M4 14L4 17 7 17 15.299 8.713 12.299 5.713zM4 20H20V22H4z"></path>
+          </svg>
+          <div class="chat-popup" id="myForm4">
+            <form class="form-container" id="formCheckbox2">
+              <label for="elements">Pacientes</label>
+              <br>
+              <select name="elements" id="elements">
+                <optgroup label="Pacientes">
+                </optgroup>
+              </select>
+              <br>
+            <button type="button" class="btn cancel" onclick="closeForm4()">Fechar</button>
+            </form>
           </div>
           <div class="allMessagesList" id="allMessagesList">
 
@@ -143,25 +158,11 @@
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
 </html>
 <!-- partial -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src="assets/js/grupos.js"></script>
 <script src="assets/js/navbar.js"></script>
-
-
 </body>
-
 </html>
