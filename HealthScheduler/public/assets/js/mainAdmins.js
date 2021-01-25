@@ -256,7 +256,6 @@ function listConsultas(uid) {
   db.collection("consultas").where("date", "==", todayDate).onSnapshot(function (querySnapshot) {
     consultaContainer.innerHTML = "";
     querySnapshot.forEach(function (doc) {
-        console.log(doc.data());
         var notes = doc.data().notes;
         var hour = doc.data().hour;
         var consultaContainer = document.getElementById('allConsultas');
