@@ -24,7 +24,7 @@ function login() {
                                     }
                                 } else if (doc.data().typeOfAcc == "Administrativo" || doc.data().typeOfAcc == "Enfermeiro"){
                                     if (emailVerf) {
-                                        window.location.replace("mainpageadmins.html");
+                                        window.location.replace("mainpageAdmins.html");
                                     } else {
                                         alert("Valide o email")
                                     }
