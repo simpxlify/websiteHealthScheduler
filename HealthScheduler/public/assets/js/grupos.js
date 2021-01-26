@@ -109,6 +109,8 @@ db.collection("chat_grupo").onSnapshot(function (querySnapshot) {
                     // btn.className = "iconOptions";
                     // nameOfTheUser.appendChild(btn);
                     listAllGroupMessages(groupID);
+
+                    document.getElementById('bottomMessagesShow').style.display = "flex";
                 });
             }
         }
@@ -554,5 +556,4 @@ function closeForm3() {
         });
       });
     });
-  
   
