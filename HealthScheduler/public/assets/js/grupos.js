@@ -24,7 +24,6 @@ var userContainer = document.getElementById('userContainer');
 
 var listContainer = document.getElementById('allUsersContainer');
 
-
 db.collection("chat_grupo").onSnapshot(function (querySnapshot) {
 
     listContainer.innerHTML = '';
@@ -63,15 +62,22 @@ db.collection("chat_grupo").onSnapshot(function (querySnapshot) {
                 listItem.className = 'imgRedonda'
                 // Add the item text
                 listItem2.innerHTML = doc.data().groupName;
-                if(doc.data().imagePath == ""){
+                if (doc.data().imagePath == "") {
                     listItem.src = "https://firebasestorage.googleapis.com/v0/b/healthscheduler-834e9.appspot.com/o/images%2Fpicuser.png?alt=media&token=ec435ba3-5fad-4223-a46a-7879db069ca5"
-                  } else{
+                } else {
                     listItem.src = doc.data().imagePath;
-                  }
+                }
 
                 // Add listItem to the listElement
                 divInsideUsersImg.appendChild(listItem);
                 divInsideUsers.appendChild(listItem2);
+
+                listItemLatestMessage = document.createElement('span');
+                listItemLatestMessage.className = 'listItems latestMessage';
+
+                listLatestMessages(doc.data().groupID, listItemLatestMessage);
+
+                divInsideUsers.appendChild(listItemLatestMessage);
 
                 var listSelectPatients = document.createElement('select');
                 var optionDefault = document.createElement('option');
@@ -90,9 +96,9 @@ db.collection("chat_grupo").onSnapshot(function (querySnapshot) {
 
                             username = doc.data().username;
                             listItem3.innerHTML = username;
-                            
+
                             listSelectPatients.appendChild(listItem3);
-                        
+
                         }
                     });
                     divInsideUsers.appendChild(listSelectPatients);
@@ -117,6 +123,31 @@ db.collection("chat_grupo").onSnapshot(function (querySnapshot) {
     });
     userContainer.appendChild(listContainer);
 });
+
+
+function listLatestMessages(groupID, listItemLatestMessage) {
+
+    db.collection("latest_messages").doc(groupID).onSnapshot(function (doc2) {
+        
+        if (doc2.exists) {
+
+            console.log(doc2.data().message);
+            console.log(doc2.data());
+
+            if (doc2.data().messageType == "text") {
+                listItemLatestMessage.innerHTML = doc2.data().message;
+
+            } else if (doc2.data().messageType == "image") {
+                listItemLatestMessage.innerHTML = "Imagem";
+
+            } else {
+                listItemLatestMessage.innerHTML = "Audio";
+            }
+        }     
+    })
+}
+
+
 
 function listAllGroupMessages(groupID) {
     var allMessagesContainer = document.getElementById('allMessagesContainer');
@@ -345,29 +376,29 @@ sendmsg.addEventListener("click", function () {
 
     var mensagem = document.getElementById('message').value;
 
-    if(mensagem == ""){
+    if (mensagem == "") {
 
-    } else{
+    } else {
         var text1 = "text";
 
         var timeStamp3 = parseInt(Date.now() / 1000);
-    
+
         var message1 = document.getElementById("message").value;
-    
+
         db.collection('chat_grupo').doc(groupID).collection("messages").add({
             "senderID": uid,
             "message": message1,
             "messageType": text1,
             "timeStamp": timeStamp3
         });
-    
-        db.collection('chat_grupo').doc(groupID).collection('latest_messages').doc("latest_message").set({
+
+        db.collection('latest_messages').doc(groupID).set({
             "senderID": uid,
             "message": message1,
             "messageType": text1,
             "timeStamp": timeStamp3
         });
-    
+
         document.getElementById('message').value = '';
     }
 });
@@ -406,7 +437,7 @@ buttonCreateGroup.addEventListener("click", function () {
     };
 
     var files = file.name;
-    
+
     var filename = files.replace('blob:http://localhost:5000/', '');
 
     var uploadTask = firebase.storage().ref().child('images/' + filename).put(fileImg, metadata);
@@ -455,40 +486,50 @@ buttonCreateGroup.addEventListener("click", function () {
 function openForm3() {
 
     document.getElementById("myForm3").style.display = "block";
+
     db.collection("users_medic").get().then(function (querySnapshot) {
 
-        querySnapshot.forEach(function (doc) {
-            divOfMedicsList = document.createElement('div');
-            divOfMedicsList.className = "divOfMedicsList";
+        var divExists = document.getElementsByClassName('divOfMedicsList');
+        console.log(divExists)
 
-            if (doc.data().medicID != uid) {
+        if (divExists.length > 0) {
 
-                checkBox = document.createElement('input');
-                checkBox.type = "checkbox";
-                checkBox.className = "checkbox";
+        } else {
 
-                label = document.createElement('label');
-                br = document.createElement('br');
+            querySnapshot.forEach(function (doc) {
 
-                if (doc.exists) {
+                divOfMedicsList = document.createElement('div');
+                divOfMedicsList.className = "divOfMedicsList";
 
-                    checkBox.name = "" + doc.data().username;
-                    checkBox.value = "" + doc.data().medicID
-                    //checkBox.id = "" + doc.data().medicID
+                if (doc.data().medicID != uid) {
 
-                    label.setAttribute("for", "" + doc.data().medicID)
-                    label.innerHTML = doc.data().username;
+                    checkBox = document.createElement('input');
+                    checkBox.type = "checkbox";
+                    checkBox.className = "checkbox";
 
-                } else {
-                    console.log("No such document!");
+                    label = document.createElement('label');
+                    br = document.createElement('br');
+
+                    if (doc.exists) {
+
+                        checkBox.name = "" + doc.data().username;
+                        checkBox.value = "" + doc.data().medicID
+                        //checkBox.id = "" + doc.data().medicID
+
+                        label.setAttribute("for", "" + doc.data().medicID)
+                        label.innerHTML = doc.data().username;
+
+                    } else {
+                        console.log("No such document!");
+                    }
+
+                    document.getElementById("formCheckbox").appendChild(divOfMedicsList);
+                    divOfMedicsList.appendChild(label);
+                    divOfMedicsList.appendChild(checkBox);
+                    divOfMedicsList.appendChild(br);
                 }
-
-                document.getElementById("formCheckbox").appendChild(divOfMedicsList);
-                divOfMedicsList.appendChild(label);
-                divOfMedicsList.appendChild(checkBox);
-                divOfMedicsList.appendChild(br);
-            }
-        })
+            })
+        }
     });
 }
 
@@ -498,62 +539,59 @@ function closeForm3() {
 }
 
 
-    var fileButton1 = document.getElementById('photo');
-  
-    fileButton1.addEventListener('change', function (e) {
-      var file1 = e.target.files[0];
-  
-      var fileImg1 = document.getElementById("photo").files[0];
-      var durl = '';
-  
-      var metadata1 = {
+var fileButton1 = document.getElementById('photo');
+
+fileButton1.addEventListener('change', function (e) {
+    var file1 = e.target.files[0];
+
+    var fileImg1 = document.getElementById("photo").files[0];
+    var durl = '';
+
+    var metadata1 = {
         contentType: 'image/jpeg'
-      };
-  
-      var files1 = file1.name;
-  
-      var uploadTask1 = firebase.storage().ref().child('images/' + files1).put(fileImg1, metadata1);
-  
-      uploadTask1.on('state_changed', function (snapshot) {
+    };
+
+    var files1 = file1.name;
+
+    var uploadTask1 = firebase.storage().ref().child('images/' + files1).put(fileImg1, metadata1);
+
+    uploadTask1.on('state_changed', function (snapshot) {
         switch (snapshot.state) {
-          case firebase.storage.TaskState.PAUSED: // or 'paused'
-            // console.log('Upload is paused');
-            break;
-          case firebase.storage.TaskState.RUNNING: // or 'running'
-            // console.log('Upload is running');
-            break;
+            case firebase.storage.TaskState.PAUSED: // or 'paused'
+                // console.log('Upload is paused');
+                break;
+            case firebase.storage.TaskState.RUNNING: // or 'running'
+                // console.log('Upload is running');
+                break;
         }
-      }, function (error) {
+    }, function (error) {
         // Handle unsuccessful uploads
-      }, function () {
+    }, function () {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         uploadTask1.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-  
+
             var image1 = "image";
-  
+
             var timeStamp3 = parseInt(Date.now() / 1000);
-  
+
             var message1 = downloadURL;
-  
+
             db.collection('chat_grupo').doc(groupID).collection("messages").add({
                 "senderID": uid,
                 "message": message1,
                 "messageType": image1,
                 "timeStamp": timeStamp3
             });
-        
-            db.collection('chat_grupo').doc(groupID).collection('latest_messages').doc("latest_message").set({
+
+            db.collection('latest_messages').doc(groupID).set({
                 "senderID": uid,
                 "message": message1,
                 "messageType": image1,
                 "timeStamp": timeStamp3
             });
-
             document.getElementById('message').value = '';
             document.getElementById('photo').value = '';
-          
         });
-      });
     });
-  
+});
