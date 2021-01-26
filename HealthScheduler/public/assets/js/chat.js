@@ -176,7 +176,11 @@ function Pacientes() {
       listItem.className = 'imgRedonda'
       // Add the item text
       listItem2.innerHTML = doc.data().username;
-      listItem.src = doc.data().imagePath;
+      if(doc.data().imagePath == ""){
+        listItem.src = "https://firebasestorage.googleapis.com/v0/b/healthscheduler-834e9.appspot.com/o/images%2Fpicuser.png?alt=media&token=ec435ba3-5fad-4223-a46a-7879db069ca5"
+      } else{
+        listItem.src = doc.data().imagePath;
+      }
 
       // Add listItem to the listElement
       divInsideUsersImg.appendChild(listItem);
@@ -251,7 +255,11 @@ function Medicos() {
         listItem.className = 'imgRedonda'
         // Add the item text
         listItem2.innerHTML = doc.data().username;
-        listItem.src = doc.data().imagePath;
+        if(doc.data().imagePath == ""){
+          listItem.src = "https://firebasestorage.googleapis.com/v0/b/healthscheduler-834e9.appspot.com/o/images%2Fpicuser.png?alt=media&token=ec435ba3-5fad-4223-a46a-7879db069ca5"
+        } else{
+          listItem.src = doc.data().imagePath;
+        }
 
         // Add listItem to the listElement
         divInsideUsersImg.appendChild(listItem);
