@@ -201,6 +201,9 @@ function Pacientes() {
         nameOfTheUser.innerHTML = doc.data().username;
         //sendMessage(uid, toId);
         listAllMessages(uid, toId);
+
+
+        document.getElementById('bottomMessagesShow').style.display = "flex";
       });
     });
     userContainer.appendChild(listContainer);
@@ -273,6 +276,9 @@ function Medicos() {
           nameOfTheUser.innerHTML = doc.data().username;
           //sendMessage(uid, toId);
           listAllMessages(uid, toId);
+
+
+          document.getElementById('bottomMessagesShow').style.display = "flex";
         });
       } else {
 
@@ -521,7 +527,8 @@ function myFunction(event) {
     document.getElementById("sendmsg").click();
   }
 }
-function sendImage() {
+
+
   var fileButton = document.getElementById('photo');
 
   fileButton.addEventListener('change', function (e) {
@@ -554,50 +561,49 @@ function sendImage() {
       // For instance, get the download URL: https://firebasestorage.googleapis.com/...
       uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
 
-          var image = "image";
+        var image = "image";
 
-          var timeStamp2 = parseInt(Date.now() / 1000);
+        var timeStamp2 = parseInt(Date.now() / 1000);
 
-          var message = downloadURL;
+        var message = downloadURL;
 
-          db.collection('chat_messages').doc(uid).collection(toId).add({
-            "fromId": uid,
-            "message": message,
-            "messageType": image,
-            "toId": toId,
-            "timeStamp": timeStamp2
-          });
+        db.collection('chat_messages').doc(uid).collection(toId).add({
+          "fromId": uid,
+          "message": message,
+          "messageType": image,
+          "toId": toId,
+          "timeStamp": timeStamp2
+        });
 
-          db.collection('chat_messages').doc(toId).collection(uid).add({
-            "fromId": uid,
-            "message": message,
-            "messageType": image,
-            "toId": toId,
-            "timeStamp": timeStamp2
-          });
+        db.collection('chat_messages').doc(toId).collection(uid).add({
+          "fromId": uid,
+          "message": message,
+          "messageType": image,
+          "toId": toId,
+          "timeStamp": timeStamp2
+        });
 
-          db.collection('latest_messages').doc(uid).collection('latest_message').doc(toId).set({
-            "fromId": uid,
-            "message": message,
-            "messageType": image,
-            "toId": toId,
-            "timeStamp": timeStamp2
-          });
+        db.collection('latest_messages').doc(uid).collection('latest_message').doc(toId).set({
+          "fromId": uid,
+          "message": message,
+          "messageType": image,
+          "toId": toId,
+          "timeStamp": timeStamp2
+        });
 
-          db.collection('latest_messages').doc(toId).collection('latest_message').doc(uid).set({
-            "fromId": uid,
-            "message": message,
-            "messageType": image,
-            "toId": toId,
-            "timeStamp": timeStamp2
-          });
-          document.getElementById('message').value = '';
-        
+        db.collection('latest_messages').doc(toId).collection('latest_message').doc(uid).set({
+          "fromId": uid,
+          "message": message,
+          "messageType": image,
+          "toId": toId,
+          "timeStamp": timeStamp2
+        });
+        document.getElementById('message').value = '';
+        document.getElementById('photo').value = '';
+
       });
     });
   });
-
-}
 
 var sendmsg = document.getElementById("sendmsg");
 
@@ -608,37 +614,41 @@ sendmsg.addEventListener("click", function () {
   var timeStamp2 = parseInt(Date.now() / 1000);
 
   var message = document.getElementById("message").value;
+  if (message == "") {
 
-  db.collection('chat_messages').doc(uid).collection(toId).add({
-    "fromId": uid,
-    "message": message,
-    "messageType": text,
-    "toId": toId,
-    "timeStamp": timeStamp2
-  });
+  } else {
 
-  db.collection('chat_messages').doc(toId).collection(uid).add({
-    "fromId": uid,
-    "message": message,
-    "messageType": text,
-    "toId": toId,
-    "timeStamp": timeStamp2
-  });
+    db.collection('chat_messages').doc(uid).collection(toId).add({
+      "fromId": uid,
+      "message": message,
+      "messageType": text,
+      "toId": toId,
+      "timeStamp": timeStamp2
+    });
 
-  db.collection('latest_messages').doc(uid).collection('latest_message').doc(toId).set({
-    "fromId": uid,
-    "message": message,
-    "messageType": text,
-    "toId": toId,
-    "timeStamp": timeStamp2
-  });
+    db.collection('chat_messages').doc(toId).collection(uid).add({
+      "fromId": uid,
+      "message": message,
+      "messageType": text,
+      "toId": toId,
+      "timeStamp": timeStamp2
+    });
 
-  db.collection('latest_messages').doc(toId).collection('latest_message').doc(uid).set({
-    "fromId": uid,
-    "message": message,
-    "messageType": text,
-    "toId": toId,
-    "timeStamp": timeStamp2
-  });
-  document.getElementById('message').value = '';
+    db.collection('latest_messages').doc(uid).collection('latest_message').doc(toId).set({
+      "fromId": uid,
+      "message": message,
+      "messageType": text,
+      "toId": toId,
+      "timeStamp": timeStamp2
+    });
+
+    db.collection('latest_messages').doc(toId).collection('latest_message').doc(uid).set({
+      "fromId": uid,
+      "message": message,
+      "messageType": text,
+      "toId": toId,
+      "timeStamp": timeStamp2
+    });
+    document.getElementById('message').value = '';
+  }
 });

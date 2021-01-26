@@ -491,7 +491,7 @@ function closeForm3() {
 
 }
 
-function sendImage() {
+
     var fileButton1 = document.getElementById('photo');
   
     fileButton1.addEventListener('change', function (e) {
@@ -545,9 +545,10 @@ function sendImage() {
             });
 
             document.getElementById('message').value = '';
+            document.getElementById('photo').value = '';
           
         });
       });
     });
   
-  }
+  
