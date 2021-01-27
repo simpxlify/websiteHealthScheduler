@@ -71,7 +71,7 @@ db.collection("consultas").get().then(function (querySnapshot) {
         if (doc.data().typeOfConsult == 'Fisioterapia') {
           defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Fisioterapia');
         }
-        if (doc.data().typeOfConsult == 'Medicina física') {
+        if (doc.data().typeOfConsult == 'Medicina_física') {
           defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Medicina');
 
         }
@@ -79,7 +79,7 @@ db.collection("consultas").get().then(function (querySnapshot) {
           defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Reabilitação');
 
         }
-        if (doc.data().typeOfConsult == 'Cuidados Paliativos') {
+        if (doc.data().typeOfConsult == 'Cuidados_paliativos') {
           defaultEvents(doc.data().date, doc.data().doctorName, doc.data().notes, 'Cuidados');
         }
         if (doc.data().typeOfConsult == 'Neurologia') {
@@ -348,7 +348,7 @@ function limparConsultas(typeOfMedico, patientName, hour, notes){
       $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Fisioterapia'> <span> " + patientName + " <span> • " + hour + " <br> <span> " + notes + "</span></p>");
       break;
 
-    case "Medicina física":
+    case "Medicina_física":
       $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Medicina'> <span> " + patientName + " <span> • " + hour + " <br> <span> " + notes + "</span></p>");
       break;
 
@@ -356,7 +356,7 @@ function limparConsultas(typeOfMedico, patientName, hour, notes){
       $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Reabilitação'> <span> " + patientName + " <span> • " + hour + " <br> <span> " + notes + "</span></p>");
       break;
 
-    case "Cuidados Paliativos":
+    case "Cuidados_paliativos":
       $(".c-aside__eventList").append("<p class='c-aside__event c-aside__event--Cuidados'> <span> " + patientName + " <span> • " + hour + " <br> <span> " + notes + "</span></p>");
       break;
 
